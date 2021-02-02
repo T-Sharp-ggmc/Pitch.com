@@ -16,29 +16,34 @@ class _HomeScreen extends State<HomeScreen> {
               child: Icon(Icons.settings),
             )
           ]),
-
-          //Top Destinations "First Row after appBar"
           body: Center(
-            child: Column(
-              children: <Widget>[
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                          padding: EdgeInsets.all(25.0),
-                          child: CircleAvatar(
-                              radius: 25.0,
-                              backgroundColor: Colors.blue,
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[Icon(Icons.sports)],
-                                ),
-                              )))
-                    ])
-              ],
-            ),
-          ),
+              child: ListView.builder(
+            padding:
+                const EdgeInsets.only(top: 0, bottom: 0, right: 24, left: 8),
+            itemCount: 5,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Column(
+                children: <Widget>[
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                            padding: EdgeInsets.all(20.0),
+                            child: CircleAvatar(
+                                radius: 45.0,
+                                backgroundColor: Colors.blue,
+                                child: Center(
+                                  child: Column(
+                                      //children: <Widget>[Icon(Icons.sports)],
+                                      ),
+                                ))),
+                      ])
+                ],
+              );
+            },
+          )),
 
           //Research Button
           floatingActionButton: FloatingActionButton(
