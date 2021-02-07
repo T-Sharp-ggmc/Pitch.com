@@ -10,6 +10,7 @@ class CampingListDto {
   double rating;
   int reviews;
   int perDay;
+  bool isFavorite;
   bool isSelected; //da sfruttare nella mappa
 
   CampingListDto({
@@ -22,6 +23,7 @@ class CampingListDto {
     this.rating = 4.5,
     this.reviews = 80,
     this.perDay = 200,
+    this.isFavorite = false,
     this.isSelected = false,
   });
 
@@ -36,6 +38,7 @@ class CampingListDto {
       rating : 3.5,
       reviews : 120,
       perDay : 60,
+      isFavorite: true,
       isSelected : true,
     ),
     CampingListDto(
@@ -48,6 +51,7 @@ class CampingListDto {
       rating : 3.5,
       reviews : 120,
       perDay : 60,
+      isFavorite: false,
       isSelected : false,
     )
   ];

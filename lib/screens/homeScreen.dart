@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'searchScreen.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreen createState() => _HomeScreen();
@@ -49,7 +51,11 @@ class _HomeScreen extends State<HomeScreen> {
 
           //Research Button
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () { Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SearchPage()),
+                      );
+            },
             child: const Icon(Icons.search),
             backgroundColor: Colors.lightBlue,
           ),

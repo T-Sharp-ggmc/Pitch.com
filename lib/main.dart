@@ -1,4 +1,5 @@
 //import 'package:WeCanTry/appTheme.dart';
+import 'package:WeCanTry/appTheme.dart';
 import 'package:WeCanTry/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [],
-      child: MaterialApp(title: 'Pitch', home: HomeScreen(), routes: {
-        LoginScreen.routeName: (ctx) => LoginScreen(),
+      child: MaterialApp( 
+        debugShowCheckedModeBanner: false,
+        title: 'Pitch', 
+        theme: AppTheme.getTheme(),
+        home: HomeScreen(), 
+        routes: {
+          LoginScreen.routeName: (ctx) => LoginScreen(),
       }),
     );
   }
