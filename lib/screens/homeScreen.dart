@@ -46,18 +46,27 @@ class _HomeScreen extends State<HomeScreen>
               children: <Widget>[
                 //logo image
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                  child: Image.asset(
-                    'assets/Icons/logo.png',
-                    fit: BoxFit.cover,
-                    height: 40,
-                  ),
-                ),
+                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                    child: Image.asset(
+                      'assets/Icons/logo.png',
+                      fit: BoxFit.cover,
+                      height: 40,
+                    )),
               ],
             ),
           ],
         ),
         backgroundColor: Colors.white,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings_sharp),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              //scaffoldKey.currentState.showSnackBar(snackBar);
+            },
+            color: Colors.black,
+          ),
+        ],
       ),
       body: Center(child: Text('in lavorazione')),
       // ignore: missing_required_param
@@ -68,15 +77,15 @@ class _HomeScreen extends State<HomeScreen>
               // ignore: deprecated_member_use
               title: Text('home')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search_sharp),
+              icon: Icon(Icons.favorite_sharp),
               // ignore: deprecated_member_use
               title: Text('search')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_sharp),
+              icon: Icon(Icons.search_sharp),
               // ignore: deprecated_member_use
               title: Text('room_preferences')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings_sharp),
+              icon: Icon(Icons.account_circle),
               // ignore: deprecated_member_use
               title: Text('filter')),
         ],
