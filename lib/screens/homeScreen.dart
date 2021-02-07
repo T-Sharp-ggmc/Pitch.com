@@ -1,59 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+//import 'package:dashed_circle/dashed_circle.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreen createState() => _HomeScreen();
 }
 
-class _HomeScreen extends State<HomeScreen> {
+class _HomeScreen extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  //Variables
+  Animation gap;
+  Animation base;
+  Animation reverse;
+  AnimationController controller;
+
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 4));
+    base = CurvedAnimation(parent: controller, curve: Curves.easeOut);
+    reverse = Tween<double>(begin: 0.0, end: -1.0).animate(base);
+    gap = Tween<double>(begin: 3.0, end: 0.0).animate(base)
+      ..addListener(() {
+        setState(() {});
+      });
+    controller.forward();
+  }
+
+  /// Dispose
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(title: const Text("Pitch.com"), actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(Icons.settings),
-            )
-          ]),
-          body: Center(
-              child: ListView.builder(
-            padding:
-                const EdgeInsets.only(top: 0, bottom: 0, right: 24, left: 8),
-            itemCount: 2,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Column(
-                children: <Widget>[
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                            padding: EdgeInsets.all(20.0),
-                            child: CircleAvatar(
-                                radius: 45.0,
-                                backgroundColor: Colors.blue,
-                                child: Center(
-                                  child: Column(
-
-                                      //children: <Widget>[Icon(Icons.sports)],
-                                      ),
-                                ))),
-                      ])
-                ],
-              );
-            },
-          )),
-
-          //Research Button
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(Icons.search),
-            backgroundColor: Colors.lightBlue,
-          ),
-          endDrawer: Drawer()),
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                //logo image
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                  child: Image.asset(
+                    'assets/Icons/logo.png',
+                    fit: BoxFit.cover,
+                    height: 40,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        backgroundColor: Colors.white,
+      ),
+      body: Center(child: Text('in lavorazione')),
+      // ignore: missing_required_param
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_sharp),
+              // ignore: deprecated_member_use
+              title: Text('home')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search_sharp),
+              // ignore: deprecated_member_use
+              title: Text('search')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_sharp),
+              // ignore: deprecated_member_use
+              title: Text('room_preferences')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings_sharp),
+              // ignore: deprecated_member_use
+              title: Text('filter')),
+        ],
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black87,
+        iconSize: 35.0,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 }
@@ -85,8 +118,7 @@ class TopPlaceImg {
   });
   static List<TopPlaceImg> img = [
     TopPlaceImg(
-      imagePath:
-          'assets/images/historic-city-center-of-lecce-puglia-italy-royalty-free-image-695789434-1563545104.jpg',
+      imagePath: 'assets/images/first.jpg',
       titleTxt: 'Grand Royal Hotel',
       subTxt: 'Wembley, London',
       dist: 2.0,
@@ -99,7 +131,7 @@ class TopPlaceImg {
           '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
     ),
     TopPlaceImg(
-      imagePath: 'index.jpg',
+      imagePath: 'assets/images/first.jpg',
       titleTxt: 'Grand Royal Hotel',
       subTxt: 'Wembley, London',
       dist: 2.0,
