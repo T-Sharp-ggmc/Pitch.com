@@ -126,7 +126,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget getSearchBarUI() {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 32, bottom: 8),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
       child: Row(
         children: <Widget>[
           Expanded(

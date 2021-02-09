@@ -17,6 +17,17 @@ class _HomeScreen extends State<HomeScreen>
   Animation reverse;
   AnimationController controller;
 
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    //HomeScreen(),
+    Center(child: Text('Home in lavorazione')),  //home body
+    Center(child: Text('Preferiti in lavorazione')),  //favorite body
+    SearchPage(),
+    Center(child: Text('Profilo in lavorazione')),  //account body
+    //FavoriteScreen(),
+    //AccountScreen(),
+  ];
+
   void initState() {
     super.initState();
     controller =
@@ -40,7 +51,7 @@ class _HomeScreen extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _currentIndex == 0 ? AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -61,44 +72,54 @@ class _HomeScreen extends State<HomeScreen>
         backgroundColor: Colors.white,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.settings_sharp),
+            icon: const Icon(Icons.settings),
             tooltip: 'Show Snackbar',
             onPressed: () {
               //scaffoldKey.currentState.showSnackBar(snackBar);
             },
           ),
         ],
-      ),
-      body: Center(child: Text('in lavorazione')),
+      )
+      : AppBar(toolbarHeight: 0,),
+      body: _children[_currentIndex],
       // ignore: missing_required_param
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_sharp),
-              // ignore: deprecated_member_use
-              title: Text('home')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_sharp),
-              // ignore: deprecated_member_use
-              title: Text('search')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search_sharp),
-              // ignore: deprecated_member_use
-              title: Text('room_preferences')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              // ignore: deprecated_member_use
-              title: Text('filter')),
-        ],
-        selectedItemColor: Colors.black87,
-        unselectedItemColor: Colors.black87,
-        iconSize: 35.0,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-      ),
-    );
-  }
+                onTap: onTabTapped,
+                currentIndex:_currentIndex,
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      // ignore: deprecated_member_use
+                      title: Text('Home')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite),
+                      // ignore: deprecated_member_use
+                      title: Text('Search')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.search),
+                      // ignore: deprecated_member_use
+                      title: Text('room_preferences')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.account_circle),
+                      // ignore: deprecated_member_use
+                      title: Text('filter')),
+                ],
+                selectedItemColor: Colors.black87,
+                unselectedItemColor: Colors.black87,
+                iconSize: 35.0,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                type: BottomNavigationBarType.fixed,
+              ),
+            );
+          }
+    
+    void onTabTapped(int value) {
+      setState(() {
+        _currentIndex = value;
+      });
+    }
+
 }
 
 //Struct Top Place
