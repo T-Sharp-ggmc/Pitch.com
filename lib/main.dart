@@ -1,5 +1,3 @@
-//import 'package:WeCanTry/appTheme.dart';
-import 'package:WeCanTry/appTheme.dart';
 import 'package:WeCanTry/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
