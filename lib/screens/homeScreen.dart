@@ -1,5 +1,7 @@
+import 'package:WeCanTry/widgets/FilterPremium.dart';
+import 'package:WeCanTry/widgets/campingList.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 //import 'package:dashed_circle/dashed_circle.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -68,7 +70,24 @@ class _HomeScreen extends State<HomeScreen>
           ),
         ],
       ),
-      body: Center(child: Text('in lavorazione')),
+      body: Container(
+          child: ListView(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Container(
+                height: 85,
+                child: FilterPremium().getStories(),
+              ),
+              Divider(),
+              Column(
+                children: CampingList().getPosts(),
+              )
+            ],
+          )
+        ],
+      )),
+
       // ignore: missing_required_param
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -98,59 +117,4 @@ class _HomeScreen extends State<HomeScreen>
       ),
     );
   }
-}
-
-//Struct Top Place
-class TopPlaceImg {
-  String imagePath;
-  String titleTxt;
-  String subTxt;
-  String dateTxt;
-  String roomSizeTxt;
-  double dist;
-  double rating;
-  int reviews;
-  int perNight;
-  bool isSelected;
-
-  TopPlaceImg({
-    this.imagePath = '',
-    this.titleTxt = '',
-    this.subTxt = "",
-    this.dateTxt = "",
-    this.roomSizeTxt = "",
-    this.dist = 1.8,
-    this.reviews = 80,
-    this.rating = 4.5,
-    this.perNight = 180,
-    this.isSelected = false,
-  });
-  static List<TopPlaceImg> img = [
-    TopPlaceImg(
-      imagePath: 'assets/images/first.jpg',
-      titleTxt: 'Grand Royal Hotel',
-      subTxt: 'Wembley, London',
-      dist: 2.0,
-      reviews: 80,
-      rating: 4.4,
-      perNight: 180,
-      roomSizeTxt: '1 Room - 2 Adults',
-      isSelected: true,
-      dateTxt:
-          '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
-    ),
-    TopPlaceImg(
-      imagePath: 'assets/images/first.jpg',
-      titleTxt: 'Grand Royal Hotel',
-      subTxt: 'Wembley, London',
-      dist: 2.0,
-      reviews: 80,
-      rating: 4.4,
-      perNight: 180,
-      roomSizeTxt: '1 Room - 2 Adults',
-      isSelected: true,
-      dateTxt:
-          '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
-    ),
-  ];
 }
