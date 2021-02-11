@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../appTheme.dart';
+import '../../appTheme.dart';
 
 class ChangepasswordScreen extends StatefulWidget {
   @override
@@ -33,24 +33,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, bottom: 16.0, left: 24, right: 24),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "Enter your new password and\nconfirm your password",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: AppTheme.getTheme().disabledColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 24),
+                        padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
                         child: Container(
                           decoration: BoxDecoration(
                             color: AppTheme.getTheme().backgroundColor,
@@ -81,10 +64,11 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                   decoration: new InputDecoration(
                                     errorText: null,
                                     border: InputBorder.none,
-                                    hintText: "New Password",
+                                    hintText: "Vecchia Password",
                                     hintStyle: TextStyle(
-                                        color:
-                                            AppTheme.getTheme().disabledColor),
+                                        fontSize: 14,
+                                        color: AppTheme.getTheme().disabledColor
+                                    ),
                                   ),
                                 ),
                               ),
@@ -127,10 +111,58 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                   decoration: new InputDecoration(
                                     errorText: null,
                                     border: InputBorder.none,
-                                    hintText: "Confirm Password",
+                                    hintText: "Nuova Password",
                                     hintStyle: TextStyle(
-                                        color:
-                                            AppTheme.getTheme().disabledColor),
+                                        fontSize: 14,
+                                        color: AppTheme.getTheme().disabledColor
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 24, right: 24),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.getTheme().backgroundColor,
+                            borderRadius: BorderRadius.all(Radius.circular(38)),
+                            // border: Border.all(
+                            //   color: HexColor("#757575").withOpacity(0.6),
+                            // ),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: AppTheme.getTheme().dividerColor,
+                                blurRadius: 8,
+                                offset: Offset(4, 4),
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            child: Container(
+                              height: 48,
+                              child: Center(
+                                child: TextField(
+                                  maxLines: 1,
+                                  onChanged: (String txt) {},
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                  cursorColor: AppTheme.getTheme().primaryColor,
+                                  decoration: new InputDecoration(
+                                    errorText: null,
+                                    border: InputBorder.none,
+                                    hintText: "Conferma Nuova Password",
+                                    hintStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: AppTheme.getTheme().disabledColor
+                                    ),
                                   ),
                                 ),
                               ),
@@ -166,7 +198,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                               },
                               child: Center(
                                 child: Text(
-                                  "Apply",
+                                  "Applica",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
@@ -221,7 +253,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
         Padding(
           padding: const EdgeInsets.only(top: 4, left: 24),
           child: Text(
-            "Change Password",
+            "Cambia Password",
             style: new TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,

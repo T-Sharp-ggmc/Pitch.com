@@ -1,9 +1,11 @@
 import 'package:WeCanTry/widgets/FilterPremium.dart';
 import 'package:WeCanTry/widgets/campingList.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 //import 'package:dashed_circle/dashed_circle.dart';
 
+import 'accountScreens/accountScreen.dart';
+import 'favoritesScreen.dart';
 import 'searchScreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,12 +25,12 @@ class _HomeScreen extends State<HomeScreen>
   final List<Widget> _children = [
     //HomeScreen(),
     Center(child: Text('Home in lavorazione')),  //home body
-    //FavoritesScreen(), 
-    Center(child: Text('Preferiti in lavorazione')),  //favorite body
+    FavoritesScreen(), //Center(child: Text('Preferiti in lavorazione')),  //favorite body
     SearchPage(),
-    //AccountScreen(),
-    Center(child: Text('Profilo in lavorazione')),  //account body
-  ];  
+    AccountScreen(),
+    //Center(child: Text('Profilo in lavorazione')),  //account body
+  ];
+
   void initState() {
     super.initState();
     controller =
@@ -120,15 +122,15 @@ class _HomeScreen extends State<HomeScreen>
   void onTabTapped(int value) {
       setState(() {
         _currentIndex = value;
-        // switch (_currentIndex) {
-        //   case 1:
-        //     _children[_currentIndex] = FavoritesScreen(animationController: controller,);  
-        //     break;
-        //   case 3:
-        //     _children[_currentIndex] = AccountScreen(animationController: controller,);  
-        //     break;
-        //   default:
-        // }
+         switch (_currentIndex) {
+           case 1:
+             _children[_currentIndex] = FavoritesScreen(animationController: controller,);  
+             break;
+           case 3:
+             _children[_currentIndex] = AccountScreen(animationController: controller,);  
+             break;
+           default:
+         }
       });
     }
 
