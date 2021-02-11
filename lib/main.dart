@@ -10,16 +10,12 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [],
-      child: MaterialApp( 
+    return MaterialApp(
+        title: 'Pitch',
         debugShowCheckedModeBanner: false,
-        title: 'Pitch', 
-        theme: AppTheme.getTheme(),
-        home: HomeScreen(), 
+        home: HomeScreen(),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
-      }),
-    );
+        });
   }
 }

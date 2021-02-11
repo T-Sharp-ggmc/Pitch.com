@@ -19,6 +19,16 @@ class _HomeScreen extends State<HomeScreen>
   Animation reverse;
   AnimationController controller;
 
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    //HomeScreen(),
+    Center(child: Text('Home in lavorazione')),  //home body
+    //FavoritesScreen(), 
+    Center(child: Text('Preferiti in lavorazione')),  //favorite body
+    SearchPage(),
+    //AccountScreen(),
+    Center(child: Text('Profilo in lavorazione')),  //account body
+  ];  
   void initState() {
     super.initState();
     controller =
@@ -42,7 +52,7 @@ class _HomeScreen extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _currentIndex == 0 ? AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -63,7 +73,7 @@ class _HomeScreen extends State<HomeScreen>
         backgroundColor: Colors.white,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.settings_sharp),
+            icon: const Icon(Icons.settings),
             tooltip: 'Show Snackbar',
             onPressed: () {
               //scaffoldKey.currentState.showSnackBar(snackBar);
@@ -71,38 +81,25 @@ class _HomeScreen extends State<HomeScreen>
             color: Colors.black,
           ),
         ],
-      ),
-      body: Container(
-          child: ListView(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                height: 85,
-                child: FilterPremium().getStories(),
-              ),
-              Divider(),
-              Column(
-                children: CampingList().getPosts(),
-              )
-            ],
-          )
-        ],
-      )),
-
+      )
+                                 : AppBar(toolbarHeight: 0,),
+      body: _currentIndex == 0 ? getHomePage() 
+                               : _children[_currentIndex],
       // ignore: missing_required_param
       bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex:_currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_sharp),
+              icon: Icon(Icons.home),
               // ignore: deprecated_member_use
               title: Text('home')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_sharp),
+              icon: Icon(Icons.favorite),
               // ignore: deprecated_member_use
               title: Text('search')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search_sharp),
+              icon: Icon(Icons.search),
               // ignore: deprecated_member_use
               title: Text('room_preferences')),
           BottomNavigationBarItem(
@@ -118,5 +115,40 @@ class _HomeScreen extends State<HomeScreen>
         type: BottomNavigationBarType.fixed,
       ),
     );
+  }
+
+  void onTabTapped(int value) {
+      setState(() {
+        _currentIndex = value;
+        // switch (_currentIndex) {
+        //   case 1:
+        //     _children[_currentIndex] = FavoritesScreen(animationController: controller,);  
+        //     break;
+        //   case 3:
+        //     _children[_currentIndex] = AccountScreen(animationController: controller,);  
+        //     break;
+        //   default:
+        // }
+      });
+    }
+
+  Widget getHomePage(){
+    return Container(
+          child: ListView(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Container(
+                height: 85,
+                child: FilterPremium().getStories(),
+              ),
+              Divider(),
+              Column(
+                children: CampingList().getPosts(),
+              )
+            ],
+          )
+        ],
+      ));
   }
 }
