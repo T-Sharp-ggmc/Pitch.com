@@ -1,3 +1,5 @@
+import 'package:WeCanTry/widgets/FilterPremium.dart';
+import 'package:WeCanTry/widgets/campingList.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 //import 'package:dashed_circle/dashed_circle.dart';
@@ -78,111 +80,77 @@ class _HomeScreen extends State<HomeScreen>
             onPressed: () {
               //scaffoldKey.currentState.showSnackBar(snackBar);
             },
+            color: Colors.black,
           ),
         ],
       )
-      : AppBar(toolbarHeight: 0,),
-      body: _children[_currentIndex],
+                                 : AppBar(toolbarHeight: 0,),
+      body: _currentIndex == 0 ? getHomePage() 
+                               : _children[_currentIndex],
       // ignore: missing_required_param
       bottomNavigationBar: BottomNavigationBar(
-                onTap: onTabTapped,
-                currentIndex:_currentIndex,
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      // ignore: deprecated_member_use
-                      title: Text('Home')),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.favorite),
-                      // ignore: deprecated_member_use
-                      title: Text('Search')),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search),
-                      // ignore: deprecated_member_use
-                      title: Text('room_preferences')),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.account_circle),
-                      // ignore: deprecated_member_use
-                      title: Text('filter')),
-                ],
-                selectedItemColor: Colors.black87,
-                unselectedItemColor: Colors.black87,
-                iconSize: 35.0,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                type: BottomNavigationBarType.fixed,
-              ),
-            );
-          }
-    
-    void onTabTapped(int value) {
+        onTap: onTabTapped,
+        currentIndex:_currentIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              // ignore: deprecated_member_use
+              title: Text('home')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              // ignore: deprecated_member_use
+              title: Text('search')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              // ignore: deprecated_member_use
+              title: Text('room_preferences')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              // ignore: deprecated_member_use
+              title: Text('filter')),
+        ],
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black87,
+        iconSize: 35.0,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+      ),
+    );
+  }
+
+  void onTabTapped(int value) {
       setState(() {
         _currentIndex = value;
-        switch (_currentIndex) {
-          case 1:
-            _children[_currentIndex] = FavoritesScreen(animationController: controller,);  
-            break;
-          case 3:
-            _children[_currentIndex] = AccountScreen(animationController: controller,);  
-            break;
-          default:
-        }
+         switch (_currentIndex) {
+           case 1:
+             _children[_currentIndex] = FavoritesScreen(animationController: controller,);  
+             break;
+           case 3:
+             _children[_currentIndex] = AccountScreen(animationController: controller,);  
+             break;
+           default:
+         }
       });
     }
 
-}
-
-//Struct Top Place
-class TopPlaceImg {
-  String imagePath;
-  String titleTxt;
-  String subTxt;
-  String dateTxt;
-  String roomSizeTxt;
-  double dist;
-  double rating;
-  int reviews;
-  int perNight;
-  bool isSelected;
-
-  TopPlaceImg({
-    this.imagePath = '',
-    this.titleTxt = '',
-    this.subTxt = "",
-    this.dateTxt = "",
-    this.roomSizeTxt = "",
-    this.dist = 1.8,
-    this.reviews = 80,
-    this.rating = 4.5,
-    this.perNight = 180,
-    this.isSelected = false,
-  });
-  static List<TopPlaceImg> img = [
-    TopPlaceImg(
-      imagePath: 'assets/images/first.jpg',
-      titleTxt: 'Grand Royal Hotel',
-      subTxt: 'Wembley, London',
-      dist: 2.0,
-      reviews: 80,
-      rating: 4.4,
-      perNight: 180,
-      roomSizeTxt: '1 Room - 2 Adults',
-      isSelected: true,
-      dateTxt:
-          '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
-    ),
-    TopPlaceImg(
-      imagePath: 'assets/images/first.jpg',
-      titleTxt: 'Grand Royal Hotel',
-      subTxt: 'Wembley, London',
-      dist: 2.0,
-      reviews: 80,
-      rating: 4.4,
-      perNight: 180,
-      roomSizeTxt: '1 Room - 2 Adults',
-      isSelected: true,
-      dateTxt:
-          '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
-    ),
-  ];
+  Widget getHomePage(){
+    return Container(
+          child: ListView(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Container(
+                height: 85,
+                child: FilterPremium().getStories(),
+              ),
+              Divider(),
+              Column(
+                children: CampingList().getPosts(),
+              )
+            ],
+          )
+        ],
+      ));
+  }
 }
