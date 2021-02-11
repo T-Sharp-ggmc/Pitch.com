@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 //import 'package:dashed_circle/dashed_circle.dart';
 
+import 'accountScreens/accountScreen.dart';
 import 'favoritesScreen.dart';
 import 'searchScreen.dart';
 
@@ -24,9 +25,8 @@ class _HomeScreen extends State<HomeScreen>
     Center(child: Text('Home in lavorazione')),  //home body
     FavoritesScreen(), //Center(child: Text('Preferiti in lavorazione')),  //favorite body
     SearchPage(),
-    Center(child: Text('Profilo in lavorazione')),  //account body
-    //FavoriteScreen(),
-    //AccountScreen(),
+    AccountScreen(),
+    //Center(child: Text('Profilo in lavorazione')),  //account body
   ];
 
   void initState() {
@@ -118,8 +118,14 @@ class _HomeScreen extends State<HomeScreen>
     void onTabTapped(int value) {
       setState(() {
         _currentIndex = value;
-        if(_currentIndex == 1){
-          _children[_currentIndex] = FavoritesScreen(animationController: controller,);
+        switch (_currentIndex) {
+          case 1:
+            _children[_currentIndex] = FavoritesScreen(animationController: controller,);  
+            break;
+          case 3:
+            _children[_currentIndex] = AccountScreen(animationController: controller,);  
+            break;
+          default:
         }
       });
     }
