@@ -26,7 +26,7 @@ class SettingsListData {
       iconData: FontAwesomeIcons.lock,
     ),
     SettingsListData(
-      titleTxt: 'Pagamenti',
+      titleTxt: 'Le mie prenotazioni',
       isSelected: false,
       iconData: FontAwesomeIcons.wallet,
     ),

@@ -16,7 +16,7 @@ class FavoriteCampingCard extends StatefulWidget {
 }
 
 class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
-  var campingList = CampingListDto.campingList;
+  var campingList = CampingListDto.campingList.where((i) => i.isFavorite).toList();
 
   @override
   void initState() {
@@ -27,7 +27,9 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: ListView.builder(
+        child: campingList.length == 0 
+        ? noFavoriteList()
+        : ListView.builder(
         itemCount: campingList.length,
         padding: EdgeInsets.only(top: 8, bottom: 8),
         scrollDirection: Axis.vertical,
@@ -49,6 +51,47 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
     
     );
   }
+}
+
+Widget noFavoriteList(){
+  return Scaffold(
+    backgroundColor: AppTheme.getTheme().backgroundColor,
+        body: InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          onTap: () {},
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 0, left: 76, right: 76),
+                    child: Image.asset("assets/images/NoFavorite.png"),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text(
+                      "Nessun campeggio preferito.\n\nInizia una ricerca e clicca sul cuore\nper salvare in preferiti",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              )
+              ],
+          ),
+        ),
+    );
 }
 
 

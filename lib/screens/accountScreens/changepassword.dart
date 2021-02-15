@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
+import '../../widgets/customAppBar.dart';
 
 class ChangepasswordScreen extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
               Padding(
                 padding:
                     EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: appBar(),
+                child: CustomAppBar(nameOfPage: "Cambia Password"),
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -217,50 +218,6 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget appBar() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: AppBar().preferredSize.height,
-          child: Padding(
-            padding: EdgeInsets.only(top: 8, left: 8),
-            child: Container(
-              width: AppBar().preferredSize.height - 8,
-              height: AppBar().preferredSize.height - 8,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.arrow_back),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4, left: 24),
-          child: Text(
-            "Cambia Password",
-            style: new TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

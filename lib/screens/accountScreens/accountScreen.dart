@@ -7,7 +7,7 @@ import '../../appTheme.dart';
 import 'changepassword.dart';
 import 'helpScreen.dart';
 import 'inviteFriendScreen.dart';
-import 'paymentScreen.dart';
+import 'bookingScreen.dart';
 import 'reviewScreen.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -120,7 +120,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PaymentScreen(),
+                    builder: (context) => BookingScreen(),
                     fullscreenDialog: true,
                   ),
                 );
@@ -129,7 +129,9 @@ class _AccountScreenState extends State<AccountScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ReviewScreen(),
+                    builder: (context) => ReviewScreen(
+                      animationController: widget.animationController,
+                    ),
                     fullscreenDialog: true,
                   ),
                 );
