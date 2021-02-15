@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'filtersScreen.dart';
-import 'popups/calendarPopup.dart';
-import 'popups/pitchPopup.dart';
+import '../popups/calendarPopup.dart';
+import '../popups/pitchPopup.dart';
 
 class SearchPage extends StatefulWidget {
   final AnimationController animationController;
@@ -106,7 +106,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                       animation: animation,
                                       animationController: animationController,
                                       campingData: campingList[index],
-                                      callback: () {},
+                                      callback: refresh,
                                     );
                                   },
                                 ),
@@ -122,6 +122,10 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             )
           ],
         ));
+  }
+
+  refresh() {
+    setState(() {});
   }
 
   Widget getSearchBarUI() {

@@ -17,9 +17,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> with TickerProviderSt
   @override
   void initState() {
     tabAnimationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    // indexView = FavoriteCampingCard(
-    //   animationController: tabAnimationController,
-    // );
+    //per evitare che la prima volta che apre la pagina si veda sfocato
+    indexView = FavoriteCampingCard(
+      animationController: tabAnimationController,
+    );
     tabAnimationController.forward();
     widget.animationController.forward();
     super.initState();

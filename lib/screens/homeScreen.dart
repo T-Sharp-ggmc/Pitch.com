@@ -1,12 +1,11 @@
 import 'package:WeCanTry/widgets/FilterPremium.dart';
 import 'package:WeCanTry/widgets/campingList.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 //import 'package:dashed_circle/dashed_circle.dart';
 
 import 'accountScreens/accountScreen.dart';
 import 'favoritesScreen.dart';
-import 'searchScreen.dart';
+import 'searchScreens/searchScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

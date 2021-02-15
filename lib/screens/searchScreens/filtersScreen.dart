@@ -1,9 +1,10 @@
 import 'package:WeCanTry/models/popularFilterList.dart';
+import 'package:WeCanTry/widgets/customAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../appTheme.dart';
-import 'RangeSliderView.dart';
-import 'SliderView.dart';
+import '../../appTheme.dart';
+import '../RangeSliderView.dart';
+import '../SliderView.dart';
 
 class FiltersScreen extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: appBar(),
+              child: CustomAppBar(nameOfPage: "Filtri",),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -334,54 +335,4 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  Widget appBar() {
-    return Row(
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: AppBar().preferredSize.height,
-              child: Row(children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 8, left: 8),
-                  child: Container(
-                    width: AppBar().preferredSize.height - 8,
-                    height: AppBar().preferredSize.height - 8,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(32.0),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.arrow_back),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 8),
-                  child: Text(
-                    "Filtri",
-                    style: new TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-
-              ],)
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 }
