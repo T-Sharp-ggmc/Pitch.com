@@ -64,8 +64,12 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                   cursorColor: AppTheme.getTheme().primaryColor,
                                   decoration: new InputDecoration(
                                     errorText: null,
+                                    // labelText: "Vecchia psw",
+                                    // labelStyle: TextStyle(
+                                    //     fontSize: 14,
+                                    //     color: AppTheme.getTheme().disabledColor,),
                                     border: InputBorder.none,
-                                    hintText: "Vecchia Password",
+                                    hintText: "Vecchia password",
                                     hintStyle: TextStyle(
                                         fontSize: 14,
                                         color: AppTheme.getTheme().disabledColor

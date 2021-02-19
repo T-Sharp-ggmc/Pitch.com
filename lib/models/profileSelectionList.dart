@@ -46,5 +46,104 @@ class SettingsListData {
       iconData: FontAwesomeIcons.userFriends,
     ),
   ];
+  
+  static List<SettingsListData> appSettingsList = [
+      SettingsListData(
+        titleTxt: 'Gestisci Privacy',
+        isSelected: false,
+        iconData: FontAwesomeIcons.lock,
+      ),
+      SettingsListData(
+        titleTxt: 'Informazioni su Pitch',
+        isSelected: false,
+        iconData: FontAwesomeIcons.info,
+      ),
+    ];
+}
 
+class Language {
+  int value;
+  String name;
+
+  Language({
+    this.value = 0,
+    this.name = "",
+  });
+
+  static List<Language> languageList = [
+    Language(
+      value : 1,
+      name : "Italiano",
+    ),
+    Language(
+      value : 2,
+      name : "Inglese",
+    ),
+    Language(
+      value : 3,
+      name : "Spagnolo",
+    ),
+    Language(
+      value : 4,
+      name : "Tedesco",
+    ),
+    Language(
+      value : 5,
+      name : "Cinese",
+    ),
+    Language(
+      value : 6,
+      name : "Olandese",
+    ),
+  ];
+}
+
+class Currency {
+  int value;
+  String name;
+
+  Currency({
+    this.value = 0,
+    this.name = "",
+  });
+
+  static List<Currency> currencyList = [
+    Currency(
+      value : 1,
+      name : "Euro",
+    ),
+    Currency(
+      value : 2,
+      name : "Sterlina",
+    ),
+    Currency(
+      value : 3,
+      name : "Dollaro",
+    ),
+    Currency(
+      value : 4,
+      name : "Yen",
+    ),
+  ];
+}
+
+class Unit {
+  int value;
+  String name;
+
+  Unit({
+    this.value = 0,
+    this.name = "",
+  });
+
+  static List<Unit> unitList = [
+    Unit(
+      value : 1,
+      name : "Km",
+    ),
+    Unit(
+      value : 2,
+      name : "Miglia",
+    ),
+  ];
 }

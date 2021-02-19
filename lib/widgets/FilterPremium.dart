@@ -44,6 +44,7 @@ class FilterPremium {
                     ),
                   ),
                   FloatingActionButton(
+                    heroTag: null,
                     elevation: 0,
                     backgroundColor: Colors.transparent,
                     onPressed: () {},

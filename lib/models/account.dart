@@ -1,20 +1,51 @@
-import 'package:flutter/material.dart';
+enum Sex{ m, f}
 
-class Account {
-  IconData iconData;
-  String name;
-  String surname;
-  String phone;
-  String birthDate;
-  String address;
+class AccountInfo {
+  String infoName;
+  Object infoDescription;
 
-  Account({
-    this.iconData = Icons.supervised_user_circle, //?
-    this.name="Gino",
-    this.surname="Pollicino",
-    this.phone="3216549870",
-    this.birthDate="20, Giugno, 1965",
-    this.address="Via sto cazzo, 123, Foggia"
+  AccountInfo({
+    this.infoName="",
+    this.infoDescription,
   });
+
+  static List<AccountInfo> accountInfoList = [
+    AccountInfo(
+      infoName:"Nome",
+      infoDescription:"Gina"
+    ),
+    AccountInfo(
+      infoName:"Cognome",
+      infoDescription:"Pollicina"
+    ),
+    AccountInfo(
+      infoName:"Telefono",
+      infoDescription:"3216549870"
+    ),
+    AccountInfo(
+      infoName:"Data di nascita",
+      infoDescription:"20, Giugno, 1965"
+    ),
+    AccountInfo(
+      infoName:"Indirizzo",
+      infoDescription:"Via sto cazzo, 123"
+    ),
+    AccountInfo(
+      infoName:"Città",
+      infoDescription:"Foggia"
+    ),
+    AccountInfo(
+      infoName:"Paese",
+      infoDescription:"Italia"
+    ),
+    // AccountInfo(
+    //   infoName:"CAP",
+    //   infoDescription:70124
+    // ),
+    // AccountInfo(
+    //   infoName:"Sesso",
+    //   infoDescription:Sex.f
+    // ),
+  ];
 
 }

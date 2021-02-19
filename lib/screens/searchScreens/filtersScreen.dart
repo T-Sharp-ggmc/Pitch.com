@@ -7,15 +7,18 @@ import '../RangeSliderView.dart';
 import '../SliderView.dart';
 
 class FiltersScreen extends StatefulWidget {
+  final List<FilterListData> serviceListDto;
+  final List<FilterListData> categoryListDto;
+  final RangeValues priceRange;
+  final Function(List<FilterListData>, List<FilterListData>, RangeValues) onApplyChanges;
+
+  const FiltersScreen({Key key, this.serviceListDto, this.categoryListDto, this.priceRange, this.onApplyChanges}) : super(key: key);
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  List<PopularFilterListData> popularListDto = PopularFilterListData.popularList;
-  List<PopularFilterListData> categoryListDto = PopularFilterListData.categoryList;
-
-  RangeValues _values = RangeValues(100, 600);
+  
   double distValue = 50.0;
 
   @override
@@ -80,6 +83,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(24.0)),
                     highlightColor: Colors.transparent,
                     onTap: () {
+                      widget.onApplyChanges(widget.categoryListDto, widget.serviceListDto, widget.priceRange);
                       Navigator.pop(context);
                     },
                     child: Center(
@@ -126,11 +130,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
     List<Widget> noList = List<Widget>();
     var count = 0;
     final columnCount = 2;
-    for (var i = 0; i < categoryListDto.length / columnCount; i++) {
+    for (var i = 0; i < widget.categoryListDto.length / columnCount; i++) {
       List<Widget> listUI = List<Widget>();
       for (var i = 0; i < columnCount; i++) {
         try {
-          final cat = categoryListDto[count];
+          final cat = widget.categoryListDto[count];
           listUI.add(Expanded(
             child: Row(
               children: <Widget>[
@@ -139,9 +143,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   child: InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(4.0)),
                     onTap: () {
-                      setState(() {
-                        cat.isSelected = !cat.isSelected;
-                      });
+                          setState(() {
+                           cat.isSelected = !cat.isSelected;
+                          });
                     },
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
@@ -185,7 +189,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
           child: Text(
-            "Filtri popolari",
+            "Servizi offerti",
             textAlign: TextAlign.left,
             style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16, fontWeight: FontWeight.normal),
           ),
@@ -205,9 +209,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   List<Widget> getPopularListUI() {
     List<Widget> noList = List<Widget>();
-    for (var i = 0; i < popularListDto.length; i++) {
-      final date = popularListDto[i];
-      noList.add(
+    for (var i = 0; i < widget.serviceListDto.length; i++) {
+        final date = widget.serviceListDto[i];      
+        noList.add(
         Material(
           color: Colors.transparent,
           child: InkWell(
@@ -253,32 +257,32 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   void checkAppPosition(int index) {
     if (index == 0) {
-      if (popularListDto[0].isSelected) {
-        popularListDto.forEach((d) {
+      if (widget.serviceListDto[0].isSelected) {
+        widget.serviceListDto.forEach((d) {
           d.isSelected = false;
         });
       } else {
-        popularListDto.forEach((d) {
+        widget.serviceListDto.forEach((d) {
           d.isSelected = true;
         });
       }
     } else {
-      popularListDto[index].isSelected = !popularListDto[index].isSelected;
+      widget.serviceListDto[index].isSelected = !widget.serviceListDto[index].isSelected;
 
       var count = 0;
-      for (var i = 0; i < popularListDto.length; i++) {
+      for (var i = 0; i < widget.serviceListDto.length; i++) {
         if (i != 0) {
-          var data = popularListDto[i];
+          var data = widget.serviceListDto[i];
           if (data.isSelected) {
             count += 1;
           }
         }
       }
 
-      if (count == popularListDto.length - 1) {
-        popularListDto[0].isSelected = true;
+      if (count == widget.serviceListDto.length - 1) {
+        widget.serviceListDto[0].isSelected = true;
       } else {
-        popularListDto[0].isSelected = false;
+        widget.serviceListDto[0].isSelected = false;
       }
     }
   }
@@ -310,6 +314,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   Widget priceBarFilter() {
+    RangeValues _values = widget.priceRange;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,

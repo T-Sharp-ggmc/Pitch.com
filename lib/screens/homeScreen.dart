@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'accountScreens/accountScreen.dart';
 import 'favoritesScreen.dart';
 import 'searchScreens/searchScreen.dart';
+import 'settingsScreens/settingScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -77,7 +78,13 @@ class _HomeScreen extends State<HomeScreen>
             icon: const Icon(Icons.settings),
             tooltip: 'Show Snackbar',
             onPressed: () {
-              //scaffoldKey.currentState.showSnackBar(snackBar);
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => SettingScreen(),
+                  fullscreenDialog: true,
+                )
+              );
             },
             color: Colors.black,
           ),

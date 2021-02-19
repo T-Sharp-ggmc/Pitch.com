@@ -1,43 +1,55 @@
-class PopularFilterListData {
+enum CampingCategory{
+  none,
+  mare,
+  lago,
+  montagna
+}
+
+class FilterListData {
   String titleTxt;
   bool isSelected;
+  CampingCategory category;
 
-  PopularFilterListData({
+  FilterListData({
     this.titleTxt = '',
     this.isSelected = false,
+    this.category= CampingCategory.none
   });
 
-  static List<PopularFilterListData> popularList = [
-    PopularFilterListData(
+  static List<FilterListData> serviceList = [
+    FilterListData(
       titleTxt: 'Tutto',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterListData(
       titleTxt: 'Bagno',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterListData(
       titleTxt: 'Lido',
       isSelected: true,
     ),
-    PopularFilterListData(
+    FilterListData(
       titleTxt: 'Ristorante',
       isSelected: false,
     ),
   ];
 
-  static List<PopularFilterListData> categoryList = [
-    PopularFilterListData(
+  static List<FilterListData> categoryList = [
+    FilterListData(
+      category: CampingCategory.mare,
       titleTxt: 'Mare',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterListData(
+      category: CampingCategory.lago,
       titleTxt: 'Lago',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterListData(
+      category: CampingCategory.montagna,
       titleTxt: 'Montagna',
-      isSelected: true,
+      isSelected: false,
     ),
   ];
 }

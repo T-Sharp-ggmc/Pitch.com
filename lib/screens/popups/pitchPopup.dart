@@ -79,9 +79,9 @@ class _PitchPopupViewState extends State<PitchPopupView> with TickerProviderStat
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            getRowView("Number of Rooms", "", pitch, PopupTextType.no),
-                            getRowView("Adult", " (Aged 18+)", ad, PopupTextType.ad),
-                            getRowView("Children", " (0-17)", ch, PopupTextType.ch),
+                            getRowView("Numero di Piazzole", "", pitch, PopupTextType.no),
+                            getRowView("Adulti", " (Età 18+)", ad, PopupTextType.ad),
+                            getRowView("Bambini", " (0-17)", ch, PopupTextType.ch),
                             Padding(
                               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 24),
                               child: Container(

@@ -1,4 +1,5 @@
 import 'package:WeCanTry/models/campingList.dart';
+import 'package:WeCanTry/screens/detailScreen/campingDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -177,7 +178,15 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                 ),
                                 onTap: () {
                                   try {
-                                    widget.callback();
+                                    Navigator.push(
+                                      context, 
+                                      MaterialPageRoute(
+                                        builder: (context) => CampingDetailScreen(
+                                          // passare campingData
+                                        ),
+                                      )
+                                    );
+                                    //widget.callback();
                                   } catch (e) {}
                                 },
                               ),
