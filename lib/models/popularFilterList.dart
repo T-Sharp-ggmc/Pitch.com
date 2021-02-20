@@ -1,50 +1,57 @@
-class PopularFilterListData {
+enum CampingCategory { none, mare, lago, montagna, fiume }
+
+class FilterListData {
   String titleTxt;
   bool isSelected;
   String imageUrl;
+  CampingCategory category;
 
-  PopularFilterListData({
-    this.titleTxt = '',
-    this.isSelected = false,
-    this.imageUrl = '',
-  });
+  FilterListData(
+      {this.titleTxt = '',
+      this.isSelected = false,
+      this.imageUrl = '',
+      this.category = CampingCategory.none});
 
-  static List<PopularFilterListData> popularList = [
-    PopularFilterListData(titleTxt: 'Tutto', isSelected: false, imageUrl: ''),
-    PopularFilterListData(
+  static List<FilterListData> serviceList = [
+    FilterListData(titleTxt: 'Tutto', isSelected: false, imageUrl: ''),
+    FilterListData(
       titleTxt: 'Bagno',
       isSelected: false,
       imageUrl: '',
     ),
-    PopularFilterListData(
+    FilterListData(
       titleTxt: 'Lido',
       isSelected: true,
       imageUrl: '',
     ),
-    PopularFilterListData(
+    FilterListData(
       titleTxt: 'Ristorante',
       isSelected: false,
       imageUrl: '',
     ),
   ];
 
-  static List<PopularFilterListData> categoryList = [
-    PopularFilterListData(
+  static List<FilterListData> categoryList = [
+    FilterListData(
+      category: CampingCategory.mare,
       titleTxt: 'Mare',
       isSelected: false,
       imageUrl: 'assets/images/filters/mare.png',
     ),
-    PopularFilterListData(
+    FilterListData(
+      category: CampingCategory.lago,
       titleTxt: 'Lago',
       isSelected: false,
       imageUrl: 'assets/images/filters/lago.png',
     ),
-    PopularFilterListData(
+    FilterListData(
+      category: CampingCategory.montagna,
       titleTxt: 'Montagna',
       isSelected: true,
       imageUrl: 'assets/images/filters/montagna.png',
     ),
-    PopularFilterListData(
+    FilterListData(
+      category: CampingCategory.fiume,
       titleTxt: 'Fiumi',
       isSelected: true,
       imageUrl: 'assets/images/filters/fiumi.png',

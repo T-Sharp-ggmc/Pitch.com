@@ -18,7 +18,7 @@ class FavoriteCampingCard extends StatefulWidget {
 class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
   var campingList =
       CampingListDto.campingList.where((i) => i.isFavorite).toList();
-
+  CampingListDto deletedCamping = new CampingListDto();
   @override
   void initState() {
     widget.animationController.forward();
@@ -42,16 +42,51 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                         curve: Interval((1 / count) * index, 1.0,
                             curve: Curves.fastOutSlowIn)));
                 widget.animationController.forward();
-                return FavoriteCampingCardListView(
-                  callback: () {}, //navigate to details page
-                  campingData: campingList[index],
-                  animation: animation,
-                  animationController: widget.animationController,
-                );
+                return Dismissible(
+                    key: UniqueKey(),
+                    background: getDismissedBackground(),
+                    onDismissed: (direction) {
+                      String nameCampingDismissed = campingList[index].name;
+                      setState(() {
+                        campingList[index].isFavorite =
+                            !campingList[index].isFavorite;
+                        deletedCamping = campingList.removeAt(index);
+                      });
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text("$nameCampingDismissed rimosso dai preferiti"),
+                        action: SnackBarAction(
+                            label: "INDIETRO",
+                            onPressed: () => setState(
+                                  () =>
+                                      campingList.insert(index, deletedCamping),
+                                )),
+                      ));
+                    },
+                    child: FavoriteCampingCardListView(
+                      callback: () {}, //navigate to details page
+                      campingData: campingList[index],
+                      animation: animation,
+                      animationController: widget.animationController,
+                    ));
               },
             ),
     );
   }
+}
+
+Widget getDismissedBackground() {
+  return Container(
+    color: AppTheme.getTheme().errorColor,
+    child: Center(
+      child: Text("Swipe per togliere dai preferiti",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          )),
+    ),
+  );
 }
 
 Widget noFavoriteList() {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../appTheme.dart';
+import '../screens/detailScreen/campingDetailScreen.dart';
 import 'starRating.dart';
 
 class CampingCardListView extends StatefulWidget {
@@ -217,7 +218,15 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                 ),
                                 onTap: () {
                                   try {
-                                    widget.callback();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              CampingDetailScreen(
+                                                  // passare campingData
+                                                  ),
+                                        ));
+                                    //widget.callback();
                                   } catch (e) {}
                                 },
                               ),

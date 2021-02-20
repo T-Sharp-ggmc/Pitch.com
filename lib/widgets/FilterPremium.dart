@@ -3,6 +3,7 @@ import 'package:Pitch/models/popularFilterList.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../appTheme.dart';
+import '../models/popularFilterList.dart';
 
 class FilterPremiumView extends StatefulWidget {
   @override
@@ -11,8 +12,7 @@ class FilterPremiumView extends StatefulWidget {
 
 class _FilterPremiumViewState extends State<FilterPremiumView>
     with TickerProviderStateMixin {
-  List<PopularFilterListData> campingTypeList =
-      PopularFilterListData.categoryList;
+  List<FilterListData> campingTypeList = FilterListData.categoryList;
 
   AnimationController animationController;
 
@@ -135,7 +135,7 @@ class _FilterPremiumViewState extends State<FilterPremiumView>
                         Padding(
                           padding: const EdgeInsets.only(top: 4),
                           child: Text(
-                            PopularFilterListData.categoryList[index].titleTxt,
+                            FilterListData.categoryList[index].titleTxt,
                             maxLines: 2,
                             style: TextStyle(fontSize: 12),
                           ),
