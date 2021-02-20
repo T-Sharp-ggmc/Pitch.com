@@ -1,3 +1,4 @@
+import 'package:Pitch/screens/settingsScreens/settingScreen.dart';
 import 'package:Pitch/widgets/FilterPremium.dart';
 import 'package:Pitch/widgets/campingList.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,12 @@ class _HomeScreen extends State<HomeScreen>
                   icon: const Icon(Icons.settings),
                   tooltip: 'Show Snackbar',
                   onPressed: () {
-                    //scaffoldKey.currentState.showSnackBar(snackBar);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingScreen(),
+                          fullscreenDialog: true),
+                    );
                   },
                   color: Colors.black,
                 ),
