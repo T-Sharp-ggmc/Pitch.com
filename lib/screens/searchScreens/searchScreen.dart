@@ -1,7 +1,7 @@
-import 'package:WeCanTry/appTheme.dart';
-import 'package:WeCanTry/models/campingList.dart';
-import 'package:WeCanTry/screens/popups/orderPopup.dart';
-import 'package:WeCanTry/widgets/campingCard.dart';
+import 'package:Pitch/appTheme.dart';
+import 'package:Pitch/models/campingList.dart';
+import 'package:Pitch/screens/popups/orderPopup.dart';
+import 'package:Pitch/widgets/campingCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -28,14 +28,15 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   final searchBarHeight = 158.0;
 
   //controller
-  AnimationController animationController; 
+  AnimationController animationController;
   //AnimationController _animationController;
   ScrollController scrollController = new ScrollController();
 
   @override
   void initState() {
-    animationController = AnimationController(duration: Duration(milliseconds: 1000), vsync: this);
-   // _animationController = AnimationController(duration: Duration(milliseconds: 0), vsync: this);
+    animationController = AnimationController(
+        duration: Duration(milliseconds: 1000), vsync: this);
+    // _animationController = AnimationController(duration: Duration(milliseconds: 0), vsync: this);
     // scrollController.addListener(() {
     //   if (context != null) {
     //     if (scrollController.offset <= 0) {
@@ -78,41 +79,46 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                     child: Column(
                       children: <Widget>[
                         Container(
-                            color: AppTheme.getTheme().scaffoldBackgroundColor,
-                            child: Column(
-                              children: <Widget>[
-                                getSearchBarUI(),
-                                getTimeDateUI(),
-                                getFilterBarUI(),
-                              ],
-                            ),
+                          color: AppTheme.getTheme().scaffoldBackgroundColor,
+                          child: Column(
+                            children: <Widget>[
+                              getSearchBarUI(),
+                              getTimeDateUI(),
+                              getFilterBarUI(),
+                            ],
+                          ),
                         ),
                         Expanded(
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                color: AppTheme.getTheme().backgroundColor,
-                                child: ListView.builder(
-                                  controller: scrollController,
-                                  itemCount: campingList.length,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) {
-                                    var count = campingList.length > 10 ? 10 : campingList.length;
-                                    var animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-                                        parent: animationController, curve: Interval((1/ count) * index, 1.0, curve: Curves.fastOutSlowIn)
-                                        ));   ///da capire
-                                    animationController.forward();
-                                    return CampingCardListView(
-                                      animation: animation,
-                                      animationController: animationController,
-                                      campingData: campingList[index],
-                                      callback: refresh,
-                                    );
-                                  },
-                                ),
+                          child: Stack(children: <Widget>[
+                            Container(
+                              color: AppTheme.getTheme().backgroundColor,
+                              child: ListView.builder(
+                                controller: scrollController,
+                                itemCount: campingList.length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  var count = campingList.length > 10
+                                      ? 10
+                                      : campingList.length;
+                                  var animation = Tween(begin: 0.0, end: 1.0)
+                                      .animate(CurvedAnimation(
+                                          parent: animationController,
+                                          curve: Interval(
+                                              (1 / count) * index, 1.0,
+                                              curve: Curves.fastOutSlowIn)));
+
+                                  ///da capire
+                                  animationController.forward();
+                                  return CampingCardListView(
+                                    animation: animation,
+                                    animationController: animationController,
+                                    campingData: campingList[index],
+                                    callback: refresh,
+                                  );
+                                },
                               ),
-                            ]
-                          ),
+                            ),
+                          ]),
                         )
                       ],
                     ),
@@ -328,7 +334,9 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                       FocusScope.of(context).requestFocus(FocusNode());
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FiltersScreen(), fullscreenDialog: true),
+                        MaterialPageRoute(
+                            builder: (context) => FiltersScreen(),
+                            fullscreenDialog: true),
                       );
                     },
                     child: Padding(
@@ -344,7 +352,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Icon(Icons.sort, color: AppTheme.getTheme().primaryColor),
+                            child: Icon(Icons.sort,
+                                color: AppTheme.getTheme().primaryColor),
                           ),
                         ],
                       ),
@@ -426,7 +435,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                             });
                           },
                         ),
-                      ); 
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(0),
@@ -479,4 +488,3 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     );
   }
 }
-

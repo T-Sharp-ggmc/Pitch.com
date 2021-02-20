@@ -1,7 +1,7 @@
-import 'package:WeCanTry/screens/homeScreen.dart';
+import 'package:Pitch/screens/homepage/homeScreen.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
-import './screens/loginScreen.dart';
+import 'screens/login/loginScreen.dart';
 
 void main() => runApp(MyApp());
 

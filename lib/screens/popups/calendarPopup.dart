@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:WeCanTry/widgets/customCalendar.dart';
+import 'package:Pitch/widgets/customCalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -28,14 +28,16 @@ class CalendarPopupView extends StatefulWidget {
   _CalendarPopupViewState createState() => _CalendarPopupViewState();
 }
 
-class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProviderStateMixin {
+class _CalendarPopupViewState extends State<CalendarPopupView>
+    with TickerProviderStateMixin {
   AnimationController animationController;
   DateTime startDate;
   DateTime endDate;
 
   @override
   void initState() {
-    animationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+    animationController =
+        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
     if (widget.initialStartDate != null) {
       startDate = widget.initialStartDate;
     }
@@ -56,7 +58,9 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
-        backgroundColor: AppTheme.isLightTheme ? Colors.transparent : AppTheme.getTheme().backgroundColor.withOpacity(0.6),
+        backgroundColor: AppTheme.isLightTheme
+            ? Colors.transparent
+            : AppTheme.getTheme().backgroundColor.withOpacity(0.6),
         body: AnimatedBuilder(
           animation: animationController,
           builder: (BuildContext context, Widget child) {
@@ -79,7 +83,10 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                         color: AppTheme.getTheme().backgroundColor,
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         boxShadow: <BoxShadow>[
-                          BoxShadow(color: AppTheme.getTheme().dividerColor, offset: Offset(4, 4), blurRadius: 8.0),
+                          BoxShadow(
+                              color: AppTheme.getTheme().dividerColor,
+                              offset: Offset(4, 4),
+                              blurRadius: 8.0),
                         ],
                       ),
                       child: InkWell(
@@ -95,18 +102,26 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
                                         "Da",
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey.withOpacity(0.8)),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16,
+                                            color:
+                                                Colors.grey.withOpacity(0.8)),
                                       ),
                                       SizedBox(
                                         height: 4,
                                       ),
                                       Text(
-                                        startDate != null ? DateFormat("EEE, dd MMM").format(startDate) : "--/-- ",
+                                        startDate != null
+                                            ? DateFormat("EEE, dd MMM")
+                                                .format(startDate)
+                                            : "--/-- ",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
@@ -123,18 +138,28 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
                                         "A",
-                                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey.withOpacity(0.8)),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16,
+                                            color:
+                                                Colors.grey.withOpacity(0.8)),
                                       ),
                                       SizedBox(
                                         height: 4,
                                       ),
                                       Text(
-                                        endDate != null ? DateFormat("EEE, dd MMM").format(endDate) : "--/-- ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                        endDate != null
+                                            ? DateFormat("EEE, dd MMM")
+                                                .format(endDate)
+                                            : "--/-- ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
                                       ),
                                     ],
                                   ),
@@ -149,7 +174,8 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                               maximumDate: widget.maximumDate,
                               initialEndDate: widget.initialEndDate,
                               initialStartDate: widget.initialStartDate,
-                              startEndDateChange: (DateTime startDateData, DateTime endDateData) {
+                              startEndDateChange: (DateTime startDateData,
+                                  DateTime endDateData) {
                                 setState(() {
                                   startDate = startDateData;
                                   endDate = endDateData;
@@ -157,12 +183,14 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                               },
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 8),
+                              padding: const EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16, top: 8),
                               child: Container(
                                 height: 48,
                                 decoration: BoxDecoration(
                                   color: AppTheme.getTheme().primaryColor,
-                                  borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(24.0)),
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
                                       color: AppTheme.getTheme().dividerColor,
@@ -174,7 +202,8 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                                 child: Material(
                                   color: Colors.transparent,
                                   child: InkWell(
-                                    borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(24.0)),
                                     highlightColor: Colors.transparent,
                                     onTap: () {
                                       try {
@@ -188,7 +217,10 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                                     child: Center(
                                       child: Text(
                                         "Applica",
-                                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 18,
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ),

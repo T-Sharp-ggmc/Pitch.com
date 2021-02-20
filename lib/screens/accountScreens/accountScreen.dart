@@ -1,6 +1,6 @@
-import 'package:WeCanTry/models/profileSelectionList.dart';
-import 'package:WeCanTry/screens/accountScreens/editAccountScreen.dart';
-import 'package:WeCanTry/widgets/accountImage.dart';
+import 'package:Pitch/models/profileSelectionList.dart';
+import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
+import 'package:Pitch/widgets/accountImage.dart';
 import 'package:flutter/material.dart';
 
 import '../../appTheme.dart';
@@ -100,12 +100,12 @@ class _AccountScreenState extends State<AccountScreen> {
           return InkWell(
             onTap: () {
               if (index == 0) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditAccountScreen(),
-                        fullscreenDialog: true,
-                      ));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditAccountScreen(),
+                      fullscreenDialog: true,
+                    ));
               }
               if (index == 1) {
                 Navigator.push(

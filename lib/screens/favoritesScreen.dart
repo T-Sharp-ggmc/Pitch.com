@@ -1,4 +1,4 @@
-import 'package:WeCanTry/widgets/favoriteCampingCard.dart';
+import 'package:Pitch/widgets/favoriteCampingCard.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -9,14 +9,15 @@ class FavoritesScreen extends StatefulWidget {
   _FavoritesScreenState createState() => _FavoritesScreenState();
 }
 
-class _FavoritesScreenState extends State<FavoritesScreen> with TickerProviderStateMixin {
-  
+class _FavoritesScreenState extends State<FavoritesScreen>
+    with TickerProviderStateMixin {
   AnimationController tabAnimationController;
   Widget indexView = Container();
-  
+
   @override
   void initState() {
-    tabAnimationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+    tabAnimationController =
+        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
     //per evitare che la prima volta che apre la pagina si veda sfocato
     indexView = FavoriteCampingCard(
       animationController: tabAnimationController,
@@ -40,24 +41,25 @@ class _FavoritesScreenState extends State<FavoritesScreen> with TickerProviderSt
         return FadeTransition(
           opacity: widget.animationController,
           child: new Transform(
-            transform: new Matrix4.translationValues(0.0, 40 * (1.0 - widget.animationController.value), 0.0),
+            transform: new Matrix4.translationValues(
+                0.0, 40 * (1.0 - widget.animationController.value), 0.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                  padding:
+                      EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 ),
                 Expanded(
                   child: FavoriteCampingCard(
-                          animationController: tabAnimationController,
+                    animationController: tabAnimationController,
                   ),
                 ),
               ],
             ),
           ),
         );
-      
       },
     );
   }

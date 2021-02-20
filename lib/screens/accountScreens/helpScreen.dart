@@ -1,4 +1,4 @@
-import 'package:WeCanTry/models/helpSelectionList.dart';
+import 'package:Pitch/models/helpSelectionList.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../appTheme.dart';
@@ -36,8 +36,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top, 
-                          bottom: 8),
+                          top: MediaQuery.of(context).padding.top, bottom: 8),
                       child: CustomAppBar(
                         nameOfPage: "Come posso aiutarti?",
                       ),
@@ -180,5 +179,4 @@ class _HelpScreenState extends State<HelpScreen> {
       ),
     );
   }
-
 }

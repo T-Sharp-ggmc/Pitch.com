@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:WeCanTry/appTheme.dart';
+
+import '../appTheme.dart';
 import 'loginScreen.dart';
 
 class SignUpScreen extends StatefulWidget {

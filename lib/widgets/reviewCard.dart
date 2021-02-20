@@ -1,4 +1,4 @@
-import 'package:WeCanTry/models/reviewList.dart';
+import 'package:Pitch/models/reviewList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,42 +35,47 @@ class _ReviewCardState extends State<ReviewCard> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 var count = myReviewList.length > 10 ? 10 : myReviewList.length;
-                var animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-                  parent: widget.animationController,
-                  curve: Interval((1/count) * index, 1.0, 
-                    curve: Curves.fastOutSlowIn)));
+                var animation = Tween(begin: 0.0, end: 1.0).animate(
+                    CurvedAnimation(
+                        parent: widget.animationController,
+                        curve: Interval((1 / count) * index, 1.0,
+                            curve: Curves.fastOutSlowIn)));
                 widget.animationController.forward();
                 return ReviewCardListView(
-                  callback: () {}, 
+                  callback: () {},
                   reviewListData: myReviewList[index],
                   animation: animation,
                   animationController: widget.animationController,
                 );
               },
-          ),
+            ),
     );
   }
 
-  Widget noReviewList(){
-      return Scaffold(
-    backgroundColor: AppTheme.getTheme().backgroundColor,
-        body: InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          onTap: () {},
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget noReviewList() {
+    return Scaffold(
+      backgroundColor: AppTheme.getTheme().backgroundColor,
+      body: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        onTap: () {},
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(left: 16, right: 16),
-                    child: Icon(Icons.rate_review, size: 50, color: AppTheme.getTheme().primaryColor,),
+                    child: Icon(
+                      Icons.rate_review,
+                      size: 50,
+                      color: AppTheme.getTheme().primaryColor,
+                    ),
                   ),
                   SizedBox(height: 5),
                   Container(
@@ -97,27 +102,31 @@ class _ReviewCardState extends State<ReviewCard> {
                   ),
                 ],
               ),
-              )
-              ],
-          ),
+            )
+          ],
         ),
+      ),
     );
-
   }
 }
 
 class ReviewCardListView extends StatelessWidget {
-
   final ReviewListData reviewListData;
   final AnimationController animationController;
   final Animation animation;
   final VoidCallback callback;
 
-  const ReviewCardListView({Key key, this.reviewListData, this.animationController, this.animation, this.callback}) : super(key: key);
+  const ReviewCardListView(
+      {Key key,
+      this.reviewListData,
+      this.animationController,
+      this.animation,
+      this.callback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-      return AnimatedBuilder(
+    return AnimatedBuilder(
       animation: animationController,
       builder: (BuildContext context, Widget child) {
         return FadeTransition(
@@ -158,18 +167,20 @@ class ReviewCardListView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                          reviewListData.nameOfCamping,
-                                          maxLines: 2,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
+                                      reviewListData.nameOfCamping,
+                                      maxLines: 2,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: <Widget>[
                                         Expanded(
                                           child: Container(
@@ -186,7 +197,8 @@ class ReviewCardListView extends StatelessWidget {
                                                   child: StarRating(
                                                     allowHalfRating: true,
                                                     starCount: 5,
-                                                    rating: reviewListData.rating,
+                                                    rating:
+                                                        reviewListData.rating,
                                                     size: 20,
                                                     color: AppTheme.getTheme()
                                                         .primaryColor,
@@ -201,7 +213,9 @@ class ReviewCardListView extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    SizedBox( height: 4,),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
                                     Text(
                                       reviewListData.review,
                                       style: TextStyle(
@@ -241,6 +255,5 @@ class ReviewCardListView extends StatelessWidget {
         );
       },
     );
-  
   }
 }

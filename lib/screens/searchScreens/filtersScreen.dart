@@ -1,5 +1,5 @@
-import 'package:WeCanTry/models/popularFilterList.dart';
-import 'package:WeCanTry/widgets/customAppBar.dart';
+import 'package:Pitch/models/popularFilterList.dart';
+import 'package:Pitch/widgets/customAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
@@ -12,8 +12,10 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  List<PopularFilterListData> popularListDto = PopularFilterListData.popularList;
-  List<PopularFilterListData> categoryListDto = PopularFilterListData.categoryList;
+  List<PopularFilterListData> popularListDto =
+      PopularFilterListData.popularList;
+  List<PopularFilterListData> categoryListDto =
+      PopularFilterListData.categoryList;
 
   RangeValues _values = RangeValues(100, 600);
   double distValue = 50.0;
@@ -30,12 +32,14 @@ class _FiltersScreenState extends State<FiltersScreen> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: CustomAppBar(nameOfPage: "Filtri",),
+              child: CustomAppBar(
+                nameOfPage: "Filtri",
+              ),
             ),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16,right: 16),
+                  padding: const EdgeInsets.only(left: 16, right: 16),
                   child: Column(
                     children: <Widget>[
                       priceBarFilter(),
@@ -60,7 +64,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
               height: 1,
             ),
             Padding(
-              padding:  EdgeInsets.only(left: 16, right: 16, bottom: 16+MediaQuery.of(context).padding.bottom, top: 8),
+              padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 16 + MediaQuery.of(context).padding.bottom,
+                  top: 8),
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
@@ -85,7 +93,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     child: Center(
                       child: Text(
                         "Applica",
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            color: Colors.white),
                       ),
                     ),
                   ),
@@ -98,7 +109,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  Widget categoryListUI(){
+  Widget categoryListUI() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,12 +119,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
           child: Text(
             "Categorie",
             textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(right: 16, left: 16),
-          child: Column(children: getCList(),),
+          child: Column(
+            children: getCList(),
+          ),
         ),
         SizedBox(
           height: 8,
@@ -122,7 +138,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  List<Widget> getCList(){
+  List<Widget> getCList() {
     List<Widget> noList = List<Widget>();
     var count = 0;
     final columnCount = 2;
@@ -148,10 +164,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
                       child: Row(
                         children: <Widget>[
                           Icon(
-                            cat.isSelected ? Icons.check_box : Icons.check_box_outline_blank,
-                            color: cat.isSelected ? AppTheme.getTheme().primaryColor : Colors.grey.withOpacity(0.6),
+                            cat.isSelected
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank,
+                            color: cat.isSelected
+                                ? AppTheme.getTheme().primaryColor
+                                : Colors.grey.withOpacity(0.6),
                           ),
-                          SizedBox(width: 4,),
+                          SizedBox(
+                            width: 4,
+                          ),
                           Text(cat.titleTxt),
                         ],
                       ),
@@ -171,8 +193,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        )
-      );
+      ));
     }
     return noList;
   }
@@ -183,11 +204,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
           child: Text(
             "Filtri popolari",
             textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal),
           ),
         ),
         Padding(
@@ -228,7 +253,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     ),
                   ),
                   CupertinoSwitch(
-                    activeColor: date.isSelected ? AppTheme.getTheme().primaryColor : Colors.grey.withOpacity(0.6),
+                    activeColor: date.isSelected
+                        ? AppTheme.getTheme().primaryColor
+                        : Colors.grey.withOpacity(0.6),
                     onChanged: (value) {
                       setState(() {
                         checkAppPosition(i);
@@ -289,11 +316,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
           child: Text(
             "Distanza dalla città più vicina",
             textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal),
           ),
         ),
         SliderView(
@@ -319,7 +350,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
           child: Text(
             "Prezzo",
             textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal),
           ),
         ),
         RangeSliderView(
@@ -334,5 +368,4 @@ class _FiltersScreenState extends State<FiltersScreen> {
       ],
     );
   }
-
 }

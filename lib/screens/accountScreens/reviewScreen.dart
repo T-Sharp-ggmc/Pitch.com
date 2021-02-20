@@ -1,5 +1,4 @@
-
-import 'package:WeCanTry/widgets/reviewCard.dart';
+import 'package:Pitch/widgets/reviewCard.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
@@ -8,17 +7,19 @@ class ReviewScreen extends StatefulWidget {
   final AnimationController animationController;
 
   const ReviewScreen({Key key, this.animationController}) : super(key: key);
-  
+
   @override
   _ReviewScreenState createState() => _ReviewScreenState();
 }
 
-class _ReviewScreenState extends State<ReviewScreen> with TickerProviderStateMixin{
-   AnimationController tabAnimationController;
+class _ReviewScreenState extends State<ReviewScreen>
+    with TickerProviderStateMixin {
+  AnimationController tabAnimationController;
   Widget indexView = Container();
-   @override
+  @override
   void initState() {
-    tabAnimationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+    tabAnimationController =
+        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
     indexView = ReviewCard(
       animationController: tabAnimationController,
     );
@@ -32,7 +33,6 @@ class _ReviewScreenState extends State<ReviewScreen> with TickerProviderStateMix
     tabAnimationController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,27 +57,29 @@ class _ReviewScreenState extends State<ReviewScreen> with TickerProviderStateMix
               ),
               Expanded(
                 child: AnimatedBuilder(
-                  animation: widget.animationController,
-                  builder: (BuildContext context, Widget child) {
-                    return FadeTransition(
-                      opacity: widget.animationController,
-                      child: new Transform(
-                        transform: new Matrix4.translationValues(0.0, 40 * (1.0 - widget.animationController.value), 0.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child:ReviewCard(
-                                animationController: tabAnimationController,
-                              ),
-                            ) 
-                          ],
+                    animation: widget.animationController,
+                    builder: (BuildContext context, Widget child) {
+                      return FadeTransition(
+                        opacity: widget.animationController,
+                        child: new Transform(
+                          transform: new Matrix4.translationValues(
+                              0.0,
+                              40 * (1.0 - widget.animationController.value),
+                              0.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                child: ReviewCard(
+                                  animationController: tabAnimationController,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                ),
+                      );
+                    }),
               ),
             ],
           ),

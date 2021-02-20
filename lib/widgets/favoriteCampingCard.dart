@@ -1,22 +1,23 @@
-import 'package:WeCanTry/models/campingList.dart';
-import 'package:WeCanTry/widgets/starRating.dart';
+import 'package:Pitch/models/campingList.dart';
+import 'package:Pitch/widgets/starRating.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../appTheme.dart';
 
 class FavoriteCampingCard extends StatefulWidget {
-  
   final AnimationController animationController;
 
-  const FavoriteCampingCard({Key key, this.animationController}) : super(key: key);
-  
+  const FavoriteCampingCard({Key key, this.animationController})
+      : super(key: key);
+
   @override
   _FavoriteCampingCardState createState() => _FavoriteCampingCardState();
 }
 
 class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
-  var campingList = CampingListDto.campingList.where((i) => i.isFavorite).toList();
+  var campingList =
+      CampingListDto.campingList.where((i) => i.isFavorite).toList();
 
   @override
   void initState() {
@@ -27,73 +28,72 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: campingList.length == 0 
-        ? noFavoriteList()
-        : ListView.builder(
-        itemCount: campingList.length,
-        padding: EdgeInsets.only(top: 8, bottom: 8),
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          var count = campingList.length > 10 ? 10 : campingList.length;
-          var animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-              parent: widget.animationController,
-              curve: Interval((1 / count) * index, 1.0,
-                  curve: Curves.fastOutSlowIn)));
-          widget.animationController.forward();
-          return FavoriteCampingCardListView(
-            callback: () {}, //navigate to details page
-            campingData: campingList[index],
-            animation: animation,
-            animationController: widget.animationController,
-          );
-        },
-      ),
-    
+      child: campingList.length == 0
+          ? noFavoriteList()
+          : ListView.builder(
+              itemCount: campingList.length,
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                var count = campingList.length > 10 ? 10 : campingList.length;
+                var animation = Tween(begin: 0.0, end: 1.0).animate(
+                    CurvedAnimation(
+                        parent: widget.animationController,
+                        curve: Interval((1 / count) * index, 1.0,
+                            curve: Curves.fastOutSlowIn)));
+                widget.animationController.forward();
+                return FavoriteCampingCardListView(
+                  callback: () {}, //navigate to details page
+                  campingData: campingList[index],
+                  animation: animation,
+                  animationController: widget.animationController,
+                );
+              },
+            ),
     );
   }
 }
 
-Widget noFavoriteList(){
+Widget noFavoriteList() {
   return Scaffold(
     backgroundColor: AppTheme.getTheme().backgroundColor,
-        body: InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          onTap: () {},
+    body: InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      onTap: () {},
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
             child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 0, left: 76, right: 76),
-                    child: Image.asset("assets/images/NoFavorite.png"),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text(
-                      "Nessun campeggio preferito.\n\nInizia una ricerca e clicca sul cuore\nper salvare in preferiti",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 0, left: 76, right: 76),
+                  child: Image.asset("assets/images/NoFavorite.png"),
+                ),
+                SizedBox(height: 5),
+                Container(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    "Nessun campeggio preferito.\n\nInizia una ricerca e clicca sul cuore\nper salvare in preferiti",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
                     ),
                   ),
-                ],
-              ),
-              )
+                ),
               ],
-          ),
-        ),
-    );
+            ),
+          )
+        ],
+      ),
+    ),
+  );
 }
-
 
 class FavoriteCampingCardListView extends StatelessWidget {
   final bool isShowDate;

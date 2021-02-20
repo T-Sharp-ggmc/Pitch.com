@@ -1,5 +1,5 @@
-import 'package:WeCanTry/models/helpSelectionList.dart';
-import 'package:WeCanTry/widgets/customAppBar.dart';
+import 'package:Pitch/models/helpSelectionList.dart';
+import 'package:Pitch/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 
@@ -31,12 +31,17 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: 24),
-                child: CustomAppBar(nameOfPage: widget.title, isDetailsPage: true,),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).padding.top, bottom: 24),
+                child: CustomAppBar(
+                  nameOfPage: widget.title,
+                  isDetailsPage: true,
+                ),
               ),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.only(bottom: 16 + MediaQuery.of(context).padding.bottom),
+                  padding: EdgeInsets.only(
+                      bottom: 16 + MediaQuery.of(context).padding.bottom),
                   itemCount: subHelpList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -53,20 +58,29 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
                                           padding: const EdgeInsets.all(16.0),
                                           child: Text(
                                             subHelpList[index].titleTxt,
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
                                           ),
                                         )
                                       : Padding(
-                                          padding: const EdgeInsets.only(left: 16,right: 16,top: 8,bottom: 16),
+                                          padding: const EdgeInsets.only(
+                                              left: 16,
+                                              right: 16,
+                                              top: 8,
+                                              bottom: 16),
                                           child: Container(
                                             child: Text(
                                               subHelpList[index].subTxt,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 16,
-                                                color: subHelpList[index].isSelected
-                                                    ? AppTheme.getTheme().primaryColor
-                                                    : AppTheme.getTheme().disabledColor,
+                                                color: subHelpList[index]
+                                                        .isSelected
+                                                    ? AppTheme.getTheme()
+                                                        .primaryColor
+                                                    : AppTheme.getTheme()
+                                                        .disabledColor,
                                               ),
                                             ),
                                           ),
@@ -77,7 +91,8 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
                           ),
                           subHelpList[index].isSelected
                               ? Padding(
-                                  padding: const EdgeInsets.only(left: 16, right: 16),
+                                  padding: const EdgeInsets.only(
+                                      left: 16, right: 16),
                                   child: Divider(
                                     height: 1,
                                   ),
@@ -95,5 +110,4 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
       ),
     );
   }
-
 }
