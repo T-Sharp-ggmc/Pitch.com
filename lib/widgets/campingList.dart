@@ -1,15 +1,16 @@
-import 'package:Pitch/models/ItemsCategory.dart';
-import 'package:Pitch/models/campingList.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 import '../appTheme.dart';
+import '../models/campingList.dart';
 
 class CampingList {
+  List<CampingListDto> premiumList = CampingListDto.premiumList;
+
   List<Widget> getPosts() {
     List<Widget> posts = [];
-    for (int i = 0; i < CampingListDto.campingList.length; i++) {
+    for (int i = 0; i < premiumList.length; i++) {
       posts.add(getPost(i));
     }
     return posts;
@@ -34,7 +35,7 @@ class CampingList {
                   AspectRatio(
                     aspectRatio: 2,
                     child: Image.asset(
-                      ItemsCategory.img[index].imagePath,
+                      premiumList[index].imagePath,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -54,7 +55,7 @@ class CampingList {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    ItemsCategory.img[index].titleTxt,
+                                    premiumList[index].name,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
@@ -67,7 +68,7 @@ class CampingList {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
-                                        ItemsCategory.img[index].subTxt,
+                                        premiumList[index].info,
                                         style: TextStyle(
                                             fontSize: 14,
                                             color:
@@ -83,8 +84,7 @@ class CampingList {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          CampingListDto
-                                              .campingList[index].name,
+                                          premiumList[index].dist.toString(),
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 14,
@@ -143,13 +143,21 @@ class CampingList {
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      premiumList[index].isFavorite =
+                          premiumList[index].isFavorite;
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.favorite_border,
-                        color: AppTheme.getTheme().primaryColor,
-                      ),
+                      child: premiumList[index].isFavorite
+                          ? Icon(
+                              Icons.favorite,
+                              color: AppTheme.getTheme().primaryColor,
+                            )
+                          : Icon(
+                              Icons.favorite_border,
+                              color: AppTheme.getTheme().primaryColor,
+                            ),
                     ),
                   ),
                 ),

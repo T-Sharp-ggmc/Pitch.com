@@ -37,7 +37,7 @@ class CampingListDto {
   static List<CampingListDto> campingList = [
     CampingListDto(
         id: 1,
-        imagePath: 'assets/images/TopPlace/caminpg_1.jpg',
+        imagePath: 'assets/images/TopPlace/camping_1.jpg',
         name: "Baia degli Aranci",
         info: "Vieste, FG",
         date:
@@ -67,5 +67,77 @@ class CampingListDto {
         isSelected: false,
         numOfBooking: 20,
         category: CampingCategory.lago)
+  ];
+
+
+  static List<CampingListDto> premiumList = [
+    CampingListDto(
+        id: 1,
+        imagePath: 'assets/images/first.jpg',
+        name: "Grand Royal Hotel",
+        info: "Wembley, London",
+        date:
+            '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
+        pitchSize: "1 Piazzola - 2 Adulti",
+        dist: 2.0,
+        rating: 4.4,
+        reviews: 80,
+        perDay: 180,
+        isFavorite: false,
+        isSelected: true,
+        numOfBooking: 40,
+        category: CampingCategory.mare),
+
+        CampingListDto(
+        id: 1,
+        imagePath: 'assets/images/hotel_Type_4.jpg',
+        name: "mtc",
+        info: "Wembley, London",
+        date:
+            '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
+        pitchSize: "1 Piazzola - 2 Adulti",
+        dist: 2.0,
+        rating: 4.4,
+        reviews: 80,
+        perDay: 180,
+        isFavorite: false,
+        isSelected: true,
+        numOfBooking: 40,
+        category: CampingCategory.fiume),
+
+        CampingListDto(
+        id: 1,
+        imagePath: 'assets/images/hotel_Type_3.jpg',
+        name: "caspiterina",
+        info: "Wembley, London",
+        date:
+            '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
+        pitchSize: "1 Piazzola - 2 Adulti",
+        dist: 2.0,
+        rating: 4.4,
+        reviews: 80,
+        perDay: 180,
+        isFavorite: false,
+        isSelected: true,
+        numOfBooking: 40,
+        category: CampingCategory.montagna),
+
+        CampingListDto(
+        id: 1,
+        imagePath: 'assets/images/hotel_Type_2.jpg',
+        name: "mimi",
+        info: "Wembley, London",
+        date:
+            '${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 2)))} - ${DateFormat("dd MMM").format(DateTime.now().add(Duration(days: 8)))}',
+        pitchSize: "1 Piazzola - 2 Adulti",
+        dist: 2.0,
+        rating: 4.4,
+        reviews: 80,
+        perDay: 180,
+        isFavorite: false,
+        isSelected: true,
+        numOfBooking: 40,
+        category: CampingCategory.none),
+        
   ];
 }
