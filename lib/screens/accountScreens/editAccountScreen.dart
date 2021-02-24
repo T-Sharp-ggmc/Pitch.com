@@ -73,43 +73,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       );
                     }),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 24, right: 24, bottom: 16, top: 16),
-                child: Container(
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: AppTheme.getTheme().errorColor,
-                        blurRadius: 8,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                      highlightColor: Colors.transparent,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Center(
-                        child: Text(
-                          "Esci",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: AppTheme.getTheme().errorColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
