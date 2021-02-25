@@ -34,7 +34,7 @@ class _FilterPremiumViewState extends State<FilterPremiumView>
     return Container(
       height: 114,
       child: ListView.builder(
-        padding: const EdgeInsets.only(top: 0, right: 16, left: 16),
+        padding: const EdgeInsets.only(top: 4, right: 16, left: 16, bottom: 2),
         itemCount: campingTypeList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -82,10 +82,6 @@ class _FilterPremiumViewState extends State<FilterPremiumView>
                                   aspectRatio: 1,
                                   child: Image.asset(
                                     campingTypeList[index].imageUrl,
-
-                                    // PopularFilterListData
-                                    //     .categoryList[index].imageUrl,
-                                    // 'assets/images/filters/lago.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
