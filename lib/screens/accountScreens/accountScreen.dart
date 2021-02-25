@@ -1,5 +1,7 @@
 import 'package:Pitch/models/profileSelectionList.dart';
 import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
+import 'package:Pitch/screens/accountScreens/paymentMethodScreen.dart';
+import 'package:Pitch/sizeConfig.dart';
 import 'package:Pitch/widgets/accountImage.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +10,10 @@ import 'changepassword.dart';
 import 'helpScreen.dart';
 import 'inviteFriendScreen.dart';
 import 'bookingScreen.dart';
+import 'pitchInfoScreen.dart';
+import 'privacySettingScreen.dart';
 import 'reviewScreen.dart';
+import 'serviceTermScreen.dart';
 
 class AccountScreen extends StatefulWidget {
   final AnimationController animationController;
@@ -41,44 +46,15 @@ class _AccountScreenState extends State<AccountScreen> {
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.only(
-                      bottom: 16 + MediaQuery.of(context).padding.bottom),
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 200,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                AccountImage(),
-                                Positioned(
-                                  bottom: 8,
-                                  child: Text(
-                                    "Gina Pollicina",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+              //da implementare funzione logout
+              Padding(
+                padding: EdgeInsets.only(right: 28, top: 16, bottom: 8),
+                child: Icon(
+                  Icons.exit_to_app,
+                  size: 34,
+                  color: AppTheme.getTheme().disabledColor.withOpacity(0.3),
                 ),
               ),
               getProfileOption(),
@@ -91,7 +67,6 @@ class _AccountScreenState extends State<AccountScreen> {
 
   Widget getProfileOption() {
     return Expanded(
-      flex: 2,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.only(top: 10),
@@ -120,7 +95,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BookingScreen(),
+                    builder: (context) => PaymentMethodScreen(),
                     fullscreenDialog: true,
                   ),
                 );
@@ -150,6 +125,42 @@ class _AccountScreenState extends State<AccountScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => InviteFriendScreen(),
+                    fullscreenDialog: true,
+                  ),
+                );
+              }
+              if (index == 6) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookingScreen(),
+                    fullscreenDialog: true,
+                  ),
+                );
+              }
+              if (index == 7) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ServiceTermScreen(),
+                    fullscreenDialog: true,
+                  ),
+                );
+              }
+              if (index == 8) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PrivacySettingScreen(),
+                    fullscreenDialog: true,
+                  ),
+                );
+              }
+              if (index == 9) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PitchInfoScreen(),
                     fullscreenDialog: true,
                   ),
                 );

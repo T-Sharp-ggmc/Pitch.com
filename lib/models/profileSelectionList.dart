@@ -26,7 +26,7 @@ class SettingsListData {
       iconData: FontAwesomeIcons.lock,
     ),
     SettingsListData(
-      titleTxt: 'Le mie prenotazioni',
+      titleTxt: 'Metodo di Pagamento',
       isSelected: false,
       iconData: FontAwesomeIcons.wallet,
     ),
@@ -45,8 +45,29 @@ class SettingsListData {
       isSelected: false,
       iconData: FontAwesomeIcons.userFriends,
     ),
+    SettingsListData(
+      titleTxt: 'Le tue prenotazioni',
+      isSelected: false,
+      iconData: FontAwesomeIcons.barcode,
+    ),
+    SettingsListData(
+      titleTxt: 'Termini di servizio',
+      isSelected: false,
+      iconData: null,
+    ),
+    SettingsListData(
+      titleTxt: 'Impostazioni per la privacy',
+      isSelected: false,
+      iconData: null,
+    ),
+    SettingsListData(
+      titleTxt: 'Informazioni su Pitch',
+      isSelected: false,
+      iconData: null,
+    ),
   ];
   
+  //to remove
   static List<SettingsListData> appSettingsList = [
       SettingsListData(
         titleTxt: 'Gestisci Privacy',

@@ -26,7 +26,7 @@ class _HomeScreen extends State<HomeScreen>
     //HomeScreen(),
     Center(child: Text('Home in lavorazione')), //home body
     FavoritesScreen(), //Center(child: Text('Preferiti in lavorazione')),  //favorite body
-    SearchPage(),
+    //SearchPage(), //al suo posto la nuova funzionalità
     AccountScreen(),
     //Center(child: Text('Profilo in lavorazione')),  //account body
   ];
@@ -108,15 +108,15 @@ class _HomeScreen extends State<HomeScreen>
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               // ignore: deprecated_member_use
-              title: Text('search')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              // ignore: deprecated_member_use
-              title: Text('room_preferences')),
+              title: Text('favorite')),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.new_releases),
+          //     // ignore: deprecated_member_use
+          //     title: Text('new feature')),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
               // ignore: deprecated_member_use
-              title: Text('filter')),
+              title: Text('account')),
         ],
         selectedItemColor: Colors.black87,
         unselectedItemColor: Colors.black87,
