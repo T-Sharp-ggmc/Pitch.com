@@ -2,7 +2,7 @@ import 'package:Pitch/models/profileSelectionList.dart';
 import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
 import 'package:Pitch/screens/accountScreens/paymentMethodScreen.dart';
 import 'package:Pitch/sizeConfig.dart';
-import 'package:Pitch/widgets/accountImage.dart';
+import 'package:Pitch/screens/accountScreens/widgets/accountImage.dart';
 import 'package:flutter/material.dart';
 
 import '../../appTheme.dart';

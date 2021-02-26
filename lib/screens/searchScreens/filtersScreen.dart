@@ -3,7 +3,7 @@ import 'package:Pitch/widgets/customAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
-import '../RangeSliderView.dart';
+import 'widgets/RangeSliderView.dart';
 import '../SliderView.dart';
 
 class FiltersScreen extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:Pitch/widgets/favoriteCampingCard.dart';
+import 'package:Pitch/screens/favoriteScreens/widgets/favoriteCampingCard.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesScreen extends StatefulWidget {

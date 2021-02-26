@@ -1,6 +1,6 @@
 import 'package:Pitch/models/account.dart';
-import 'package:Pitch/widgets/accountImage.dart';
-import 'package:Pitch/widgets/textToEdit.dart';
+import 'package:Pitch/screens/accountScreens/widgets/accountImage.dart';
+import 'package:Pitch/screens/accountScreens/widgets/textToEdit.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/customAppBar.dart';
 import '../../appTheme.dart';

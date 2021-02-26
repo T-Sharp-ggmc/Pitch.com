@@ -1,4 +1,4 @@
-import 'package:Pitch/widgets/reviewCard.dart';
+import 'package:Pitch/screens/accountScreens/widgets/reviewCard.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
