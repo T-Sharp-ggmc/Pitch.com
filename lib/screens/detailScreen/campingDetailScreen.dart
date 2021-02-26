@@ -10,9 +10,10 @@ import 'widgets/customDetailAppBar.dart';
 import 'widgets/detailsBottomBar.dart';
 
 class CampingDetailScreen extends StatefulWidget {
-  final CampingListDto camping;
+  static String routeName = "/campingDetail";
+  //final CampingListDto camping;
 
-  const CampingDetailScreen({Key key, this.camping}) : super(key: key);
+  const CampingDetailScreen({Key key}) : super(key: key);
   @override
   _CampingDetailScreenState createState() => _CampingDetailScreenState();
 }
@@ -22,12 +23,13 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
   var pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
-    images.add(widget.camping.imagePath);
-    images.add(widget.camping.imagePath);
+    final CampingListDto camping = ModalRoute.of(context).settings.arguments;
     SizeConfig().init(context);
+    images.add(camping.imagePath);
+    images.add(camping.imagePath);
     return Scaffold(
       backgroundColor: AppTheme.getTheme().backgroundColor,
-      appBar: CustomDetailAppBar(widget.camping.isFavorite),
+      appBar: CustomDetailAppBar(camping.isFavorite),
       extendBodyBehindAppBar: true,
       body: Stack(
         alignment: Alignment.topCenter,
@@ -87,7 +89,7 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.camping.name,
+                  camping.name,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 30,
@@ -98,7 +100,7 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      widget.camping.info,
+                      camping.info,
                       style: TextStyle(
                           fontSize: 14, color: Colors.grey.withOpacity(0.8)),
                     ),
@@ -115,7 +117,7 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        "${widget.camping.dist} km dal centro",
+                        "${camping.dist} km dal centro",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 14, color: Colors.grey.withOpacity(0.8)),
@@ -130,13 +132,13 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                       StarRating(
                         allowHalfRating: true,
                         starCount: 5,
-                        rating: widget.camping.rating,
+                        rating: camping.rating,
                         size: 20,
                         color: AppTheme.getTheme().primaryColor,
                         borderColor: AppTheme.getTheme().primaryColor,
                       ),
                       Text(
-                        " ${widget.camping.reviews} Reviews",
+                        " ${camping.reviews} Reviews",
                         style: TextStyle(
                             fontSize: 14, color: Colors.grey.withOpacity(0.8)),
                       ),

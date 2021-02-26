@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class PrivacySettingScreen extends StatefulWidget {
+  static String routeName = "/privacySetting";
   @override
   _PrivacySettingScreenState createState() => _PrivacySettingScreenState();
 }
@@ -9,9 +11,9 @@ class PrivacySettingScreen extends StatefulWidget {
 class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        // backgroundColor: AppTheme.getTheme().backgroundColor,
+    return Scaffold(
+      appBar: NewCustomAppBar(nameOfPage: "Impostazioni privacy"),
+        backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -23,16 +25,10 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Le mie prenotazioni"),
-              ),
               Expanded()
               ],
           ),
         ),
-      ),
     );
   }
 }

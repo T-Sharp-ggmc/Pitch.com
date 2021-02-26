@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../appTheme.dart';
+import '../../../appTheme.dart';
 
 class RangeSliderView extends StatefulWidget {
   final Function(RangeValues) onChnageRangeValues;

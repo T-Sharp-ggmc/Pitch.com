@@ -1,9 +1,10 @@
-import 'package:Pitch/widgets/reviewCard.dart';
+import 'package:Pitch/screens/accountScreens/widgets/reviewCard.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class ReviewScreen extends StatefulWidget {
+  static String routeName = "/review";
   final AnimationController animationController;
 
   const ReviewScreen({Key key, this.animationController}) : super(key: key);
@@ -36,8 +37,8 @@ class _ReviewScreenState extends State<ReviewScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    return Scaffold(
+      appBar: NewCustomAppBar(nameOfPage: "Le tue recensioni"),
         backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
@@ -50,11 +51,6 @@ class _ReviewScreenState extends State<ReviewScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Le tue recensioni"),
-              ),
               Expanded(
                 child: AnimatedBuilder(
                     animation: widget.animationController,
@@ -84,7 +80,6 @@ class _ReviewScreenState extends State<ReviewScreen>
             ],
           ),
         ),
-      ),
     );
   }
 }

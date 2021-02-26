@@ -6,6 +6,7 @@ import '../../widgets/customAppBar.dart';
 import 'helpDetailsScreen.dart';
 
 class HelpScreen extends StatefulWidget {
+  static String routeName = "/help";
   @override
   _HelpScreenState createState() => _HelpScreenState();
 }
@@ -16,6 +17,7 @@ class _HelpScreenState extends State<HelpScreen> {
     List<HelpSelectionListData> helpSearchList =
         HelpSelectionListData.helpSearchList;
     return Scaffold(
+      appBar: NewCustomAppBar(nameOfPage: "Come posso aiutarti?"),
       backgroundColor: AppTheme.getTheme().backgroundColor,
       body: InkWell(
         splashColor: Colors.transparent,
@@ -34,13 +36,6 @@ class _HelpScreenState extends State<HelpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top, bottom: 8),
-                      child: CustomAppBar(
-                        nameOfPage: "Come posso aiutarti?",
-                      ),
-                    ),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 24, right: 24, top: 4),
@@ -113,14 +108,15 @@ class _HelpScreenState extends State<HelpScreen> {
                   return InkWell(
                     onTap: helpSearchList[index].subTxt != ""
                         ? () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HelpDetailsScreen(
-                                  title: helpSearchList[index].subTxt,
-                                ),
-                              ),
-                            );
+                          Navigator.pushNamed(context, HelpDetailsScreen.routeName, arguments: helpSearchList[index].subTxt);
+                            // Navigator.pushNamed(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => HelpDetailsScreen(
+                            //       title: helpSearchList[index].subTxt,
+                            //     ),
+                            //   ),
+                            // );
                           }
                         : null,
                     child: Column(

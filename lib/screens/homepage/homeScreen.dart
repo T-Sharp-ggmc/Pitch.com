@@ -1,14 +1,16 @@
 import 'package:Pitch/screens/settingsScreens/settingScreen.dart';
-import 'package:Pitch/widgets/FilterPremium.dart';
-import 'package:Pitch/widgets/campingList.dart';
+import 'package:Pitch/screens/homepage/widget/FilterPremium.dart';
+import 'package:Pitch/screens/homepage/widget/campingList.dart';
+import 'package:Pitch/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../appTheme.dart';
 import '../accountScreens/accountScreen.dart';
-import '../favoritesScreen.dart';
+import '../favoriteScreens/favoritesScreen.dart';
 import '../searchScreens/searchScreen.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String routeName = "/home";
   @override
   _HomeScreen createState() => _HomeScreen();
 }
@@ -23,12 +25,10 @@ class _HomeScreen extends State<HomeScreen>
 
   int _currentIndex = 0;
   final List<Widget> _children = [
-    //HomeScreen(),
     Center(child: Text('Home in lavorazione')), //home body
-    FavoritesScreen(), //Center(child: Text('Preferiti in lavorazione')),  //favorite body
-    //SearchPage(), //al suo posto la nuova funzionalità
+    FavoritesScreen(), 
+    // nuova funzionalità
     AccountScreen(),
-    //Center(child: Text('Profilo in lavorazione')),  //account body
   ];
 
   void initState() {
@@ -53,48 +53,9 @@ class _HomeScreen extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      appBar: _currentIndex == 0
-          ? null
-          // ? AppBar(
-          //     title: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: <Widget>[
-          //         Row(
-          //           children: <Widget>[
-          //             //logo image
-          //             Padding(
-          //                 padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-          //                 child: Image.asset(
-          //                   'assets/Icons/logo.png',
-          //                   fit: BoxFit.cover,
-          //                   height: 40,
-          //                 )),
-          //           ],
-          //         ),
-          //       ],
-          //     ),
-          //     backgroundColor: Colors.white,
-          //     actions: <Widget>[
-          //       IconButton(
-          //         icon: const Icon(Icons.settings),
-          //         tooltip: 'Show Snackbar',
-          //         onPressed: () {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //                 builder: (context) => SettingScreen(),
-          //                 fullscreenDialog: true),
-          //           );
-          //         },
-          //         color: Colors.black,
-          //       ),
-          //     ],
-          //   )
-          : AppBar(
-              toolbarHeight: 0,
-            ),
       body: _currentIndex == 0 ? getHomePage() : _children[_currentIndex],
       // ignore: missing_required_param
       bottomNavigationBar: BottomNavigationBar(
@@ -137,11 +98,11 @@ class _HomeScreen extends State<HomeScreen>
             animationController: controller,
           );
           break;
-        case 3:
-          _children[_currentIndex] = AccountScreen(
-            animationController: controller,
-          );
-          break;
+        // case 3:
+        //   _children[_currentIndex] = AccountScreen(
+        //     animationController: controller,
+        //   );
+        //   break;
         default:
       }
     });
@@ -168,11 +129,12 @@ class _HomeScreen extends State<HomeScreen>
                 ),
               ),
               Positioned(
-                top: 20,
+                top: 25,
                 left: 35,
                 right: 75,
                 child: Container(
                   width: 350,
+                  height: getProportionateScreenHeight(50),
                   decoration: BoxDecoration(
                     color: Colors.grey[100].withOpacity(0.9),
                     borderRadius: BorderRadius.all(Radius.circular((38.0))),
@@ -185,18 +147,13 @@ class _HomeScreen extends State<HomeScreen>
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 16, right: 16, top: 3, bottom: 3),
+                        left: 20, right: 16, top: 0, bottom: 3),
                     child: TextField(
                       readOnly: true,
                       // onChanged: (String
                       //     txt) {}, // funzione per aggiornare automaticamente la lista di campeggi che compare sotto
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SearchPage(),
-                              fullscreenDialog: true,
-                            ));
+                        Navigator.pushNamed(context, SearchScreen.routeName);
                       },
                       style: TextStyle(fontSize: 14),
                       cursorColor: AppTheme.getTheme().primaryColor,

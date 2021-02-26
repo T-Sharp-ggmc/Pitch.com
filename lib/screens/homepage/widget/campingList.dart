@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
-import '../appTheme.dart';
-import '../models/campingList.dart';
-import 'campingCard.dart';
+import '../../../appTheme.dart';
+import '../../../models/campingList.dart';
+import '../../../widgets/campingCard.dart';
 
 class CampingList extends StatefulWidget {
   final AnimationController animationController;

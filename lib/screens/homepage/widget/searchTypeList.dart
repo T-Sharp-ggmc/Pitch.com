@@ -1,7 +1,7 @@
-import '../models/campingList.dart';
+import '../../../models/campingList.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../appTheme.dart';
+import '../../../appTheme.dart';
 
 class SearchTypeListView extends StatefulWidget {
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class ServiceTermScreen extends StatefulWidget {
+  static String routeName = "/serviceTerm";
   @override
   _ServiceTermScreenState createState() => _ServiceTermScreenState();
 }
@@ -9,9 +11,9 @@ class ServiceTermScreen extends StatefulWidget {
 class _ServiceTermScreenState extends State<ServiceTermScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        // backgroundColor: AppTheme.getTheme().backgroundColor,
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Termini di servizio"),
+        backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -23,16 +25,10 @@ class _ServiceTermScreenState extends State<ServiceTermScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Le mie prenotazioni"),
-              ),
               Expanded()
               ],
           ),
         ),
-      ),
     );
   }
 }

@@ -1,11 +1,12 @@
 import 'package:Pitch/models/account.dart';
-import 'package:Pitch/widgets/accountImage.dart';
-import 'package:Pitch/widgets/textToEdit.dart';
+import 'package:Pitch/screens/accountScreens/widgets/accountImage.dart';
+import 'package:Pitch/screens/accountScreens/widgets/textToEdit.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/customAppBar.dart';
 import '../../appTheme.dart';
 
 class EditAccountScreen extends StatefulWidget {
+  static String routeName = "/editAccount";
   @override
   _EditAccountScreenState createState() => _EditAccountScreenState();
 }
@@ -15,8 +16,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   String newAccountInfo = "";
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Modifica Profilo"),
         resizeToAvoidBottomInset: false,
         backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
@@ -30,11 +31,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Modifica Profilo"),
-              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 16),
@@ -76,7 +72,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 

@@ -4,6 +4,7 @@ import 'package:Pitch/appTheme.dart';
 import 'loginScreen.dart';
 
 class SignUpScreen extends StatefulWidget {
+  static String routeName = "/signUp";
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -257,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   BorderRadius.all(Radius.circular(24.0)),
                               highlightColor: Colors.transparent,
                               onTap: () {
-                                /*  Navigator.pushNamedAndRemoveUntil(
+                                /*  Navigator.pushNamedNamedAndRemoveUntil(
                                     context,
                                     Routes.TabScreen,
                                     (Route<dynamic> route) => false);*/
@@ -303,11 +304,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           InkWell(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginScreen()),
-                              );
+                              Navigator.pushNamed(context,LoginScreen.routeName);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

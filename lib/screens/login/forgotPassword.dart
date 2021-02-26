@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
+  static String routeName = "/forgotPassword";
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }

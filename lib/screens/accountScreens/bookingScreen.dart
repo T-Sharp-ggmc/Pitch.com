@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class BookingScreen extends StatefulWidget {
+  static String routeName = "/booking";
   @override
   _BookingScreenState createState() => _BookingScreenState();
 }
@@ -9,10 +11,11 @@ class BookingScreen extends StatefulWidget {
 class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        // backgroundColor: AppTheme.getTheme().backgroundColor,
-        body: InkWell(
+    return  Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Le tue prenotazioni"),
+        backgroundColor: AppTheme.getTheme().backgroundColor,
+        body: 
+        InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           focusColor: Colors.transparent,
@@ -23,16 +26,10 @@ class _BookingScreenState extends State<BookingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Le mie prenotazioni"),
-              ),
               Expanded()
               ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

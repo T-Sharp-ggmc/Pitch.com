@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class PitchInfoScreen extends StatefulWidget {
+  static String routeName = "/pitchInfo";
   @override
   _PitchInfoScreenState createState() => _PitchInfoScreenState();
 }
@@ -9,9 +11,9 @@ class PitchInfoScreen extends StatefulWidget {
 class _PitchInfoScreenState extends State<PitchInfoScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        // backgroundColor: AppTheme.getTheme().backgroundColor,
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Informazioni su Pitch"),
+        backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -23,16 +25,10 @@ class _PitchInfoScreenState extends State<PitchInfoScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Le mie prenotazioni"),
-              ),
               Expanded()
               ],
           ),
         ),
-      ),
     );
   }
 }

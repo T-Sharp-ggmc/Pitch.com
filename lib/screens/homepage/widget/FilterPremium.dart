@@ -2,8 +2,8 @@ import 'package:Pitch/models/popularFilterList.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../appTheme.dart';
-import '../models/popularFilterList.dart';
+import '../../../appTheme.dart';
+import '../../../models/popularFilterList.dart';
 
 class FilterPremiumView extends StatefulWidget {
   @override

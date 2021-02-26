@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
+  static String routeName = "/paymentMethod";
   @override
   _PaymentMethodScreenState createState() => _PaymentMethodScreenState();
 }
@@ -9,9 +11,9 @@ class PaymentMethodScreen extends StatefulWidget {
 class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        // backgroundColor: AppTheme.getTheme().backgroundColor,
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Metodi di pagamento"),
+        backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -23,16 +25,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Le mie prenotazioni"),
-              ),
               Expanded()
               ],
           ),
         ),
-      ),
     );
   }
 }

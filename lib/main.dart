@@ -1,3 +1,4 @@
+import 'package:Pitch/routes.dart';
 import 'package:Pitch/screens/homepage/homeScreen.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
@@ -12,8 +13,8 @@ class MyApp extends StatelessWidget {
         title: 'Pitch',
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),
-        routes: {
-          LoginScreen.routeName: (ctx) => LoginScreen(),
-        });
+        initialRoute: HomeScreen.routeName,
+        routes: routes,
+    );
   }
 }
