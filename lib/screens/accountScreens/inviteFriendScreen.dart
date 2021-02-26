@@ -3,10 +3,11 @@ import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class InviteFriendScreen extends StatelessWidget {
+  static String routeName = "/inviteFriend";
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    return Scaffold(
+      appBar: NewCustomAppBar(nameOfPage: "Invita Amici"),
         backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
@@ -19,11 +20,6 @@ class InviteFriendScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Invita Amici"),
-              ),
               Expanded(
                 child: Column(
                 children: <Widget>[
@@ -95,7 +91,6 @@ class InviteFriendScreen extends StatelessWidget {
               ],
           ),
         ),
-      ),
     );
   }
 }

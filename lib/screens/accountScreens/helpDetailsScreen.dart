@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 
 class HelpDetailsScreen extends StatefulWidget {
-  final String title;
+  static String routeName = "/helpDetails";
+  //final String title;// = ModalRoute.of(context).settings.arguments;
 
-  const HelpDetailsScreen({Key key, this.title = ""}) : super(key: key);
+  const HelpDetailsScreen({Key key}) : super(key: key);
   @override
   _HelpDetailsScreenState createState() => _HelpDetailsScreenState();
 }
@@ -16,8 +17,9 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    final String title = ModalRoute.of(context).settings.arguments.toString();
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: title),
         backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
@@ -30,14 +32,6 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top, bottom: 24),
-                child: CustomAppBar(
-                  nameOfPage: widget.title,
-                  isDetailsPage: true,
-                ),
-              ),
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(
@@ -107,7 +101,6 @@ class _HelpDetailsScreenState extends State<HelpDetailsScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 }

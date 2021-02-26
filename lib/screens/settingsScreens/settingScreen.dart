@@ -4,6 +4,7 @@ import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class SettingScreen extends StatefulWidget {
+  static String routeName = "/setting";
   @override
   _SettingScreenState createState() => _SettingScreenState();
 }
@@ -95,8 +96,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Impostazioni"),
         backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
@@ -109,11 +110,6 @@ class _SettingScreenState extends State<SettingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Impostazioni"),
-              ),
               getTitleOfDropDown("Lingua"),
               getLanguageDropDownButton(),
               Padding(
@@ -148,7 +144,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       return InkWell(
                         onTap: () {
                           // if (index == 0) {
-                          //     Navigator.push(
+                          //     Navigator.pushNamed(
                           //         context,
                           //         MaterialPageRoute(
                           //           builder: (context) => PrivacyScreen(),
@@ -156,7 +152,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           //         ));
                           // }
                           // if (index == 1) {
-                          //   Navigator.push(
+                          //   Navigator.pushNamed(
                           //     context,
                           //     MaterialPageRoute(
                           //       builder: (context) => InfoScreen(),
@@ -213,7 +209,6 @@ class _SettingScreenState extends State<SettingScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 

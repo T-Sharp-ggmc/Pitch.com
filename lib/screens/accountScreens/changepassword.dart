@@ -3,6 +3,7 @@ import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class ChangepasswordScreen extends StatefulWidget {
+  static String routeName = "/changePassword";
   @override
   _ChangepasswordScreenState createState() => _ChangepasswordScreenState();
 }
@@ -10,9 +11,9 @@ class ChangepasswordScreen extends StatefulWidget {
 class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        // backgroundColor: AppTheme.getTheme().backgroundColor,
+    return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Cambia Password"),
+        backgroundColor: AppTheme.getTheme().backgroundColor,
         body: InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -24,11 +25,6 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: CustomAppBar(nameOfPage: "Cambia Password"),
-              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -221,7 +217,6 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 }

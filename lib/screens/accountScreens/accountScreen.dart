@@ -16,19 +16,21 @@ import 'reviewScreen.dart';
 import 'serviceTermScreen.dart';
 
 class AccountScreen extends StatefulWidget {
-  final AnimationController animationController;
-
-  const AccountScreen({Key key, this.animationController}) : super(key: key);
+  static String routeName = "/account";
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
 
-class _AccountScreenState extends State<AccountScreen> {
+class _AccountScreenState extends State<AccountScreen>
+    with TickerProviderStateMixin {
   List<SettingsListData> userSettingsList = SettingsListData.userSettingsList;
+  AnimationController controller;
 
   @override
   void initState() {
-    // widget.animationController.forward(); implementare animazione nel build
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 4));
+    controller.forward(); //implementare animazione nel build
     super.initState();
   }
 
@@ -48,16 +50,51 @@ class _AccountScreenState extends State<AccountScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              //da implementare funzione logout
-              Padding(
-                padding: EdgeInsets.only(right: 28, top: 16, bottom: 8),
-                child: Icon(
-                  Icons.exit_to_app,
-                  size: 34,
-                  color: AppTheme.getTheme().disabledColor.withOpacity(0.3),
-                ),
+              SizedBox(
+                height: getProportionateScreenHeight(60),
               ),
               getProfileOption(),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 24, right: 24, bottom: 20, top: 16),
+                child: Center(
+                  child: Container(
+                    height: getProportionateScreenHeight(50),
+                    width: getProportionateScreenWidth(150),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: AppTheme.getTheme().errorColor),
+                      borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: AppTheme.getTheme().errorColor,
+                          blurRadius: 6,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                        highlightColor: Colors.transparent,
+                        onTap: () {
+                          //logOut
+                        },
+                        child: Center(
+                          child: Text(
+                            "Esci",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -74,97 +111,26 @@ class _AccountScreenState extends State<AccountScreen> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              if (index == 0) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditAccountScreen(),
-                      fullscreenDialog: true,
-                    ));
-              }
-              if (index == 1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChangepasswordScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 2) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentMethodScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 3) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ReviewScreen(
-                      animationController: widget.animationController,
-                    ),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 4) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HelpScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 5) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => InviteFriendScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 6) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookingScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 7) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ServiceTermScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 8) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PrivacySettingScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
-              if (index == 9) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PitchInfoScreen(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              }
+              if (index == 0)
+                Navigator.pushNamed(context, EditAccountScreen.routeName);
+              if (index == 1)
+                Navigator.pushNamed(context, ChangepasswordScreen.routeName);
+              if (index == 2)
+                Navigator.pushNamed(context, PaymentMethodScreen.routeName);
+              if (index == 3)
+                Navigator.pushNamed(context, ReviewScreen.routeName);
+              if (index == 4)
+                Navigator.pushNamed(context, HelpScreen.routeName);
+              if (index == 5)
+                Navigator.pushNamed(context, InviteFriendScreen.routeName);
+              if (index == 6)
+                Navigator.pushNamed(context, BookingScreen.routeName);
+              if (index == 7)
+                Navigator.pushNamed(context, ServiceTermScreen.routeName);
+              if (index == 8)
+                Navigator.pushNamed(context, PrivacySettingScreen.routeName);
+              if (index == 9)
+                Navigator.pushNamed(context, PitchInfoScreen.routeName);
             },
             child: Column(
               children: <Widget>[

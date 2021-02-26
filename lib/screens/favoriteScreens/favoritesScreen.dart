@@ -2,6 +2,7 @@ import 'package:Pitch/screens/favoriteScreens/widgets/favoriteCampingCard.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesScreen extends StatefulWidget {
+  static String routeName = "/favorite";
   final AnimationController animationController;
 
   const FavoritesScreen({Key key, this.animationController}) : super(key: key);

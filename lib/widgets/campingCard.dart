@@ -218,11 +218,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                 ),
                                 onTap: () {
                                   try {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => CampingDetailScreen(camping: widget.campingData),
-                                        ));
+                                    Navigator.pushNamed(context, CampingDetailScreen.routeName, arguments: widget.campingData);
                                     //widget.callback();
                                   } catch (e) {}
                                 },

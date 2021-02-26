@@ -11,15 +11,16 @@ import 'filtersScreen.dart';
 import '../popups/calendarPopup.dart';
 import '../popups/pitchPopup.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchScreen extends StatefulWidget {
+  static String routeName = "/search";
   final AnimationController animationController;
 
-  const SearchPage({Key key, this.animationController}) : super(key: key);
+  const SearchScreen({Key key, this.animationController}) : super(key: key);
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
+class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMixin {
   var campingList = CampingListDto.campingList;
 
   List<FilterListData> serviceListData = FilterListData.serviceList;
@@ -70,6 +71,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Ricerca"),
         backgroundColor: AppTheme.getTheme().backgroundColor,
         body: Stack(
           children: <Widget>[

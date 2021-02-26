@@ -4,7 +4,7 @@ import '../../appTheme.dart';
 import 'forgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/login';
+  static const routeName = '/logIn';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -171,12 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ForgotPasswordScreen()),
-                                );
+                                Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+                                
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -217,12 +213,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   BorderRadius.all(Radius.circular(24.0)),
                               highlightColor: Colors.transparent,
                               onTap: () {
-                                // Navigator.pushAndRemoveUntil(context, Routes.SPLASH, (Route<dynamic> route) => false);
-                                // Navigator.pushNamedAndRemoveUntil(
+                                // Navigator.pushNamedAndRemoveUntil(context, Routes.SPLASH, (Route<dynamic> route) => false);
+                                // Navigator.pushNamedNamedAndRemoveUntil(
                                 //  context,
                                 //  Routes.TabScreen,
                                 //  (Route<dynamic> route) => false);
-                                // Navigator.pushReplacementNamed(context, Routes.TabScreen);
+                                // Navigator.pushNamedReplacementNamed(context, Routes.TabScreen);
                               },
                               child: Center(
                                 child: Text(

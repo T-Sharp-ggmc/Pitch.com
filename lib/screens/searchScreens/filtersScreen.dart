@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import 'widgets/RangeSliderView.dart';
-import '../SliderView.dart';
+import 'widgets/SliderView.dart';
 
 class FiltersScreen extends StatefulWidget {
+  static String routeName = "/filter";
   final List<FilterListData> serviceListDto;
   final List<FilterListData> categoryListDto;
   final RangeValues priceRange;
@@ -32,17 +33,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Container(
       color: AppTheme.getTheme().backgroundColor,
       child: Scaffold(
+        appBar: NewCustomAppBar(nameOfPage: "Filtri"),
         backgroundColor: Colors.transparent,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: CustomAppBar(
-                nameOfPage: "Filtri",
-              ),
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
