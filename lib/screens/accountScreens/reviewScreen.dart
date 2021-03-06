@@ -5,9 +5,8 @@ import '../../widgets/customAppBar.dart';
 
 class ReviewScreen extends StatefulWidget {
   static String routeName = "/review";
-  final AnimationController animationController;
 
-  const ReviewScreen({Key key, this.animationController}) : super(key: key);
+  const ReviewScreen({Key key}) : super(key: key);
 
   @override
   _ReviewScreenState createState() => _ReviewScreenState();
@@ -25,7 +24,6 @@ class _ReviewScreenState extends State<ReviewScreen>
       animationController: tabAnimationController,
     );
     tabAnimationController.forward();
-    widget.animationController.forward();
     super.initState();
   }
 
@@ -53,14 +51,14 @@ class _ReviewScreenState extends State<ReviewScreen>
             children: <Widget>[
               Expanded(
                 child: AnimatedBuilder(
-                    animation: widget.animationController,
+                    animation: tabAnimationController,
                     builder: (BuildContext context, Widget child) {
                       return FadeTransition(
-                        opacity: widget.animationController,
+                        opacity: tabAnimationController,
                         child: new Transform(
                           transform: new Matrix4.translationValues(
                               0.0,
-                              40 * (1.0 - widget.animationController.value),
+                              40 * (1.0 - tabAnimationController.value),
                               0.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
