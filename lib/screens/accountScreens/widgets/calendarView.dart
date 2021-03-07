@@ -17,7 +17,7 @@ class CalendarView extends StatefulWidget {
 }
 
 class _CalendarViewState extends State<CalendarView> {
-  List<DateTime> dateList = List<DateTime>();
+  List<DateTime> dateList = <DateTime>[];
   var currentMonthDate = DateTime.now();
   DateTime _date;
 
@@ -146,7 +146,7 @@ class _CalendarViewState extends State<CalendarView> {
   }
 
   List<Widget> getDaysNameUI() {
-    List<Widget> listUI = List<Widget>();
+    List<Widget> listUI = <Widget>[];
     for (var i = 0; i < 7; i++) {
       listUI.add(
         Expanded(
@@ -163,10 +163,10 @@ class _CalendarViewState extends State<CalendarView> {
   }
 
   List<Widget> getDaysNoUI() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = <Widget>[];
     var cout = 0;
     for (var i = 0; i < dateList.length / 7; i++) {
-      List<Widget> listUI = List<Widget>();
+      List<Widget> listUI = <Widget>[];
       for (var i = 0; i < 7; i++) {
         final date = dateList[cout];
         listUI.add(
