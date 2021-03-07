@@ -31,7 +31,6 @@ class _HelpScreenState extends State<HelpScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-                color: AppTheme.getTheme().primaryColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,14 +108,6 @@ class _HelpScreenState extends State<HelpScreen> {
                     onTap: helpSearchList[index].subTxt != ""
                         ? () {
                           Navigator.pushNamed(context, HelpDetailsScreen.routeName, arguments: helpSearchList[index].subTxt);
-                            // Navigator.pushNamed(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => HelpDetailsScreen(
-                            //       title: helpSearchList[index].subTxt,
-                            //     ),
-                            //   ),
-                            // );
                           }
                         : null,
                     child: Column(

@@ -56,7 +56,7 @@ class SettingsListData {
       iconData: null,
     ),
     SettingsListData(
-      titleTxt: 'Impostazioni per la privacy',
+      titleTxt: 'Impostazioni sulla privacy',
       isSelected: false,
       iconData: null,
     ),

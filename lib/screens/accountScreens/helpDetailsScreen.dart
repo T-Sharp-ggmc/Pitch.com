@@ -5,7 +5,6 @@ import '../../appTheme.dart';
 
 class HelpDetailsScreen extends StatefulWidget {
   static String routeName = "/helpDetails";
-  //final String title;// = ModalRoute.of(context).settings.arguments;
 
   const HelpDetailsScreen({Key key}) : super(key: key);
   @override

@@ -16,7 +16,7 @@ class HelpSelectionListData {
     ),
     HelpSelectionListData(
       titleTxt: '',
-      subTxt: "Come posso cancellare una prenotazione?",
+      subTxt: "Come posso cancellare \nuna prenotazione?",
     ),
     HelpSelectionListData(
       titleTxt: 'Prenotare una piazzola',
@@ -24,7 +24,7 @@ class HelpSelectionListData {
     ),
     HelpSelectionListData(
       titleTxt: '',
-      subTxt: "Come posso prenotare un campeggio nei preferiti?",
+      subTxt: "Come posso prenotare \nun campeggio nei preferiti?",
     ),
   ];
 
