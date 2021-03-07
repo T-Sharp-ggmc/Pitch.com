@@ -1,12 +1,8 @@
 import 'package:Pitch/models/profileSelectionList.dart';
 import 'package:Pitch/screens/accountScreens/card_screen.dart';
 import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
-import 'package:Pitch/screens/accountScreens/widgets/credit_card.dart';
-
 import 'package:Pitch/sizeConfig.dart';
-
 import 'package:flutter/material.dart';
-
 import '../../appTheme.dart';
 import 'changepassword.dart';
 import 'helpScreen.dart';

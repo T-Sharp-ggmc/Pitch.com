@@ -1,4 +1,3 @@
-import 'package:Pitch/screens/settingsScreens/settingScreen.dart';
 import 'package:Pitch/screens/homepage/widget/FilterPremium.dart';
 import 'package:Pitch/screens/homepage/widget/campingList.dart';
 import 'package:Pitch/sizeConfig.dart';
@@ -26,7 +25,7 @@ class _HomeScreen extends State<HomeScreen>
   int _currentIndex = 0;
   final List<Widget> _children = [
     Center(child: Text('Home in lavorazione')), //home body
-    FavoritesScreen(), 
+    FavoritesScreen(),
     // nuova funzionalità
     AccountScreen(),
   ];

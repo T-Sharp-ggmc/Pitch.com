@@ -19,7 +19,8 @@ class CampingDetailScreen extends StatefulWidget {
 }
 
 class _CampingDetailScreenState extends State<CampingDetailScreen> {
-  List<String> images = new List<String>(); //da cambiare imagepath in camping models in array di immagini
+  List<String> images =
+      <String>[]; //da cambiare imagepath in camping models in array di immagini
   var pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
@@ -158,5 +159,3 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
     );
   }
 }
-
-

@@ -19,7 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   List<DropdownMenuItem<Language>> buildLanguageDropDownMenuItems(
       List listItems) {
-    List<DropdownMenuItem<Language>> items = List();
+    List<DropdownMenuItem<Language>> items = [];
     for (Language listItem in listItems) {
       items.add(
         DropdownMenuItem(
@@ -38,7 +38,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   List<DropdownMenuItem<Currency>> buildCurrencyDropDownMenuItems(
       List listItems) {
-    List<DropdownMenuItem<Currency>> items = List();
+    List<DropdownMenuItem<Currency>> items = [];
     for (Currency listItem in listItems) {
       items.add(
         DropdownMenuItem(
@@ -56,7 +56,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Unit _selectedUnit;
 
   List<DropdownMenuItem<Unit>> buildUnitDropDownMenuItems(List listItems) {
-    List<DropdownMenuItem<Unit>> items = List();
+    List<DropdownMenuItem<Unit>> items = [];
     for (Unit listItem in listItems) {
       items.add(
         DropdownMenuItem(
@@ -82,7 +82,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   List<DropdownMenuItem<Language>> buildDropDownMenuItems(List listItems) {
-    List<DropdownMenuItem<Language>> items = List();
+    List<DropdownMenuItem<Language>> items = [];
     for (Language listItem in listItems) {
       items.add(
         DropdownMenuItem(
@@ -97,118 +97,115 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: NewCustomAppBar(nameOfPage: "Impostazioni"),
-        backgroundColor: AppTheme.getTheme().backgroundColor,
-        body: InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              getTitleOfDropDown("Lingua"),
-              getLanguageDropDownButton(),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Divider(
-                  height: 2,
-                ),
+      appBar: NewCustomAppBar(nameOfPage: "Impostazioni"),
+      backgroundColor: AppTheme.getTheme().backgroundColor,
+      body: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            getTitleOfDropDown("Lingua"),
+            getLanguageDropDownButton(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Divider(
+                height: 2,
               ),
-              getTitleOfDropDown("Valuta"),
-              getCurrencyDropDownButton(),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Divider(
-                  height: 2,
-                ),
+            ),
+            getTitleOfDropDown("Valuta"),
+            getCurrencyDropDownButton(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Divider(
+                height: 2,
               ),
-              getTitleOfDropDown("Unità"),
-              getUnitDropDownButton(),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Divider(
-                  height: 2,
-                ),
+            ),
+            getTitleOfDropDown("Unità"),
+            getUnitDropDownButton(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Divider(
+                height: 2,
               ),
-              Expanded(
-                child: Container(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.only(top: 10),
-                    itemCount: appSettingsList.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          // if (index == 0) {
-                          //     Navigator.pushNamed(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //           builder: (context) => PrivacyScreen(),
-                          //           fullscreenDialog: true,
-                          //         ));
-                          // }
-                          // if (index == 1) {
-                          //   Navigator.pushNamed(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => InfoScreen(),
-                          //       fullscreenDialog: true,
-                          //     ),
-                          //   );
-                          // }
-                        },
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8, right: 16),
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text(
-                                        appSettingsList[index].titleTxt,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16),
-                                      ),
+            ),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.only(top: 10),
+                  itemCount: appSettingsList.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        // if (index == 0) {
+                        //     Navigator.pushNamed(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //           builder: (context) => PrivacyScreen(),
+                        //           fullscreenDialog: true,
+                        //         ));
+                        // }
+                        // if (index == 1) {
+                        //   Navigator.pushNamed(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => InfoScreen(),
+                        //       fullscreenDialog: true,
+                        //     ),
+                        //   );
+                        // }
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 16),
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      appSettingsList[index].titleTxt,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Container(
-                                      child: Icon(
-                                          appSettingsList[index].iconData,
-                                          color: AppTheme.getTheme()
-                                              .disabledColor
-                                              .withOpacity(0.3)),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Container(
+                                    child: Icon(appSettingsList[index].iconData,
+                                        color: AppTheme.getTheme()
+                                            .disabledColor
+                                            .withOpacity(0.3)),
+                                  ),
+                                )
+                              ],
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16, right: 16),
-                              child: Divider(
-                                height: 1,
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            child: Divider(
+                              height: 1,
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
+      ),
     );
   }
 

@@ -52,6 +52,7 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                             !campingList[index].isFavorite;
                         deletedCamping = campingList.removeAt(index);
                       });
+                      // ignore: deprecated_member_use
                       Scaffold.of(context).showSnackBar(SnackBar(
                         content:
                             Text("$nameCampingDismissed rimosso dai preferiti"),

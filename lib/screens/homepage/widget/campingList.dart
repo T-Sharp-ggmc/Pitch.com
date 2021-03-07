@@ -1,8 +1,5 @@
 import 'package:Pitch/screens/popups/orderPopup.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
-
 import '../../../appTheme.dart';
 import '../../../models/campingList.dart';
 import '../../../widgets/campingCard.dart';

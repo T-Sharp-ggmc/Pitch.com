@@ -20,7 +20,8 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMixin {
+class _SearchScreenState extends State<SearchScreen>
+    with TickerProviderStateMixin {
   var campingList = CampingListDto.campingList;
 
   List<FilterListData> serviceListData = FilterListData.serviceList;
@@ -148,13 +149,13 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
     bool isInSelectedCategory = false;
     List<FilterListData> categoryList =
         categoryListData.where((element) => element.isSelected).toList();
-    List<CampingCategory> categorySelectedList = new List<CampingCategory>();
+    List<CampingCategory> categorySelectedList = <CampingCategory>[];
     List<CampingListDto> filteredList = listToFilter;
 
     for (var i = 0; i < categoryList.length; i++) {
       categorySelectedList.add(categoryList[i].category);
     }
-    List<int> index = new List<int>();
+    List<int> index = <int>[];
 
     for (var x = 0; x < filteredList.length; x++) {
       //filter price
