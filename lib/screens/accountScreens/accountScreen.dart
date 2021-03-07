@@ -1,6 +1,7 @@
 import 'package:Pitch/models/profileSelectionList.dart';
 import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
 import 'package:Pitch/screens/accountScreens/paymentMethodScreen.dart';
+import 'package:Pitch/services/auth.dart';
 import 'package:Pitch/sizeConfig.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ class _AccountScreenState extends State<AccountScreen>
     with TickerProviderStateMixin {
   List<SettingsListData> userSettingsList = SettingsListData.userSettingsList;
   AnimationController controller;
+  AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -83,8 +85,8 @@ class _AccountScreenState extends State<AccountScreen>
                       child: InkWell(
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         highlightColor: Colors.transparent,
-                        onTap: () {
-                          //logOut
+                        onTap: () async{
+                          await _authService.signOut();
                         },
                         child: Center(
                           child: Text(

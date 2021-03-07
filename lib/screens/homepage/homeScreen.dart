@@ -1,4 +1,3 @@
-import 'package:Pitch/screens/settingsScreens/settingScreen.dart';
 import 'package:Pitch/screens/homepage/widget/FilterPremium.dart';
 import 'package:Pitch/screens/homepage/widget/campingList.dart';
 import 'package:Pitch/sizeConfig.dart';

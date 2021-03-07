@@ -8,13 +8,13 @@ class User {
 
 class UserData {
 
-   String uid; //da usare per unificare l'utente con firestore
-   String name;
-   String surname;
-   String email;
-   DateTime birthDate;
-   String phone;
+   final String uid; //da usare per unificare l'utente con firestore
+   final String name;
+   final String surname;
+   final String email;
+   //final DateTime birthDate;
+   final String phone;
 
-  UserData(this.name, this.surname, this.email, this.phone, this.birthDate, {this.uid});
+  UserData({this.name, this.surname, this.email, this.phone, this.uid});
 
 }

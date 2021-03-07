@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "854781975911",
+    "project_id": "mycamping-59b95",
+    "storage_bucket": "mycamping-59b95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854781975911:android:9dc584dc211fad5fefe3c2",
+        "android_client_info": {
+          "package_name": "com.G_Project.MyCamping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854781975911-kf0kngflm6bd0bcjh16ppf4m43durpto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ2W5hfULjP1NhOf4ypwYfGO_v-9ckPxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854781975911-kf0kngflm6bd0bcjh16ppf4m43durpto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
