@@ -10,7 +10,13 @@ class CustomCalendarView extends StatefulWidget {
   final DateTime initialEndDate;
   final Function(DateTime, DateTime) startEndDateChange;
 
-  const CustomCalendarView({Key key, this.initialStartDate, this.initialEndDate, this.startEndDateChange, this.minimumDate, this.maximumDate})
+  const CustomCalendarView(
+      {Key key,
+      this.initialStartDate,
+      this.initialEndDate,
+      this.startEndDateChange,
+      this.minimumDate,
+      this.maximumDate})
       : super(key: key);
 
   @override
@@ -18,7 +24,7 @@ class CustomCalendarView extends StatefulWidget {
 }
 
 class _CustomCalendarViewState extends State<CustomCalendarView> {
-  List<DateTime> dateList = List<DateTime>();
+  List<DateTime> dateList = <DateTime>[];
   var currentMonthDate = DateTime.now();
   DateTime startDate;
   DateTime endDate;
@@ -64,7 +70,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 4, bottom: 4),
+            padding:
+                const EdgeInsets.only(left: 8.0, right: 8.0, top: 4, bottom: 4),
             child: Row(
               children: <Widget>[
                 Padding(
@@ -84,7 +91,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         onTap: () {
                           setState(() {
-                            currentMonthDate = DateTime(currentMonthDate.year, currentMonthDate.month, 0);
+                            currentMonthDate = DateTime(currentMonthDate.year,
+                                currentMonthDate.month, 0);
                             setListOfDate(currentMonthDate);
                           });
                         },
@@ -100,7 +108,12 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                   child: Center(
                     child: Text(
                       DateFormat("MMMM, yyyy").format(currentMonthDate),
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppTheme.getTheme().disabledColor.withOpacity(1.0)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: AppTheme.getTheme()
+                              .disabledColor
+                              .withOpacity(1.0)),
                     ),
                   ),
                 ),
@@ -121,7 +134,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         onTap: () {
                           setState(() {
-                            currentMonthDate = DateTime(currentMonthDate.year, currentMonthDate.month + 2, 0);
+                            currentMonthDate = DateTime(currentMonthDate.year,
+                                currentMonthDate.month + 2, 0);
                             setListOfDate(currentMonthDate);
                           });
                         },
@@ -154,14 +168,17 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   List<Widget> getDaysNameUI() {
-    List<Widget> listUI = List<Widget>();
+    List<Widget> listUI = <Widget>[];
     for (var i = 0; i < 7; i++) {
       listUI.add(
         Expanded(
           child: Center(
             child: Text(
               DateFormat("EEE").format(dateList[i]),
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.getTheme().primaryColor),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppTheme.getTheme().primaryColor),
             ),
           ),
         ),
@@ -171,10 +188,10 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   List<Widget> getDaysNoUI() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = <Widget>[];
     var cout = 0;
     for (var i = 0; i < dateList.length / 7; i++) {
-      List<Widget> listUI = List<Widget>();
+      List<Widget> listUI = <Widget>[];
       for (var i = 0; i < 7; i++) {
         final date = dateList[cout];
         listUI.add(
@@ -189,19 +206,34 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                       child: Material(
                         color: Colors.transparent,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 2, bottom: 2, left: isStartDateRadius(date) ? 4 : 0, right: isEndDateRadius(date) ? 4 : 0),
+                          padding: EdgeInsets.only(
+                              top: 2,
+                              bottom: 2,
+                              left: isStartDateRadius(date) ? 4 : 0,
+                              right: isEndDateRadius(date) ? 4 : 0),
                           child: Container(
                             decoration: BoxDecoration(
                               color: startDate != null && endDate != null
-                                  ? getIsItStartAndEndDate(date) || getIsInRange(date)
-                                      ? AppTheme.getTheme().primaryColor.withOpacity(0.4)
+                                  ? getIsItStartAndEndDate(date) ||
+                                          getIsInRange(date)
+                                      ? AppTheme.getTheme()
+                                          .primaryColor
+                                          .withOpacity(0.4)
                                       : Colors.transparent
                                   : Colors.transparent,
                               borderRadius: BorderRadius.only(
-                                bottomLeft: isStartDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                                topLeft: isStartDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                                topRight: isEndDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                                bottomRight: isEndDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
+                                bottomLeft: isStartDateRadius(date)
+                                    ? Radius.circular(24.0)
+                                    : Radius.circular(0.0),
+                                topLeft: isStartDateRadius(date)
+                                    ? Radius.circular(24.0)
+                                    : Radius.circular(0.0),
+                                topRight: isEndDateRadius(date)
+                                    ? Radius.circular(24.0)
+                                    : Radius.circular(0.0),
+                                bottomRight: isEndDateRadius(date)
+                                    ? Radius.circular(24.0)
+                                    : Radius.circular(0.0),
                               ),
                             ),
                           ),
@@ -214,19 +246,33 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         borderRadius: BorderRadius.all(Radius.circular(32.0)),
                         onTap: () {
                           if (currentMonthDate.month == date.month) {
-                            if (widget.minimumDate != null && widget.maximumDate != null) {
-                              var newminimumDate = DateTime(widget.minimumDate.year, widget.minimumDate.month, widget.minimumDate.day - 1);
-                              var newmaximumDate = DateTime(widget.maximumDate.year, widget.maximumDate.month, widget.maximumDate.day + 1);
-                              if (date.isAfter(newminimumDate) && date.isBefore(newmaximumDate)) {
+                            if (widget.minimumDate != null &&
+                                widget.maximumDate != null) {
+                              var newminimumDate = DateTime(
+                                  widget.minimumDate.year,
+                                  widget.minimumDate.month,
+                                  widget.minimumDate.day - 1);
+                              var newmaximumDate = DateTime(
+                                  widget.maximumDate.year,
+                                  widget.maximumDate.month,
+                                  widget.maximumDate.day + 1);
+                              if (date.isAfter(newminimumDate) &&
+                                  date.isBefore(newmaximumDate)) {
                                 onDateClick(date);
                               }
                             } else if (widget.minimumDate != null) {
-                              var newminimumDate = DateTime(widget.minimumDate.year, widget.minimumDate.month, widget.minimumDate.day - 1);
+                              var newminimumDate = DateTime(
+                                  widget.minimumDate.year,
+                                  widget.minimumDate.month,
+                                  widget.minimumDate.day - 1);
                               if (date.isAfter(newminimumDate)) {
                                 onDateClick(date);
                               }
                             } else if (widget.maximumDate != null) {
-                              var newmaximumDate = DateTime(widget.maximumDate.year, widget.maximumDate.month, widget.maximumDate.day + 1);
+                              var newmaximumDate = DateTime(
+                                  widget.maximumDate.year,
+                                  widget.maximumDate.month,
+                                  widget.maximumDate.day + 1);
                               if (date.isBefore(newmaximumDate)) {
                                 onDateClick(date);
                               }
@@ -239,15 +285,24 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                           padding: EdgeInsets.all(2),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: getIsItStartAndEndDate(date) ? AppTheme.getTheme().primaryColor : Colors.transparent,
-                              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                              color: getIsItStartAndEndDate(date)
+                                  ? AppTheme.getTheme().primaryColor
+                                  : Colors.transparent,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0)),
                               border: Border.all(
-                                color: getIsItStartAndEndDate(date) ? Colors.white : Colors.transparent,
+                                color: getIsItStartAndEndDate(date)
+                                    ? Colors.white
+                                    : Colors.transparent,
                                 width: 2,
                               ),
                               boxShadow: getIsItStartAndEndDate(date)
                                   ? <BoxShadow>[
-                                      BoxShadow(color: AppTheme.getTheme().disabledColor, blurRadius: 4, offset: Offset(0, 0)),
+                                      BoxShadow(
+                                          color:
+                                              AppTheme.getTheme().disabledColor,
+                                          blurRadius: 4,
+                                          offset: Offset(0, 0)),
                                     ]
                                   : null,
                             ),
@@ -256,10 +311,21 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                 "${date.day}",
                                 style: TextStyle(
                                     color: getIsItStartAndEndDate(date)
-                                        ? AppTheme.getTheme().disabledColor.withOpacity(1.0)
-                                        : currentMonthDate.month == date.month ? AppTheme.getTheme().disabledColor.withOpacity(1.0) :AppTheme.getTheme().disabledColor,
-                                    fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-                                    fontWeight: getIsItStartAndEndDate(date) ? FontWeight.bold : FontWeight.normal),
+                                        ? AppTheme.getTheme()
+                                            .disabledColor
+                                            .withOpacity(1.0)
+                                        : currentMonthDate.month == date.month
+                                            ? AppTheme.getTheme()
+                                                .disabledColor
+                                                .withOpacity(1.0)
+                                            : AppTheme.getTheme().disabledColor,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width > 360
+                                            ? 18
+                                            : 16,
+                                    fontWeight: getIsItStartAndEndDate(date)
+                                        ? FontWeight.bold
+                                        : FontWeight.normal),
                               ),
                             ),
                           ),
@@ -274,8 +340,12 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         height: 6,
                         width: 6,
                         decoration: BoxDecoration(
-                            color: DateTime.now().day == date.day && DateTime.now().month == date.month && DateTime.now().year == date.year
-                                ? getIsInRange(date) ? Colors.white : AppTheme.getTheme().primaryColor
+                            color: DateTime.now().day == date.day &&
+                                    DateTime.now().month == date.month &&
+                                    DateTime.now().year == date.year
+                                ? getIsInRange(date)
+                                    ? Colors.white
+                                    : AppTheme.getTheme().primaryColor
                                 : Colors.transparent,
                             shape: BoxShape.circle),
                       ),
@@ -311,9 +381,15 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   bool getIsItStartAndEndDate(DateTime date) {
-    if (startDate != null && startDate.day == date.day && startDate.month == date.month && startDate.year == date.year) {
+    if (startDate != null &&
+        startDate.day == date.day &&
+        startDate.month == date.month &&
+        startDate.year == date.year) {
       return true;
-    } else if (endDate != null && endDate.day == date.day && endDate.month == date.month && endDate.year == date.year) {
+    } else if (endDate != null &&
+        endDate.day == date.day &&
+        endDate.month == date.month &&
+        endDate.year == date.year) {
       return true;
     } else {
       return false;
@@ -321,7 +397,9 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   bool isStartDateRadius(DateTime date) {
-    if (startDate != null && startDate.day == date.day && startDate.month == date.month) {
+    if (startDate != null &&
+        startDate.day == date.day &&
+        startDate.month == date.month) {
       return true;
     } else if (date.weekday == 1) {
       return true;
@@ -331,7 +409,9 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   bool isEndDateRadius(DateTime date) {
-    if (endDate != null && endDate.day == date.day && endDate.month == date.month) {
+    if (endDate != null &&
+        endDate.day == date.day &&
+        endDate.month == date.month) {
       return true;
     } else if (date.weekday == 7) {
       return true;

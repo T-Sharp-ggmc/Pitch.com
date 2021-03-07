@@ -144,11 +144,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   List<Widget> getCList() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = <Widget>[];
     var count = 0;
     final columnCount = 2;
     for (var i = 0; i < widget.categoryListDto.length / columnCount; i++) {
-      List<Widget> listUI = List<Widget>();
+      List<Widget> listUI = <Widget>[];
       for (var i = 0; i < columnCount; i++) {
         try {
           final cat = widget.categoryListDto[count];
@@ -234,7 +234,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   List<Widget> getPopularListUI() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = <Widget>[];
     for (var i = 0; i < widget.serviceListDto.length; i++) {
       final date = widget.serviceListDto[i];
       noList.add(

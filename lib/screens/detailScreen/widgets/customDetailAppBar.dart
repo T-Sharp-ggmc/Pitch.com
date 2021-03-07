@@ -22,6 +22,7 @@ class CustomDetailAppBar extends PreferredSize {
             SizedBox(
               height: getProportionateScreenWidth(40),
               width: getProportionateScreenWidth(40),
+              // ignore: deprecated_member_use
               child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60),
@@ -37,6 +38,7 @@ class CustomDetailAppBar extends PreferredSize {
                 SizedBox(
                     height: getProportionateScreenWidth(40),
                     width: getProportionateScreenWidth(40),
+                    // ignore: deprecated_member_use
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60),
@@ -53,6 +55,7 @@ class CustomDetailAppBar extends PreferredSize {
                 SizedBox(
                     height: getProportionateScreenWidth(40),
                     width: getProportionateScreenWidth(40),
+                    // ignore: deprecated_member_use
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60),

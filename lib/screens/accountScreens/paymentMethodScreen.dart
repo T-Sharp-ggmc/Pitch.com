@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import '../../appTheme.dart';
-import '../../widgets/customAppBar.dart';
+// import 'package:flutter/material.dart';
+// import '../../appTheme.dart';
+// import '../../widgets/customAppBar.dart';
 
-class PaymentMethodScreen extends StatefulWidget {
-  static String routeName = "/paymentMethod";
-  @override
-  _PaymentMethodScreenState createState() => _PaymentMethodScreenState();
-}
+// class PaymentMethodScreen extends StatefulWidget {
+//   static String routeName = "/paymentMethod";
+//   @override
+//   _PaymentMethodScreenState createState() => _PaymentMethodScreenState();
+// }
 
 class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override

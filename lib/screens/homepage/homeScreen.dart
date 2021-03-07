@@ -25,7 +25,7 @@ class _HomeScreen extends State<HomeScreen>
   int _currentIndex = 0;
   final List<Widget> _children = [
     Center(child: Text('Home in lavorazione')), //home body
-    FavoritesScreen(), 
+    FavoritesScreen(),
     // nuova funzionalità
     AccountScreen(),
   ];
