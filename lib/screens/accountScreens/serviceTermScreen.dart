@@ -25,7 +25,7 @@ class _ServiceTermScreenState extends State<ServiceTermScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded()
+              //Expanded()
               ],
           ),
         ),

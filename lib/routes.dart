@@ -13,9 +13,9 @@ import 'package:Pitch/screens/accountScreens/serviceTermScreen.dart';
 import 'package:Pitch/screens/detailScreen/campingDetailScreen.dart';
 import 'package:Pitch/screens/favoriteScreens/favoritesScreen.dart';
 import 'package:Pitch/screens/homepage/homeScreen.dart';
-import 'package:Pitch/screens/login/forgotPassword.dart';
-import 'package:Pitch/screens/login/loginScreen.dart';
-import 'package:Pitch/screens/login/signUpScreen.dart';
+import 'package:Pitch/screens/authenticate/forgotPassword.dart';
+import 'package:Pitch/screens/authenticate/loginScreen.dart';
+import 'package:Pitch/screens/authenticate/signUpScreen.dart';
 import 'package:Pitch/screens/searchScreens/searchScreen.dart';
 import 'package:flutter/widgets.dart';
 

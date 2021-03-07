@@ -25,7 +25,7 @@ class _PrivacySettingScreenState extends State<PrivacySettingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded()
+              //Expanded()
               ],
           ),
         ),
