@@ -1,7 +1,6 @@
 import 'package:Pitch/models/user.dart';
 import 'package:Pitch/screens/accountScreens/widgets/calendar.dart';
 import 'package:Pitch/services/database.dart';
-import 'package:Pitch/sizeConfig.dart';
 import 'package:Pitch/widgets/customInputDecorator.dart';
 import 'package:Pitch/widgets/loading.dart';
 import 'package:flutter/material.dart';
