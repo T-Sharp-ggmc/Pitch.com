@@ -1,8 +1,10 @@
 import 'package:Pitch/models/profileSelectionList.dart';
+import 'package:Pitch/screens/accountScreens/card_screen.dart';
 import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
-import 'package:Pitch/screens/accountScreens/paymentMethodScreen.dart';
+import 'package:Pitch/screens/accountScreens/widgets/credit_card.dart';
+
 import 'package:Pitch/sizeConfig.dart';
-import 'package:Pitch/screens/accountScreens/widgets/accountImage.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../appTheme.dart';
@@ -116,7 +118,7 @@ class _AccountScreenState extends State<AccountScreen>
               if (index == 1)
                 Navigator.pushNamed(context, ChangepasswordScreen.routeName);
               if (index == 2)
-                Navigator.pushNamed(context, PaymentMethodScreen.routeName);
+                Navigator.pushNamed(context, CardScreen.routeName);
               if (index == 3)
                 Navigator.pushNamed(context, ReviewScreen.routeName);
               if (index == 4)

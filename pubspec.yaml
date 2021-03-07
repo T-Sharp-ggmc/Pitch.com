@@ -54,6 +54,7 @@ flutter:
     - assets/images/filters/
     - assets/images/
     - assets/Icons/
+    - assets/images/chip.png
   #  - jsonFile/countryList.json
   #  - images/a_dot_ham.jpeg
 

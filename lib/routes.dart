@@ -1,11 +1,11 @@
 import 'package:Pitch/screens/accountScreens/accountScreen.dart';
 import 'package:Pitch/screens/accountScreens/bookingScreen.dart';
+import 'package:Pitch/screens/accountScreens/card_screen.dart';
 import 'package:Pitch/screens/accountScreens/changepassword.dart';
 import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
 import 'package:Pitch/screens/accountScreens/helpDetailsScreen.dart';
 import 'package:Pitch/screens/accountScreens/helpScreen.dart';
 import 'package:Pitch/screens/accountScreens/inviteFriendScreen.dart';
-import 'package:Pitch/screens/accountScreens/paymentMethodScreen.dart';
 import 'package:Pitch/screens/accountScreens/pitchInfoScreen.dart';
 import 'package:Pitch/screens/accountScreens/privacySettingScreen.dart';
 import 'package:Pitch/screens/accountScreens/reviewScreen.dart';
@@ -16,7 +16,6 @@ import 'package:Pitch/screens/homepage/homeScreen.dart';
 import 'package:Pitch/screens/login/forgotPassword.dart';
 import 'package:Pitch/screens/login/loginScreen.dart';
 import 'package:Pitch/screens/login/signUpScreen.dart';
-import 'package:Pitch/screens/searchScreens/filtersScreen.dart';
 import 'package:Pitch/screens/searchScreens/searchScreen.dart';
 import 'package:flutter/widgets.dart';
 
@@ -32,7 +31,7 @@ final Map<String, WidgetBuilder> routes = {
   HelpDetailsScreen.routeName: (context) => HelpDetailsScreen(),
   HelpScreen.routeName: (context) => HelpScreen(),
   InviteFriendScreen.routeName: (context) => InviteFriendScreen(),
-  PaymentMethodScreen.routeName: (context) => PaymentMethodScreen(),
+  CardScreen.routeName: (context) => CardScreen(),
   PitchInfoScreen.routeName: (context) => PitchInfoScreen(),
   PrivacySettingScreen.routeName: (context) => PrivacySettingScreen(),
   ReviewScreen.routeName: (context) => ReviewScreen(),
