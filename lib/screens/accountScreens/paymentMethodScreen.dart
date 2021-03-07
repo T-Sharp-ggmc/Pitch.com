@@ -25,7 +25,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded()
+              //Expanded()
               ],
           ),
         ),

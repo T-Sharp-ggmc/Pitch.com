@@ -25,7 +25,7 @@ class _PitchInfoScreenState extends State<PitchInfoScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded()
+              //Expanded()
               ],
           ),
         ),

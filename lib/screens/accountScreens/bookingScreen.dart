@@ -26,7 +26,7 @@ class _BookingScreenState extends State<BookingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded()
+              //Expanded()
               ],
           ),
         ),
