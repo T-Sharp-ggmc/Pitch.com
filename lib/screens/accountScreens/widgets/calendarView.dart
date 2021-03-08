@@ -176,30 +176,6 @@ class _CalendarViewState extends State<CalendarView> {
               child: Container(
                 child: Stack(
                   children: <Widget>[
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 3, bottom: 3),
-                    //   child: Material(
-                    //     color: Colors.transparent,
-                    //     child: Padding(
-                    //       padding: EdgeInsets.only(top: 2, bottom: 2, left: isDateRadius(date) ? 4 : 0, right: isDateRadius(date) ? 4 : 0),
-                    //       child: Container(
-                    //         decoration: BoxDecoration(
-                    //           color: _date != null
-                    //               ? getIsItDate(date) || getIsInRange(date)
-                    //                   ? AppTheme.getTheme().primaryColor.withOpacity(0.4)
-                    //                   : Colors.transparent
-                    //               : Colors.transparent,
-                    //           borderRadius: BorderRadius.only(
-                    //             bottomLeft: isDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                    //             topLeft: isDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                    //             topRight: isDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                    //             bottomRight: isDateRadius(date) ? Radius.circular(24.0) : Radius.circular(0.0),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     Material(
                       color: Colors.transparent,
                       child: InkWell(

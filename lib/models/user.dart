@@ -12,9 +12,9 @@ class UserData {
    final String name;
    final String surname;
    final String email;
-   //final DateTime birthDate;
    final String phone;
+   final String birthDate;
 
-  UserData({this.name, this.surname, this.email, this.phone, this.uid});
+  UserData({this.name, this.surname, this.email, this.phone, this.birthDate, this.uid});
 
 }

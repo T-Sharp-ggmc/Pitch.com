@@ -8,12 +8,13 @@ class DatabaseService {
 
   final CollectionReference userCollection = Firestore.instance.collection('users');
 
-  Future<void> updateUserData(String name, String surname, String email, String phone) async {
+  Future<void> updateUserData(String name, String surname, String email, String phone, String birthDate) async {
     return await userCollection.document(uid).setData({
       'name': name,
       'surname': surname,
       'email': email,
       'phone': phone,
+      'birthDate': birthDate,
     });
   }
 
@@ -25,6 +26,7 @@ class DatabaseService {
       surname: snapshot.data['surname'],
       email: snapshot.data['email'],
       phone: snapshot.data['phone'],
+      birthDate: snapshot.data['birthDate'],
     );
   }
 
