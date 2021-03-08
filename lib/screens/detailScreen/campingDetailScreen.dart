@@ -19,15 +19,12 @@ class CampingDetailScreen extends StatefulWidget {
 }
 
 class _CampingDetailScreenState extends State<CampingDetailScreen> {
-  List<String> images =
-      <String>[]; //da cambiare imagepath in camping models in array di immagini
+  
   var pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     final CampingListDto camping = ModalRoute.of(context).settings.arguments;
     SizeConfig().init(context);
-    images.add(camping.imagePath);
-    images.add(camping.imagePath);
     return Scaffold(
       backgroundColor: AppTheme.getTheme().backgroundColor,
       appBar: CustomDetailAppBar(camping.isFavorite),
@@ -52,7 +49,7 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                           pageSnapping: true,
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            for (var image in images)
+                            for (var image in camping.imagePath)
                               Image.asset(
                                 image,
                                 fit: BoxFit.cover,

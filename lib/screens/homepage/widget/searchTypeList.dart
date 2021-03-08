@@ -79,7 +79,7 @@ class _SearchTypeListViewState extends State<SearchTypeListView>
                                 child: AspectRatio(
                                   aspectRatio: 1,
                                   child: Image.asset(
-                                    hotelTypeList[index].imagePath,
+                                    hotelTypeList[index].imagePath.first,
                                     fit: BoxFit.cover,
                                   ),
                                 ),

@@ -182,7 +182,7 @@ class FavoriteCampingCardListView extends StatelessWidget {
                             AspectRatio(
                               aspectRatio: 0.90,
                               child: Image.asset(
-                                campingData.imagePath,
+                                campingData.imagePath.first,
                                 fit: BoxFit.cover,
                               ),
                             ),

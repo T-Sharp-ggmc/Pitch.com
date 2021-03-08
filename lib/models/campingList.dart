@@ -4,7 +4,7 @@ import 'popularFilterList.dart';
 
 class CampingListDto {
   int id;
-  String imagePath;
+  List<String> imagePath;
   String name;
   String info;
   String date;
@@ -20,7 +20,7 @@ class CampingListDto {
 
   CampingListDto(
       {this.id = 0,
-      this.imagePath = '',
+      this.imagePath,
       this.name = "",
       this.info = "",
       this.date = '',
@@ -37,7 +37,7 @@ class CampingListDto {
   static List<CampingListDto> campingList = [
     CampingListDto(
         id: 1,
-        imagePath: 'assets/images/TopPlace/camping_1.jpg',
+        imagePath: ['assets/images/TopPlace/camping_1.jpg', 'assets/images/TopPlace/camping_2.jpg', 'assets/images/TopPlace/camping_3.jpg'],
         name: "Baia degli Aranci",
         info: "Vieste, FG",
         date:
@@ -53,7 +53,7 @@ class CampingListDto {
         category: CampingCategory.mare),
     CampingListDto(
         id: 2,
-        imagePath: 'assets/images/TopPlace/camping_1.jpg',
+        imagePath: ['assets/images/TopPlace/camping_1.jpg', 'assets/images/TopPlace/camping_2.jpg', 'assets/images/TopPlace/camping_3.jpg'],
         name: "Baia degli Arancioni",
         info: "Peschici, FG",
         date:
@@ -73,7 +73,7 @@ class CampingListDto {
   static List<CampingListDto> premiumList = [
     CampingListDto(
         id: 1,
-        imagePath: 'assets/images/first.jpg',
+        imagePath: ['assets/images/TopPlace/camping_1.jpg', 'assets/images/TopPlace/camping_2.jpg', 'assets/images/TopPlace/camping_3.jpg'],
         name: "Grand Royal Hotel",
         info: "Wembley, London",
         date:
@@ -90,7 +90,7 @@ class CampingListDto {
 
         CampingListDto(
         id: 1,
-        imagePath: 'assets/images/hotel_Type_4.jpg',
+        imagePath: ['assets/images/TopPlace/camping_1.jpg', 'assets/images/TopPlace/camping_2.jpg', 'assets/images/TopPlace/camping_3.jpg'],
         name: "mtc",
         info: "Wembley, London",
         date:
@@ -107,7 +107,7 @@ class CampingListDto {
 
         CampingListDto(
         id: 1,
-        imagePath: 'assets/images/hotel_Type_3.jpg',
+        imagePath: ['assets/images/TopPlace/camping_1.jpg', 'assets/images/TopPlace/camping_2.jpg', 'assets/images/TopPlace/camping_3.jpg'],
         name: "caspiterina",
         info: "Wembley, London",
         date:
@@ -124,7 +124,7 @@ class CampingListDto {
 
         CampingListDto(
         id: 1,
-        imagePath: 'assets/images/hotel_Type_2.jpg',
+        imagePath: ['assets/images/TopPlace/camping_1.jpg', 'assets/images/TopPlace/camping_2.jpg', 'assets/images/TopPlace/camping_3.jpg'],
         name: "mimi",
         info: "Wembley, London",
         date:

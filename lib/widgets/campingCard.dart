@@ -70,7 +70,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                               AspectRatio(
                                 aspectRatio: 2,
                                 child: Image.asset(
-                                  widget.campingData.imagePath,
+                                  widget.campingData.imagePath.first,
                                   fit: BoxFit.cover,
                                 ),
                               ),
