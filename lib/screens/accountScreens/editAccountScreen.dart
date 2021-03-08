@@ -17,7 +17,9 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
+  
   final _formKey = GlobalKey<FormState>();
+  final List<String> sex = ['Maschio', 'Femmina', 'Altro'];
   TextEditingController textController = TextEditingController();
   String newAccountInfo = "";
   String _currentName;
@@ -25,6 +27,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   String _currentEmail;
   String _currentBirthDate; 
   String _currentPhone;
+  String _currentSex;
 
   @override
   void initState() {
@@ -41,14 +44,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
 
-    //DateFormat formatter = DateFormat('yyyy-MM-dd');
-     
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
-            textController.text = userData.birthDate;
+            textController.text = _currentBirthDate ?? userData.birthDate;
             return Scaffold(
               appBar: NewCustomAppBar(nameOfPage: "Modifica Profilo"),
               resizeToAvoidBottomInset: false,
@@ -319,6 +320,51 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8, left: 24, right: 24),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color:
+                                          AppTheme.getTheme().backgroundColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(38)),
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                          color:
+                                              AppTheme.getTheme().dividerColor,
+                                          blurRadius: 8,
+                                          offset: Offset(4, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Container(
+                                        height: 50,
+                                        child: Center(
+                                          child: DropdownButtonFormField(
+                                            value: _currentSex ?? userData.sex,
+                                            decoration: textInputDecoration,
+                                            items: sex.map((sex) {
+                                              return DropdownMenuItem(
+                                                value: sex,
+                                                child: Text('$sex', style: TextStyle(
+                                                  fontSize: 14,
+                                                ),),
+                                              );
+                                            }).toList(),
+                                            onChanged: (val) => setState(() => _currentSex = val ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 24, right: 24, bottom: 8, top: 24),
@@ -357,7 +403,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                                     _currentPhone ??
                                                         snapshot.data.phone,
                                                     _currentBirthDate ??
-                                                        snapshot.data.birthDate);
+                                                        snapshot.data.birthDate,
+                                                    _currentSex ??
+                                                        snapshot.data.sex);
                                             Navigator.pop(context);
                                           }
                                         },

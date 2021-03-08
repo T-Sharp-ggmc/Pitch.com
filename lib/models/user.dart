@@ -14,7 +14,8 @@ class UserData {
    final String email;
    final String phone;
    final String birthDate;
+   final String sex;
 
-  UserData({this.name, this.surname, this.email, this.phone, this.birthDate, this.uid});
+  UserData({this.sex, this.name, this.surname, this.email, this.phone, this.birthDate, this.uid});
 
 }
