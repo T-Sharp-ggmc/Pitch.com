@@ -1,4 +1,4 @@
-import 'package:Pitch/models/reviewList.dart';
+import 'package:my_camping/models/reviewList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

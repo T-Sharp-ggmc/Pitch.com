@@ -1,5 +1,5 @@
-import 'package:Pitch/models/popularFilterList.dart';
-import 'package:Pitch/widgets/customAppBar.dart';
+import 'package:my_camping/models/popularFilterList.dart';
+import 'package:my_camping/widgets/customAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';

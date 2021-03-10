@@ -1,4 +1,4 @@
-import 'package:Pitch/widgets/customInputDecorator.dart';
+import 'package:my_camping/widgets/customInputDecorator.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';

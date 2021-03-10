@@ -1,10 +1,12 @@
-import 'package:Pitch/models/user.dart';
-import 'package:Pitch/screens/accountScreens/widgets/calendar.dart';
-import 'package:Pitch/services/database.dart';
-import 'package:Pitch/widgets/customInputDecorator.dart';
-import 'package:Pitch/widgets/loading.dart';
+import 'package:my_camping/models/user.dart';
+import 'package:my_camping/screens/accountScreens/widgets/calendar.dart';
+import 'package:my_camping/services/userService.dart';
+import 'package:my_camping/widgets/customInputDecorator.dart';
+import 'package:my_camping/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../sizeConfig.dart';
 import '../../widgets/customAppBar.dart';
 import '../../appTheme.dart';
 
@@ -16,13 +18,15 @@ class EditAccountScreen extends StatefulWidget {
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
   final _formKey = GlobalKey<FormState>();
-  final textController = TextEditingController(text: "");
+  final List<String> sex = ['Maschio', 'Femmina', 'Altro'];
+  TextEditingController textController = TextEditingController();
   String newAccountInfo = "";
   String _currentName;
   String _currentSurname;
   String _currentEmail;
-  DateTime _currentBirthDate = DateTime.now();
+  String _currentBirthDate;
   String _currentPhone;
+  String _currentSex;
 
   @override
   void initState() {
@@ -37,14 +41,14 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context);
-    //textController.text = _currentBirthDate.toString();
+    MyCampingUser user = Provider.of<MyCampingUser>(context);
 
     return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
+        stream: UserService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
+            textController.text = _currentBirthDate ?? userData.birthDate;
             return Scaffold(
               appBar: NewCustomAppBar(nameOfPage: "Modifica Profilo"),
               resizeToAvoidBottomInset: false,
@@ -234,9 +238,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                                 textInputDecoration.copyWith(
                                                     hintText:
                                                         "Numero di cellulare"),
-                                            validator: (val) => val.isEmpty
-                                                ? 'Inserisci il tuo numero di cellulare'
-                                                : null,
                                             onChanged: (val) => setState(
                                                 () => _currentPhone = val),
                                             maxLines: 1,
@@ -252,81 +253,122 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 SizedBox(
                                   height: 12,
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.only(
-                                //       top: 8, left: 24, right: 24),
-                                //   child: Container(
-                                //     decoration: BoxDecoration(
-                                //       color:
-                                //           AppTheme.getTheme().backgroundColor,
-                                //       borderRadius:
-                                //           BorderRadius.all(Radius.circular(38)),
-                                //       boxShadow: <BoxShadow>[
-                                //         BoxShadow(
-                                //           color:
-                                //               AppTheme.getTheme().dividerColor,
-                                //           blurRadius: 8,
-                                //           offset: Offset(4, 4),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //     child: Padding(
-                                //       padding: const EdgeInsets.only(left: 16),
-                                //       child: Row(
-                                //         children: <Widget>[
-                                //           Container(
-                                //             width: getProportionateScreenWidth(
-                                //                 240),
-                                //             height: 50,
-                                //             child: Center(
-                                //               child: TextFormField(
-                                //                 initialValue: userData.birthDate
-                                //                     .toString(),
-                                //                 readOnly: true,
-                                //                 controller: textController,
-                                //                 decoration: textInputDecoration
-                                //                     .copyWith(
-                                //                         hintText:
-                                //                             "Data di nascita"),
-                                //                 validator: (val) => val.isEmpty
-                                //                     ? 'Inserisci il tuo numero di cellulare'
-                                //                     : null,
-                                //                 maxLines: 1,
-                                //                 style: TextStyle(
-                                //                   fontSize: 14,
-                                //                 ),
-                                //               ),
-                                //             ),
-                                //           ),
-                                //           Padding(
-                                //             padding:
-                                //                 const EdgeInsets.only(left: 16),
-                                //             child: Container(
-                                //                 child: IconButton(
-                                //               icon: Icon(Icons.calendar_today,
-                                //                   color: AppTheme.getTheme()
-                                //                       .disabledColor
-                                //                       .withOpacity(0.3)),
-                                //               onPressed: () {
-                                //                 FocusScope.of(context)
-                                //                     .requestFocus(FocusNode());
-                                //                 // setState(() {
-                                //                 //   isDatePopupOpen = true;
-                                //                 // });
-                                //                 showDemoDialog(
-                                //                     context: context);
-                                //                 // apre popup calendario
-                                //                 setState(() {
-                                //                   textController.text = "Data";
-                                //                 });
-                                //               },
-                                //             )),
-                                //           )
-                                //         ],
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8, left: 24, right: 24),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color:
+                                          AppTheme.getTheme().backgroundColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(38)),
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                          color:
+                                              AppTheme.getTheme().dividerColor,
+                                          blurRadius: 8,
+                                          offset: Offset(4, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Container(
+                                            width: getProportionateScreenWidth(
+                                                240),
+                                            height: 50,
+                                            child: Center(
+                                              child: TextFormField(
+                                                readOnly: true,
+                                                controller: textController,
+                                                decoration: textInputDecoration
+                                                    .copyWith(
+                                                        hintText:
+                                                            "Data di nascita"),
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 16),
+                                            child: Container(
+                                                child: IconButton(
+                                              icon: Icon(Icons.calendar_today,
+                                                  color: AppTheme.getTheme()
+                                                      .disabledColor
+                                                      .withOpacity(0.3)),
+                                              onPressed: () {
+                                                FocusScope.of(context)
+                                                    .requestFocus(FocusNode());
+                                                showDemoDialog(
+                                                    context: context,
+                                                    userBirthDate:
+                                                        userData.birthDate);
+                                                textController.text =
+                                                    _currentBirthDate;
+                                              },
+                                            )),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8, left: 24, right: 24),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color:
+                                          AppTheme.getTheme().backgroundColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(38)),
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                          color:
+                                              AppTheme.getTheme().dividerColor,
+                                          blurRadius: 8,
+                                          offset: Offset(4, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Container(
+                                        height: 50,
+                                        child: Center(
+                                          child: DropdownButtonFormField(
+                                            value: _currentSex ?? userData.sex,
+                                            decoration: textInputDecoration,
+                                            items: sex.map((sex) {
+                                              return DropdownMenuItem(
+                                                value: sex,
+                                                child: Text(
+                                                  '$sex',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              );
+                                            }).toList(),
+                                            onChanged: (val) => setState(
+                                                () => _currentSex = val),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 24, right: 24, bottom: 8, top: 24),
@@ -354,7 +396,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         onTap: () async {
                                           if (_formKey.currentState
                                               .validate()) {
-                                            await DatabaseService(uid: user.uid)
+                                            await UserService(uid: user.uid)
                                                 .updateUserData(
                                                     _currentName ??
                                                         snapshot.data.name,
@@ -362,10 +404,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                                         snapshot.data.surname,
                                                     _currentEmail ??
                                                         snapshot.data.email,
-                                                    // _currentBirthDate ??
-                                                    //     snapshot.data.birthDate.toString(),
                                                     _currentPhone ??
-                                                        snapshot.data.phone);
+                                                        snapshot.data.phone,
+                                                    _currentBirthDate ??
+                                                        snapshot.data.birthDate,
+                                                    _currentSex ??
+                                                        snapshot.data.sex);
                                             Navigator.pop(context);
                                           }
                                         },
@@ -396,18 +440,25 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         });
   }
 
-  void showDemoDialog({BuildContext context}) {
+  void showDemoDialog({BuildContext context, String userBirthDate}) {
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+    DateTime date;
+    if (userBirthDate.isNotEmpty) {
+      userBirthDate += " 00:00:00";
+      date = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(userBirthDate);
+      print(date);
+    } else {
+      date = DateTime.now();
+    }
     showDialog(
       context: context,
       builder: (BuildContext context) => Calendar(
         maximumDate: DateTime.now(),
-        date: _currentBirthDate,
+        date: date,
         onApplyClick: (DateTime applyData) {
-          setState(() {
-            if (applyData != null) {
-              _currentBirthDate = applyData;
-            }
-          });
+          if (applyData != null) {
+            _currentBirthDate = formatter.format(applyData);
+          }
         },
       ),
     );

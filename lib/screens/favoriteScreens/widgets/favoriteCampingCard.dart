@@ -1,7 +1,11 @@
-import 'package:Pitch/models/campingList.dart';
-import 'package:Pitch/widgets/starRating.dart';
+import 'package:my_camping/models/camping.dart';
+import 'package:my_camping/provider/favoriteCampingProvider.dart';
+import 'package:my_camping/services/favoriteService.dart';
+import 'package:my_camping/widgets/starRating.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../../../appTheme.dart';
 
@@ -16,9 +20,7 @@ class FavoriteCampingCard extends StatefulWidget {
 }
 
 class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
-  var campingList =
-      CampingListDto.campingList.where((i) => i.isFavorite).toList();
-  CampingListDto deletedCamping = new CampingListDto();
+  Camping deletedCamping = new Camping();
   @override
   void initState() {
     widget.animationController.forward();
@@ -27,52 +29,54 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: campingList.length == 0
-          ? noFavoriteList()
-          : ListView.builder(
-              itemCount: campingList.length,
-              padding: EdgeInsets.only(top: 8, bottom: 8),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                var count = campingList.length > 10 ? 10 : campingList.length;
-                var animation = Tween(begin: 0.0, end: 1.0).animate(
-                    CurvedAnimation(
-                        parent: widget.animationController,
-                        curve: Interval((1 / count) * index, 1.0,
-                            curve: Curves.fastOutSlowIn)));
-                widget.animationController.forward();
-                return Dismissible(
-                    key: UniqueKey(),
-                    background: getDismissedBackground(),
-                    onDismissed: (direction) {
-                      String nameCampingDismissed = campingList[index].name;
-                      setState(() {
-                        campingList[index].isFavorite =
-                            !campingList[index].isFavorite;
-                        deletedCamping = campingList.removeAt(index);
-                      });
-                      // ignore: deprecated_member_use
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content:
-                            Text("$nameCampingDismissed rimosso dai preferiti"),
-                        action: SnackBarAction(
-                            label: "INDIETRO",
-                            onPressed: () => setState(
-                                  () =>
-                                      campingList.insert(index, deletedCamping),
-                                )),
+    return Consumer<FavoriteCampingProvider>(builder: (context, provider, _) {
+      return Container(
+        child: provider.favoriteCampings.length == 0
+            ? noFavoriteList()
+            : ListView.builder(
+                itemCount: provider.favoriteCampings.length,
+                padding: EdgeInsets.only(top: 8, bottom: 8),
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  var count = provider.favoriteCampings.length > 10
+                      ? 10
+                      : provider.favoriteCampings.length;
+                  var animation = Tween(begin: 0.0, end: 1.0).animate(
+                      CurvedAnimation(
+                          parent: widget.animationController,
+                          curve: Interval((1 / count) * index, 1.0,
+                              curve: Curves.fastOutSlowIn)));
+                  widget.animationController.forward();
+                  return Dismissible(
+                      key: UniqueKey(),
+                      background: getDismissedBackground(),
+                      onDismissed: (direction) async {
+                        String nameCampingDismissed =
+                            provider.favoriteCampings[index].name;
+                        await FavoriteService.removeInFavoriteList(
+                            provider.favoriteCampings[index].cid);
+                        // ignore: deprecated_member_use
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              "$nameCampingDismissed rimosso dai preferiti"),
+                          action: SnackBarAction(
+                              label: "INDIETRO",
+                              onPressed: () async {
+                                await FavoriteService.addInFavoriteList(
+                                    provider.favoriteCampings[index]);
+                              }),
+                        ));
+                      },
+                      child: FavoriteCampingCardListView(
+                        callback: () {}, //navigate to details page
+                        campingData: provider.favoriteCampings[index],
+                        animation: animation,
+                        animationController: widget.animationController,
                       ));
-                    },
-                    child: FavoriteCampingCardListView(
-                      callback: () {}, //navigate to details page
-                      campingData: campingList[index],
-                      animation: animation,
-                      animationController: widget.animationController,
-                    ));
-              },
-            ),
-    );
+                },
+              ),
+      );
+    });
   }
 }
 
@@ -134,7 +138,7 @@ Widget noFavoriteList() {
 class FavoriteCampingCardListView extends StatelessWidget {
   final bool isShowDate;
   final VoidCallback callback;
-  final CampingListDto campingData;
+  final Camping campingData;
   final AnimationController animationController;
   final Animation animation;
 
@@ -181,8 +185,8 @@ class FavoriteCampingCardListView extends StatelessWidget {
                           children: <Widget>[
                             AspectRatio(
                               aspectRatio: 0.90,
-                              child: Image.asset(
-                                campingData.imagePath,
+                              child: CachedNetworkImage(
+                                imageUrl: campingData.photos.first,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -241,7 +245,7 @@ class FavoriteCampingCardListView extends StatelessWidget {
                                                           .primaryColor,
                                                     ),
                                                     Text(
-                                                      " ${campingData.dist.toStringAsFixed(1)} km dalla città",
+                                                      " 2 km dalla città",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
@@ -282,7 +286,7 @@ class FavoriteCampingCardListView extends StatelessWidget {
                                                 CrossAxisAlignment.end,
                                             children: <Widget>[
                                               Text(
-                                                "€${campingData.perDay}",
+                                                "€${campingData.campingPitch.first.price}",
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,

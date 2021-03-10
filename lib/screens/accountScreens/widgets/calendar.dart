@@ -112,9 +112,6 @@ class _CalendarState extends State<Calendar> with TickerProviderStateMixin{
                                     highlightColor: Colors.transparent,
                                     onTap: () {
                                       try {
-                                        // animationController.reverse().then((f) {
-
-                                        // });
                                         widget.onApplyClick(_date);
                                         Navigator.pop(context);
                                       } catch (e) {}

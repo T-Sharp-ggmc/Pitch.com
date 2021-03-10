@@ -1,8 +1,8 @@
-import 'package:Pitch/models/profileSelectionList.dart';
-import 'package:Pitch/screens/accountScreens/card_screen.dart';
-import 'package:Pitch/screens/accountScreens/editAccountScreen.dart';
-import 'package:Pitch/services/auth.dart';
-import 'package:Pitch/sizeConfig.dart';
+import 'package:my_camping/models/profileSelectionList.dart';
+import 'package:my_camping/screens/accountScreens/card_screen.dart';
+import 'package:my_camping/screens/accountScreens/editAccountScreen.dart';
+import 'package:my_camping/services/authService.dart';
+import 'package:my_camping/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import 'changepassword.dart';
@@ -84,7 +84,7 @@ class _AccountScreenState extends State<AccountScreen>
                       child: InkWell(
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         highlightColor: Colors.transparent,
-                        onTap: () async{
+                        onTap: () async {
                           await _authService.signOut();
                         },
                         child: Center(

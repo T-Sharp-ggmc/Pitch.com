@@ -1,17 +1,17 @@
-import 'package:Pitch/appTheme.dart';
-import 'package:Pitch/models/campingList.dart';
-import 'package:Pitch/widgets/starRating.dart';
+import 'package:my_camping/appTheme.dart';
+import 'package:my_camping/widgets/starRating.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../models/camping.dart';
 import '../../sizeConfig.dart';
 import 'widgets/customDetailAppBar.dart';
 import 'widgets/detailsBottomBar.dart';
 
 class CampingDetailScreen extends StatefulWidget {
   static String routeName = "/campingDetail";
-  //final CampingListDto camping;
 
   const CampingDetailScreen({Key key}) : super(key: key);
   @override
@@ -19,18 +19,14 @@ class CampingDetailScreen extends StatefulWidget {
 }
 
 class _CampingDetailScreenState extends State<CampingDetailScreen> {
-  List<String> images =
-      <String>[]; //da cambiare imagepath in camping models in array di immagini
   var pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
-    final CampingListDto camping = ModalRoute.of(context).settings.arguments;
+    final Camping camping = ModalRoute.of(context).settings.arguments;
     SizeConfig().init(context);
-    images.add(camping.imagePath);
-    images.add(camping.imagePath);
     return Scaffold(
       backgroundColor: AppTheme.getTheme().backgroundColor,
-      appBar: CustomDetailAppBar(camping.isFavorite),
+      appBar: CustomDetailAppBar(false), //passare true se favorite
       extendBodyBehindAppBar: true,
       body: Stack(
         alignment: Alignment.topCenter,
@@ -52,11 +48,11 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                           pageSnapping: true,
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            for (var image in images)
-                              Image.asset(
-                                image,
+                            for (var image in camping.photos)
+                              CachedNetworkImage(
+                                imageUrl: image,
                                 fit: BoxFit.cover,
-                              ),
+                              )
                           ],
                         )),
                   ),
@@ -101,7 +97,7 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      camping.info,
+                      camping.city,
                       style: TextStyle(
                           fontSize: 14, color: Colors.grey.withOpacity(0.8)),
                     ),
@@ -118,7 +114,7 @@ class _CampingDetailScreenState extends State<CampingDetailScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        "${camping.dist} km dal centro",
+                        "2.5 km dal centro",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 14, color: Colors.grey.withOpacity(0.8)),

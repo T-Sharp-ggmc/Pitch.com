@@ -1,6 +1,6 @@
-import 'package:Pitch/screens/homepage/widget/FilterPremium.dart';
-import 'package:Pitch/screens/homepage/widget/campingList.dart';
-import 'package:Pitch/sizeConfig.dart';
+import 'package:my_camping/screens/homepage/widget/FilterPremium.dart';
+import 'package:my_camping/screens/homepage/widget/campingList.dart';
+import 'package:my_camping/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../appTheme.dart';
