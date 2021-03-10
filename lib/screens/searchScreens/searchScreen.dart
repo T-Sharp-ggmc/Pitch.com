@@ -1,11 +1,12 @@
-import 'package:Pitch/appTheme.dart';
-import 'package:Pitch/models/campingList.dart';
-import 'package:Pitch/screens/popups/orderPopup.dart';
-import 'package:Pitch/widgets/campingCard.dart';
-import 'package:Pitch/widgets/customAppBar.dart';
+import 'package:my_camping/appTheme.dart';
+import 'package:my_camping/provider/campingProvider.dart';
+import 'package:my_camping/screens/popups/orderPopup.dart';
+import 'package:my_camping/widgets/campingCard.dart';
+import 'package:my_camping/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../models/popularFilterList.dart';
 import 'filtersScreen.dart';
 import '../popups/calendarPopup.dart';
@@ -22,7 +23,6 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen>
     with TickerProviderStateMixin {
-  var campingList = CampingListDto.campingList;
 
   List<FilterListData> serviceListData = FilterListData.serviceList;
   List<FilterListData> categoryListData = FilterListData.categoryList;
@@ -46,19 +46,6 @@ class _SearchScreenState extends State<SearchScreen>
   void initState() {
     animationController = AnimationController(
         duration: Duration(milliseconds: 1000), vsync: this);
-    // _animationController = AnimationController(duration: Duration(milliseconds: 0), vsync: this);
-    // scrollController.addListener(() {
-    //   if (context != null) {
-    //     if (scrollController.offset <= 0) {
-    //       _animationController.animateTo(0.0);
-    //     } else if (scrollController.offset > 0.0 && scrollController.offset < searchBarHeight) {
-    //       // we need around searchBarHieght scrolling values in 0.0 to 1.0
-    //       _animationController.animateTo((scrollController.offset / searchBarHeight));
-    //     } else {
-    //       _animationController.animateTo(1.0);
-    //     }
-    //   }
-    // });
     super.initState();
   }
 
@@ -101,36 +88,83 @@ class _SearchScreenState extends State<SearchScreen>
                         ),
                         Expanded(
                           child: Stack(children: <Widget>[
-                            Container(
-                              color: AppTheme.getTheme().backgroundColor,
-                              child: ListView.builder(
-                                controller: scrollController,
-                                itemCount: campingList.length,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  var count = campingList.length > 10
-                                      ? 10
-                                      : campingList.length;
-                                  campingList =
-                                      orderList(_selectedOrder, campingList);
-                                  var animation = Tween(begin: 0.0, end: 1.0)
-                                      .animate(CurvedAnimation(
-                                          parent: animationController,
-                                          curve: Interval(
-                                              (1 / count) * index, 1.0,
-                                              curve: Curves.fastOutSlowIn)));
+                            Consumer<CampingProvider>(
+                                builder: (context, provider, _) {
+                              int campingListLenght = provider.campings.length;
+                              if (provider.keyword == "") {
+                                return Container(
+                                  color: AppTheme.getTheme().backgroundColor,
+                                  child: ListView.builder(
+                                    controller: scrollController,
+                                    itemCount: campingListLenght,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) {
+                                      var count = campingListLenght > 10
+                                          ? 10
+                                          : campingListLenght;
+                                      // provider.campings =
+                                      //     orderList(_selectedOrder, provider.campings);
+                                      var animation =
+                                          Tween(begin: 0.0, end: 1.0).animate(
+                                              CurvedAnimation(
+                                                  parent: animationController,
+                                                  curve: Interval(
+                                                      (1 / count) * index, 1.0,
+                                                      curve: Curves
+                                                          .fastOutSlowIn)));
 
-                                  ///da capire
-                                  animationController.forward();
-                                  return CampingCardListView(
-                                    animation: animation,
-                                    animationController: animationController,
-                                    campingData: campingList[index],
-                                    callback: refresh,
-                                  );
-                                },
-                              ),
-                            ),
+                                      animationController.forward();
+                                      return CampingCardListView(
+                                        animation: animation,
+                                        animationController:
+                                            animationController,
+                                        campingData: provider.campings[index],
+                                        callback: refresh,
+                                      );
+                                    },
+                                  ),
+                                );
+                              } else if (provider.searchedCampings.length !=
+                                  0) {
+                                return Container(
+                                  color: AppTheme.getTheme().backgroundColor,
+                                  child: ListView.builder(
+                                    controller: scrollController,
+                                    itemCount: provider.searchedCampings.length,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) {
+                                      var count = campingListLenght > 10
+                                          ? 10
+                                          : campingListLenght;
+                                      // provider.campings =
+                                      //     orderList(_selectedOrder, provider.campings);
+                                      var animation =
+                                          Tween(begin: 0.0, end: 1.0).animate(
+                                              CurvedAnimation(
+                                                  parent: animationController,
+                                                  curve: Interval(
+                                                      (1 / count) * index, 1.0,
+                                                      curve: Curves
+                                                          .fastOutSlowIn)));
+
+                                      animationController.forward();
+                                      return CampingCardListView(
+                                        animation: animation,
+                                        animationController:
+                                            animationController,
+                                        campingData:
+                                            provider.searchedCampings[index],
+                                        callback: refresh,
+                                      );
+                                    },
+                                  ),
+                                );
+                              }
+                              return Container(
+                                height: 360,
+                                child: SizedBox(),
+                              );
+                            })
                           ]),
                         )
                       ],
@@ -144,77 +178,77 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
 // do not use!
-  List<CampingListDto> filterListApply(List<CampingListDto> listToFilter) {
-    bool isToRemove = false;
-    bool isInSelectedCategory = false;
-    List<FilterListData> categoryList =
-        categoryListData.where((element) => element.isSelected).toList();
-    List<CampingCategory> categorySelectedList = <CampingCategory>[];
-    List<CampingListDto> filteredList = listToFilter;
+  // List<CampingListDto> filterListApply(List<CampingListDto> listToFilter) {
+  //   bool isToRemove = false;
+  //   bool isInSelectedCategory = false;
+  //   List<FilterListData> categoryList =
+  //       categoryListData.where((element) => element.isSelected).toList();
+  //   List<CampingCategory> categorySelectedList = <CampingCategory>[];
+  //   List<CampingListDto> filteredList = listToFilter;
 
-    for (var i = 0; i < categoryList.length; i++) {
-      categorySelectedList.add(categoryList[i].category);
-    }
-    List<int> index = <int>[];
+  //   for (var i = 0; i < categoryList.length; i++) {
+  //     categorySelectedList.add(categoryList[i].category);
+  //   }
+  //   List<int> index = <int>[];
 
-    for (var x = 0; x < filteredList.length; x++) {
-      //filter price
-      if (filteredList[x].perDay < priceRangeSelected.start ||
-          filteredList[x].perDay > priceRangeSelected.end) isToRemove = true;
+  //   for (var x = 0; x < filteredList.length; x++) {
+  //     //filter price
+  //     if (filteredList[x].perDay < priceRangeSelected.start ||
+  //         filteredList[x].perDay > priceRangeSelected.end) isToRemove = true;
 
-      //filter category
-      if (categorySelectedList.isNotEmpty) {
-        isInSelectedCategory = false;
-        for (var i = 0; i < categorySelectedList.length; i++) {
-          if (filteredList[x].category == categorySelectedList[i])
-            isInSelectedCategory = true;
-        }
+  //     //filter category
+  //     if (categorySelectedList.isNotEmpty) {
+  //       isInSelectedCategory = false;
+  //       for (var i = 0; i < categorySelectedList.length; i++) {
+  //         if (filteredList[x].category == categorySelectedList[i])
+  //           isInSelectedCategory = true;
+  //       }
 
-        if (!isInSelectedCategory) isToRemove = true;
-      }
+  //       if (!isInSelectedCategory) isToRemove = true;
+  //     }
 
-      //filter service
+  //     //filter service
 
-      //filter distance
+  //     //filter distance
 
-      if (isToRemove) index.add(filteredList[x].id);
-    }
+  //     if (isToRemove) index.add(filteredList[x].id);
+  //   }
 
-    //remove items
-    if (index.isNotEmpty) {
-      for (var i = 0; i < index.length; i++) {
-        for (var j = 0; j < filteredList.length; j++) {
-          if (filteredList[j].id == index[i]) {
-            filteredList.remove(filteredList[j]);
-            //break;
-          }
-        }
-      }
-    }
+  //   //remove items
+  //   if (index.isNotEmpty) {
+  //     for (var i = 0; i < index.length; i++) {
+  //       for (var j = 0; j < filteredList.length; j++) {
+  //         if (filteredList[j].id == index[i]) {
+  //           filteredList.remove(filteredList[j]);
+  //           //break;
+  //         }
+  //       }
+  //     }
+  //   }
 
-    return filteredList;
-  }
+  //   return filteredList;
+  // }
 
-  List<CampingListDto> orderList(
-      OrderType orderType, List<CampingListDto> listToOrder) {
-    switch (orderType) {
-      case OrderType.priceCre:
-        listToOrder.sort((a, b) => a.perDay.compareTo(b.perDay));
-        break;
-      case OrderType.priceDec:
-        listToOrder.sort((b, a) => a.perDay.compareTo(b.perDay));
-        break;
-      case OrderType.avgRating:
-        listToOrder.sort((b, a) => a.rating.compareTo(b.rating));
-        break;
-      case OrderType.popCamp:
-        listToOrder.sort((b, a) => a.numOfBooking.compareTo(b.numOfBooking));
-        break;
-      default:
-        listToOrder.sort((a, b) => a.name.compareTo(b.name));
-    }
-    return listToOrder;
-  }
+  // List<Camping> orderList(
+  //     OrderType orderType, List<Camping> listToOrder) {
+  //   switch (orderType) {
+  //     case OrderType.priceCre:
+  //       listToOrder.sort((a, b) => a.perDay.compareTo(b.perDay));
+  //       break;
+  //     case OrderType.priceDec:
+  //       listToOrder.sort((b, a) => a.perDay.compareTo(b.perDay));
+  //       break;
+  //     case OrderType.avgRating:
+  //       listToOrder.sort((b, a) => a.rating.compareTo(b.rating));
+  //       break;
+  //     case OrderType.popCamp:
+  //       listToOrder.sort((b, a) => a.numOfBooking.compareTo(b.numOfBooking));
+  //       break;
+  //     default:
+  //       listToOrder.sort((a, b) => a.name.compareTo(b.name));
+  //   }
+  //   return listToOrder;
+  // }
 
   refresh() {
     setState(() {});
@@ -241,20 +275,22 @@ class _SearchScreenState extends State<SearchScreen>
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 16, right: 16, top: 4, bottom: 4),
-                  child: TextField(
-                    onChanged: (String
-                        txt) {}, // funzione per aggiornare automaticamente la lista di campeggi che compare sotto
-                    onTap: () {},
-                    style: TextStyle(fontSize: 16),
-                    cursorColor: AppTheme.getTheme().primaryColor,
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Cerca",
-                    ),
-                  ),
-                ),
+                    padding: const EdgeInsets.only(
+                        left: 16, right: 16, top: 4, bottom: 4),
+                    child: Consumer<CampingProvider>(
+                      builder: (context, provider, _) => TextField(
+                        onChanged: (val) {
+                          provider.searchCamping(val);
+                        },
+                        onTap: () {},
+                        style: TextStyle(fontSize: 16),
+                        cursorColor: AppTheme.getTheme().primaryColor,
+                        decoration: new InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Cerca",
+                        ),
+                      ),
+                    )),
               ),
             ),
           ),

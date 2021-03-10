@@ -1,5 +1,5 @@
-import 'package:Pitch/models/helpSelectionList.dart';
-import 'package:Pitch/widgets/customAppBar.dart';
+import 'package:my_camping/models/helpSelectionList.dart';
+import 'package:my_camping/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 

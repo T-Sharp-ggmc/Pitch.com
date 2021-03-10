@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:Pitch/screens/searchScreens/widgets/customCalendar.dart';
+import 'package:my_camping/screens/searchScreens/widgets/customCalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

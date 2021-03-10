@@ -1,4 +1,4 @@
-import 'package:Pitch/screens/accountScreens/widgets/credit_card.dart';
+import 'package:my_camping/screens/accountScreens/widgets/credit_card.dart';
 import 'package:flutter/material.dart';
 
 class CardScreen extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:Pitch/screens/authenticate/loginScreen.dart';
-import 'package:Pitch/screens/authenticate/signUpScreen.dart';
+import 'package:my_camping/screens/authenticate/loginScreen.dart';
+import 'package:my_camping/screens/authenticate/signUpScreen.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {

@@ -1,8 +1,8 @@
-import 'package:Pitch/models/user.dart';
-import 'package:Pitch/screens/accountScreens/widgets/calendar.dart';
-import 'package:Pitch/services/database.dart';
-import 'package:Pitch/widgets/customInputDecorator.dart';
-import 'package:Pitch/widgets/loading.dart';
+import 'package:my_camping/models/user.dart';
+import 'package:my_camping/screens/accountScreens/widgets/calendar.dart';
+import 'package:my_camping/services/userService.dart';
+import 'package:my_camping/widgets/customInputDecorator.dart';
+import 'package:my_camping/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,6 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
-  
   final _formKey = GlobalKey<FormState>();
   final List<String> sex = ['Maschio', 'Femmina', 'Altro'];
   TextEditingController textController = TextEditingController();
@@ -25,7 +24,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   String _currentName;
   String _currentSurname;
   String _currentEmail;
-  String _currentBirthDate; 
+  String _currentBirthDate;
   String _currentPhone;
   String _currentSex;
 
@@ -42,10 +41,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context);
+    MyCampingUser user = Provider.of<MyCampingUser>(context);
 
     return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
+        stream: UserService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
@@ -307,11 +306,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                               onPressed: () {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                      showDemoDialog(
-                                                          context: context,
-                                                          userBirthDate: userData.birthDate);
-                                                      textController.text = _currentBirthDate;
-                                                    
+                                                showDemoDialog(
+                                                    context: context,
+                                                    userBirthDate:
+                                                        userData.birthDate);
+                                                textController.text =
+                                                    _currentBirthDate;
                                               },
                                             )),
                                           )
@@ -353,12 +353,16 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             items: sex.map((sex) {
                                               return DropdownMenuItem(
                                                 value: sex,
-                                                child: Text('$sex', style: TextStyle(
-                                                  fontSize: 14,
-                                                ),),
+                                                child: Text(
+                                                  '$sex',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
                                               );
                                             }).toList(),
-                                            onChanged: (val) => setState(() => _currentSex = val ),
+                                            onChanged: (val) => setState(
+                                                () => _currentSex = val),
                                           ),
                                         ),
                                       ),
@@ -392,7 +396,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         onTap: () async {
                                           if (_formKey.currentState
                                               .validate()) {
-                                            await DatabaseService(uid: user.uid)
+                                            await UserService(uid: user.uid)
                                                 .updateUserData(
                                                     _currentName ??
                                                         snapshot.data.name,
@@ -439,13 +443,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   void showDemoDialog({BuildContext context, String userBirthDate}) {
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     DateTime date;
-    if(userBirthDate.isNotEmpty)
-    {
-    userBirthDate += " 00:00:00";
-     date = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(userBirthDate); 
-    print(date);
-    }
-    else{
+    if (userBirthDate.isNotEmpty) {
+      userBirthDate += " 00:00:00";
+      date = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(userBirthDate);
+      print(date);
+    } else {
       date = DateTime.now();
     }
     showDialog(
@@ -454,12 +456,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         maximumDate: DateTime.now(),
         date: date,
         onApplyClick: (DateTime applyData) {
-            if (applyData != null) {
-              _currentBirthDate = formatter.format(applyData);
-            }
+          if (applyData != null) {
+            _currentBirthDate = formatter.format(applyData);
+          }
         },
       ),
     );
   }
-
 }

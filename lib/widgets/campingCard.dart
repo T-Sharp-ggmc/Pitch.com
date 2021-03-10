@@ -1,4 +1,6 @@
-import 'package:Pitch/models/campingList.dart';
+import 'package:my_camping/models/camping.dart';
+import 'package:my_camping/services/favoriteService.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,7 +11,7 @@ import 'starRating.dart';
 class CampingCardListView extends StatefulWidget {
   final bool isShowDate;
   final VoidCallback callback;
-  final CampingListDto campingData;
+  final Camping campingData;
   final AnimationController animationController;
   final Animation animation;
 
@@ -27,6 +29,14 @@ class CampingCardListView extends StatefulWidget {
 }
 
 class _CampingCardListViewState extends State<CampingCardListView> {
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    //isFavorite = await isInFavoriteList(widget.campingData);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -42,14 +52,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                   left: 24, right: 24, top: 8, bottom: 16),
               child: Column(
                 children: <Widget>[
-                  widget.isShowDate
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 12, bottom: 12),
-                          child: Text(widget.campingData.date +
-                              ', ' +
-                              widget.campingData.pitchSize),
-                        )
-                      : SizedBox(),
+                  SizedBox(),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(16.0)),
@@ -68,12 +71,11 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                           Column(
                             children: <Widget>[
                               AspectRatio(
-                                aspectRatio: 2,
-                                child: Image.asset(
-                                  widget.campingData.imagePath.first,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                                  aspectRatio: 2,
+                                  child: CachedNetworkImage(
+                                    imageUrl: widget.campingData.photos.first,
+                                    fit: BoxFit.cover,
+                                  )),
                               Container(
                                 color: AppTheme.getTheme().backgroundColor,
                                 child: Row(
@@ -106,7 +108,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                                     MainAxisAlignment.start,
                                                 children: <Widget>[
                                                   Text(
-                                                    widget.campingData.info,
+                                                    widget.campingData.city,
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey
@@ -124,7 +126,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                                   ),
                                                   Expanded(
                                                     child: Text(
-                                                      "${widget.campingData.dist.toStringAsFixed(1)} km to city",
+                                                      "2.5 km to city", //fare funzione per calcolo della distanza dalla citta
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
@@ -179,7 +181,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                             CrossAxisAlignment.end,
                                         children: <Widget>[
                                           Text(
-                                            "\$${widget.campingData.perDay}",
+                                            "\$${widget.campingData.campingPitch.first.price}",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                               fontWeight: FontWeight.w600,
@@ -218,7 +220,9 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                 ),
                                 onTap: () {
                                   try {
-                                    Navigator.pushNamed(context, CampingDetailScreen.routeName, arguments: widget.campingData);
+                                    Navigator.pushNamed(
+                                        context, CampingDetailScreen.routeName,
+                                        arguments: widget.campingData);
                                     //widget.callback();
                                   } catch (e) {}
                                 },
@@ -238,16 +242,24 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(32.0),
                                   ),
-                                  onTap: () {
-                                    widget.campingData.isFavorite =
-                                        !widget.campingData.isFavorite;
-                                    try {
-                                      widget.callback();
-                                    } catch (e) {}
+                                  onTap: () async {
+                                    if (await isInFavoriteList(widget.campingData)) 
+                                    {
+                                      await FavoriteService
+                                          .removeInFavoriteList(
+                                              widget.campingData.cid);
+                                    } else {
+                                      await FavoriteService.addInFavoriteList(
+                                          widget.campingData);
+                                    }
+                                    bool update = await isInFavoriteList(widget.campingData);
+                                      setState(() {
+                                        isFavorite = update;
+                                      }); 
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: widget.campingData.isFavorite
+                                    child: isFavorite
                                         ? Icon(
                                             Icons.favorite,
                                             color: AppTheme.getTheme()
@@ -274,5 +286,13 @@ class _CampingCardListViewState extends State<CampingCardListView> {
         );
       },
     );
+  }
+
+  Future<bool> isInFavoriteList(Camping camping) async {
+    var favoriteList = await FavoriteService.getFavoriteList();
+    for (var i = 0; i < favoriteList.length; i++) {
+      if (favoriteList[i].cid == camping.cid) return true;
+    }
+    return false;
   }
 }

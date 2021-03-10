@@ -1,7 +1,8 @@
-import 'package:Pitch/screens/popups/orderPopup.dart';
+import 'package:my_camping/provider/premiumCampingProvider.dart';
+import 'package:my_camping/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../appTheme.dart';
-import '../../../models/campingList.dart';
 import '../../../widgets/campingCard.dart';
 
 class CampingList extends StatefulWidget {
@@ -14,8 +15,6 @@ class CampingList extends StatefulWidget {
 
 class _CampingListState extends State<CampingList>
     with TickerProviderStateMixin {
-  var campingList = CampingListDto.campingList;
-  OrderType _selectedOrder = OrderType.noOrder;
   ScrollController scrollController = new ScrollController();
   AnimationController animationController;
 
@@ -46,43 +45,50 @@ class _CampingListState extends State<CampingList>
         child: Column(
           children: <Widget>[
             Expanded(
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Stack(children: <Widget>[
-                      Container(
+              child: Stack(children: <Widget>[
+                Consumer<PremiumCampingProvider>(
+                    builder: (context, provider, _) {
+                  if(provider.premiumCampings != null){
+                    if (provider.premiumCampings.length != 0) {
+                      return Container(
                         color: AppTheme.getTheme().backgroundColor,
                         child: ListView.builder(
                           controller: scrollController,
-                          itemCount: campingList.length,
+                          itemCount: provider.premiumCampings.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            var count = campingList.length > 10
+                            var count = provider.premiumCampings.length > 10
                                 ? 10
-                                : campingList.length;
-                            campingList =
-                                orderList(_selectedOrder, campingList);
+                                : provider.premiumCampings.length;
+                            // provider.campings =
+                            //     orderList(_selectedOrder, provider.campings);
                             var animation = Tween(begin: 0.0, end: 1.0).animate(
                                 CurvedAnimation(
                                     parent: animationController,
                                     curve: Interval((1 / count) * index, 1.0,
                                         curve: Curves.fastOutSlowIn)));
 
-                            ///da capire
                             animationController.forward();
                             return CampingCardListView(
                               animation: animation,
                               animationController: animationController,
-                              campingData: campingList[index],
+                              campingData: provider.premiumCampings[index],
                               callback: refresh,
                             );
                           },
                         ),
-                      ),
-                    ]),
-                  )
-                ],
-              ),
+                      );
+                    }
+                    return Container(
+                      height: 360,
+                      child: SizedBox(),
+                    );
+                  }
+                  else {
+                    return Loading();
+                  }
+                })
+              ]),
             ),
           ],
         ),
@@ -92,27 +98,5 @@ class _CampingListState extends State<CampingList>
 
   refresh() {
     setState(() {});
-  }
-
-
-  List<CampingListDto> orderList(
-      OrderType orderType, List<CampingListDto> listToOrder) {
-    switch (orderType) {
-      case OrderType.priceCre:
-        listToOrder.sort((a, b) => a.perDay.compareTo(b.perDay));
-        break;
-      case OrderType.priceDec:
-        listToOrder.sort((b, a) => a.perDay.compareTo(b.perDay));
-        break;
-      case OrderType.avgRating:
-        listToOrder.sort((b, a) => a.rating.compareTo(b.rating));
-        break;
-      case OrderType.popCamp:
-        listToOrder.sort((b, a) => a.numOfBooking.compareTo(b.numOfBooking));
-        break;
-      default:
-        listToOrder.sort((a, b) => a.name.compareTo(b.name));
-    }
-    return listToOrder;
   }
 }

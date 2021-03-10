@@ -1,4 +1,4 @@
-import 'package:Pitch/models/popularFilterList.dart';
+import 'package:my_camping/models/popularFilterList.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

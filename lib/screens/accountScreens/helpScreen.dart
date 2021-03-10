@@ -1,4 +1,4 @@
-import 'package:Pitch/models/helpSelectionList.dart';
+import 'package:my_camping/models/helpSelectionList.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../appTheme.dart';

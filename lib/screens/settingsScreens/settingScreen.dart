@@ -1,4 +1,4 @@
-import 'package:Pitch/models/profileSelectionList.dart';
+import 'package:my_camping/models/profileSelectionList.dart';
 import 'package:flutter/material.dart';
 import '../../appTheme.dart';
 import '../../widgets/customAppBar.dart';
