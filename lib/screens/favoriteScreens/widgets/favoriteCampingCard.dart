@@ -1,6 +1,7 @@
 import 'package:my_camping/models/camping.dart';
 import 'package:my_camping/provider/favoriteCampingProvider.dart';
 import 'package:my_camping/services/favoriteService.dart';
+import 'package:my_camping/widgets/loading.dart';
 import 'package:my_camping/widgets/starRating.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -29,53 +30,57 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<FavoriteCampingProvider>(context).loadfavoriteCamping();
     return Consumer<FavoriteCampingProvider>(builder: (context, provider, _) {
-      return Container(
-        child: provider.favoriteCampings.length == 0
-            ? noFavoriteList()
-            : ListView.builder(
-                itemCount: provider.favoriteCampings.length,
-                padding: EdgeInsets.only(top: 8, bottom: 8),
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  var count = provider.favoriteCampings.length > 10
-                      ? 10
-                      : provider.favoriteCampings.length;
-                  var animation = Tween(begin: 0.0, end: 1.0).animate(
-                      CurvedAnimation(
-                          parent: widget.animationController,
-                          curve: Interval((1 / count) * index, 1.0,
-                              curve: Curves.fastOutSlowIn)));
-                  widget.animationController.forward();
-                  return Dismissible(
-                      key: UniqueKey(),
-                      background: getDismissedBackground(),
-                      onDismissed: (direction) async {
-                        String nameCampingDismissed =
-                            provider.favoriteCampings[index].name;
-                        await FavoriteService.removeInFavoriteList(
-                            provider.favoriteCampings[index].cid);
-                        // ignore: deprecated_member_use
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                              "$nameCampingDismissed rimosso dai preferiti"),
-                          action: SnackBarAction(
-                              label: "INDIETRO",
-                              onPressed: () async {
-                                await FavoriteService.addInFavoriteList(
-                                    provider.favoriteCampings[index]);
-                              }),
+      if (provider.favoriteCampings != null) {
+        return Container(
+          child: provider.favoriteCampings.length == 0
+              ? noFavoriteList()
+              : ListView.builder(
+                  itemCount: provider.favoriteCampings.length,
+                  padding: EdgeInsets.only(top: 8, bottom: 8),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    var count = provider.favoriteCampings.length > 10
+                        ? 10
+                        : provider.favoriteCampings.length;
+                    var animation = Tween(begin: 0.0, end: 1.0).animate(
+                        CurvedAnimation(
+                            parent: widget.animationController,
+                            curve: Interval((1 / count) * index, 1.0,
+                                curve: Curves.fastOutSlowIn)));
+                    widget.animationController.forward();
+                    return Dismissible(
+                        key: UniqueKey(),
+                        background: getDismissedBackground(),
+                        onDismissed: (direction) async {
+                          String nameCampingDismissed =
+                              provider.favoriteCampings[index].name;
+                          await FavoriteService.removeInFavoriteList(
+                              provider.favoriteCampings[index].cid);
+                          // ignore: deprecated_member_use
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "$nameCampingDismissed rimosso dai preferiti"),
+                            action: SnackBarAction(
+                                label: "INDIETRO",
+                                onPressed: () async {
+                                  await FavoriteService.addInFavoriteList(
+                                      provider.favoriteCampings[index]);
+                                }),
+                          ));
+                        },
+                        child: FavoriteCampingCardListView(
+                          callback: () {}, //navigate to details page
+                          campingData: provider.favoriteCampings[index],
+                          animation: animation,
+                          animationController: widget.animationController,
                         ));
-                      },
-                      child: FavoriteCampingCardListView(
-                        callback: () {}, //navigate to details page
-                        campingData: provider.favoriteCampings[index],
-                        animation: animation,
-                        animationController: widget.animationController,
-                      ));
-                },
-              ),
-      );
+                  },
+                ),
+        );
+      } else
+        return Loading();
     });
   }
 }

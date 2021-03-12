@@ -47,7 +47,7 @@ class Camping extends Equatable {
         photos,
         services,
         campingPitch,
-        //position,
+        position,
       ];
 
   Map<String, dynamic> toJson() => {
@@ -81,4 +81,12 @@ class Camping extends Equatable {
         campingPitch: json['campingPitch'],
         position: json['position'],
       );
+
+  static Pitch getLowestPrice(List<Pitch> pitch){
+    if (pitch != null && pitch.isNotEmpty) {
+      pitch.sort((a, b) => a.price.compareTo(b.price));
+      return pitch.first;
+    }
+    return pitch.first;
+  }
 }

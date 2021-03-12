@@ -2,11 +2,12 @@ import 'package:my_camping/models/camping.dart';
 import 'package:my_camping/models/campingCoordinate.dart';
 import 'package:my_camping/models/pitch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_camping/screens/popups/orderPopup.dart';
 
 class CampingService {
   static CollectionReference _campingCollection = FirebaseFirestore.instance.collection('campings');
 
-  static Future<List<Camping>> getCamping() async {
+  static Future<List<Camping>> getCamping(OrderType orderType) async {
     QuerySnapshot snapshot = await _campingCollection.get();
 
     List<Camping> campings = [];
@@ -36,8 +37,35 @@ class CampingService {
         ),
       );
     }
+    campings = orderList(orderType, campings);
 
     return campings;
+  }
+
+  static int compareForLowestPrice (Camping a, Camping b){
+    Pitch pA = Camping.getLowestPrice(a.campingPitch);
+    Pitch pB = Camping.getLowestPrice(b.campingPitch);
+    return pA.price.compareTo(pB.price);
+  }
+
+  static List<Camping> orderList(OrderType orderType, List<Camping> listToOrder) {
+    switch (orderType) {
+      case OrderType.priceCre:
+        listToOrder.sort((a, b) => compareForLowestPrice(a, b));
+        break;
+      case OrderType.priceDec:
+        listToOrder.sort((b, a) => compareForLowestPrice(a, b));
+        break;
+      case OrderType.avgRating:
+        listToOrder.sort((b, a) => a.rating.compareTo(b.rating));
+        break;
+      case OrderType.popCamp:
+        listToOrder.sort((b, a) => a.numOfBooking.compareTo(b.numOfBooking));
+        break;
+      default:
+        listToOrder.sort((a, b) => a.name.compareTo(b.name));
+    }
+    return listToOrder;
   }
 
   static Future<List<Camping>> getPremiumCamping() async {

@@ -16,11 +16,12 @@ class OrderPopupView extends StatefulWidget {
 enum OrderType { noOrder, priceCre, priceDec, avgRating, popCamp }
 
 class _OrderPopupViewState extends State<OrderPopupView> with TickerProviderStateMixin{
-  OrderType _orderType = OrderType.noOrder;
+  OrderType _orderType;
   AnimationController animationController;
 
   @override
   void initState() {
+    _orderType = widget.orderType;
     animationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
     animationController.forward();
     super.initState();
