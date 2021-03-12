@@ -4,8 +4,7 @@ import 'package:my_camping/models/pitch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CampingService {
-  static CollectionReference _campingCollection =
-      FirebaseFirestore.instance.collection('campings');
+  static CollectionReference _campingCollection = FirebaseFirestore.instance.collection('campings');
 
   static Future<List<Camping>> getCamping() async {
     QuerySnapshot snapshot = await _campingCollection.get();

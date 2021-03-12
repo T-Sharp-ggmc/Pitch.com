@@ -15,7 +15,7 @@ class Wrapper extends StatelessWidget {
     Provider.of<CampingProvider>(context).loadCamping();
     Provider.of<PremiumCampingProvider>(context).loadPremiumCamping();
     Provider.of<FavoriteCampingProvider>(context).loadfavoriteCamping();
-    print(user);
+    //print(user);
     if (user == null) {
       return Authenticate();
     } else {
