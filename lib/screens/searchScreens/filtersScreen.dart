@@ -2,7 +2,7 @@ import 'package:my_camping/models/popularFilterList.dart';
 import 'package:my_camping/widgets/customAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 import 'widgets/RangeSliderView.dart';
 import 'widgets/SliderView.dart';
 

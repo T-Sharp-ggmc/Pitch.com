@@ -1,6 +1,6 @@
 import 'package:my_camping/models/profileSelectionList.dart';
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class SettingScreen extends StatefulWidget {

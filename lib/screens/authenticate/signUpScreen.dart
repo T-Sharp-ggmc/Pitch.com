@@ -1,10 +1,10 @@
 import 'package:my_camping/services/authService.dart';
 import 'package:my_camping/widgets/customAppBar.dart';
-import 'package:my_camping/widgets/customInputDecorator.dart';
+import 'package:my_camping/utilities/customInputDecorator.dart';
 import 'package:my_camping/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:my_camping/appTheme.dart';
+import 'package:my_camping/utilities/appTheme.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = "/signUp";

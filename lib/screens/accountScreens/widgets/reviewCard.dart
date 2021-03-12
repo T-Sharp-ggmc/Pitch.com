@@ -2,7 +2,7 @@ import 'package:my_camping/models/reviewList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../appTheme.dart';
+import '../../../utilities/appTheme.dart';
 import '../../../widgets/starRating.dart';
 
 class ReviewCard extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:my_camping/screens/accountScreens/widgets/reviewCard.dart';
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class ReviewScreen extends StatefulWidget {

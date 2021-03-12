@@ -1,5 +1,5 @@
-import 'package:my_camping/provider.dart';
-import 'package:my_camping/routes.dart';
+import 'package:my_camping/utilities/provider.dart';
+import 'package:my_camping/utilities/routes.dart';
 import 'package:my_camping/screens/wrapper.dart';
 import 'package:my_camping/services/authService.dart';
 import 'package:flutter/material.dart';

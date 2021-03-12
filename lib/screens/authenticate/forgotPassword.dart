@@ -1,7 +1,7 @@
 import 'package:my_camping/widgets/customAppBar.dart';
-import 'package:my_camping/widgets/customInputDecorator.dart';
+import 'package:my_camping/utilities/customInputDecorator.dart';
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static String routeName = "/forgotPassword";

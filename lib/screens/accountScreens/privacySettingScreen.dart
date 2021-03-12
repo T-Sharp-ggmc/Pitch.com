@@ -1,7 +1,7 @@
 import 'package:my_camping/models/privacySelectionList.dart';
-import 'package:my_camping/sizeConfig.dart';
+import 'package:my_camping/utilities/sizeConfig.dart';
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 import '../../widgets/customAppBar.dart';
 import 'widgets/cookie.dart';
 

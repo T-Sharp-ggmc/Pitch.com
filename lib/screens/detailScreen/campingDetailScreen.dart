@@ -1,4 +1,4 @@
-import 'package:my_camping/appTheme.dart';
+import 'package:my_camping/utilities/appTheme.dart';
 import 'package:my_camping/widgets/starRating.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../models/camping.dart';
-import '../../sizeConfig.dart';
+import '../../utilities/sizeConfig.dart';
 import 'widgets/customDetailAppBar.dart';
 import 'widgets/detailsBottomBar.dart';
 

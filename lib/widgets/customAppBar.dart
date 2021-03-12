@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sizeConfig.dart';
+import '../utilities/sizeConfig.dart';
 
 class NewCustomAppBar extends PreferredSize {
   final String nameOfPage;

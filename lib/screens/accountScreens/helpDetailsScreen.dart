@@ -1,7 +1,7 @@
 import 'package:my_camping/models/helpSelectionList.dart';
 import 'package:my_camping/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 
 class HelpDetailsScreen extends StatefulWidget {
   static String routeName = "/helpDetails";

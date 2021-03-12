@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_camping/utilities/enum.dart';
 
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 
 class OrderPopupView extends StatefulWidget {
    final Function(OrderType) onChange;
@@ -13,7 +14,7 @@ class OrderPopupView extends StatefulWidget {
   _OrderPopupViewState createState() => _OrderPopupViewState();
 }
 
-enum OrderType { noOrder, priceCre, priceDec, avgRating, popCamp }
+
 
 class _OrderPopupViewState extends State<OrderPopupView> with TickerProviderStateMixin{
   OrderType _orderType;

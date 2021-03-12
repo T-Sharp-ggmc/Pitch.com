@@ -1,14 +1,14 @@
 import 'package:my_camping/models/user.dart';
 import 'package:my_camping/screens/accountScreens/widgets/calendar.dart';
 import 'package:my_camping/services/userService.dart';
-import 'package:my_camping/widgets/customInputDecorator.dart';
+import 'package:my_camping/utilities/customInputDecorator.dart';
 import 'package:my_camping/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../sizeConfig.dart';
+import '../../utilities/sizeConfig.dart';
 import '../../widgets/customAppBar.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 
 class EditAccountScreen extends StatefulWidget {
   static String routeName = "/editAccount";

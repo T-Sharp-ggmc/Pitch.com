@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_camping/utilities/enum.dart';
 
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 
 class PitchPopupView extends StatefulWidget {
   final Function(int, int, int) onChnage;
@@ -253,4 +254,4 @@ class _PitchPopupViewState extends State<PitchPopupView> with TickerProviderStat
   }
 }
 
-enum PopupTextType { no, ad, ch }
+

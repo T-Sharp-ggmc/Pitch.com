@@ -1,4 +1,4 @@
-enum CampingCategory { none, mare, lago, montagna, fiume }
+import 'package:my_camping/utilities/enum.dart';
 
 class FilterListData {
   String titleTxt;
