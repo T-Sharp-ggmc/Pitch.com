@@ -1,5 +1,6 @@
 import 'package:my_camping/models/camping.dart';
-import 'package:my_camping/services/campingService.dart';
+import 'package:my_camping/screens/popups/orderPopup.dart';
+import 'package:my_camping/services/searchService.dart';
 import 'package:flutter/material.dart';
 
 class CampingProvider extends ChangeNotifier {
@@ -11,8 +12,8 @@ class CampingProvider extends ChangeNotifier {
   List<Camping> get campings => _campings;
   List<Camping> get searchedCampings => _searchedCampings;
 
-  void loadCamping() async {
-    _campings = await CampingService.getCamping();
+  void loadCamping(OrderType orderType) async {
+    _campings = await SearchService.getCamping(orderType);
 
     notifyListeners();
   }
@@ -20,7 +21,7 @@ class CampingProvider extends ChangeNotifier {
   void searchCamping(String query) async {
     _keyword = query;
     _searchedCampings =
-        campings.where((c) => c.name.toLowerCase().contains(keyword)).toList();
+        campings.where((c) => c.name.toLowerCase().contains(keyword) || c.city.toLowerCase().contains(keyword)).toList();
 
     notifyListeners();
   }

@@ -1,8 +1,10 @@
+import 'package:my_camping/provider/favoriteCampingProvider.dart';
 import 'package:my_camping/screens/homepage/widget/FilterPremium.dart';
 import 'package:my_camping/screens/homepage/widget/campingList.dart';
 import 'package:my_camping/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../../appTheme.dart';
 import '../accountScreens/accountScreen.dart';
 import '../favoriteScreens/favoritesScreen.dart';
@@ -33,7 +35,7 @@ class _HomeScreen extends State<HomeScreen>
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 4));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     base = CurvedAnimation(parent: controller, curve: Curves.easeOut);
     reverse = Tween<double>(begin: 0.0, end: -1.0).animate(base);
     gap = Tween<double>(begin: 3.0, end: 0.0).animate(base)
@@ -96,6 +98,7 @@ class _HomeScreen extends State<HomeScreen>
           _children[_currentIndex] = FavoritesScreen(
             animationController: controller,
           );
+          Provider.of<FavoriteCampingProvider>(context, listen: false).loadfavoriteCamping();
           break;
         // case 3:
         //   _children[_currentIndex] = AccountScreen(
@@ -149,8 +152,6 @@ class _HomeScreen extends State<HomeScreen>
                         left: 20, right: 16, top: 0, bottom: 3),
                     child: TextField(
                       readOnly: true,
-                      // onChanged: (String
-                      //     txt) {}, // funzione per aggiornare automaticamente la lista di campeggi che compare sotto
                       onTap: () {
                         Navigator.pushNamed(context, SearchScreen.routeName);
                       },
@@ -158,7 +159,7 @@ class _HomeScreen extends State<HomeScreen>
                       cursorColor: AppTheme.getTheme().primaryColor,
                       decoration: new InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Cerca",
+                        hintText: "Dove vuoi andare?",
                       ),
                     ),
                   ),

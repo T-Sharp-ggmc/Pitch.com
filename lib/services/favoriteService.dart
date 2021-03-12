@@ -5,13 +5,11 @@ import 'package:my_camping/services/authService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FavoriteService {
-  static CollectionReference userCollection =
-      FirebaseFirestore.instance.collection('users');
+  static CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
   static final currentUserID = AuthService().getUserID();
+  static CollectionReference favoriteCollection = userCollection.doc(currentUserID).collection('favoriteCamping');
 
   static Future<List<Camping>> getFavoriteList() async {
-    CollectionReference favoriteCollection =
-        userCollection.doc(currentUserID).collection('favoriteCamping');
     QuerySnapshot snapshot = await favoriteCollection.get();
     List<Camping> favoriteCampings = [];
 
@@ -45,8 +43,6 @@ class FavoriteService {
   }
 
   static Future<void> addInFavoriteList(Camping favCamping) async {
-    CollectionReference favoriteCollection =
-        userCollection.doc(currentUserID).collection('favoriteCamping');
     await favoriteCollection.doc().set({
       'cid': favCamping.cid,
       'name': favCamping.name,
@@ -65,8 +61,6 @@ class FavoriteService {
   }
 
   static Future<void> removeInFavoriteList(int favoriteCid) async {
-    CollectionReference favoriteCollection =
-        userCollection.doc(currentUserID).collection('favoriteCamping');
     await favoriteCollection
         .where("cid", isEqualTo: favoriteCid)
         .get()
