@@ -1,6 +1,6 @@
 import 'package:my_camping/models/camping.dart';
 import 'package:my_camping/screens/popups/orderPopup.dart';
-import 'package:my_camping/services/campingService.dart';
+import 'package:my_camping/services/searchService.dart';
 import 'package:flutter/material.dart';
 
 class CampingProvider extends ChangeNotifier {
@@ -13,7 +13,7 @@ class CampingProvider extends ChangeNotifier {
   List<Camping> get searchedCampings => _searchedCampings;
 
   void loadCamping(OrderType orderType) async {
-    _campings = await CampingService.getCamping(orderType);
+    _campings = await SearchService.getCamping(orderType);
 
     notifyListeners();
   }
