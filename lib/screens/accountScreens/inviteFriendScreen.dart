@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 import '../../widgets/customAppBar.dart';
 
 class InviteFriendScreen extends StatelessWidget {

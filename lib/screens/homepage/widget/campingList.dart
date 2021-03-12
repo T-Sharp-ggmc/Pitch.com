@@ -2,7 +2,7 @@ import 'package:my_camping/provider/premiumCampingProvider.dart';
 import 'package:my_camping/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../appTheme.dart';
+import '../../../utilities/appTheme.dart';
 import '../../../widgets/campingCard.dart';
 
 class CampingList extends StatefulWidget {

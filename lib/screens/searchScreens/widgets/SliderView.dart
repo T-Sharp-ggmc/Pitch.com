@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../appTheme.dart';
+import '../../../utilities/appTheme.dart';
 
 class SliderView extends StatefulWidget {
   final Function(double) onChnagedistValue;

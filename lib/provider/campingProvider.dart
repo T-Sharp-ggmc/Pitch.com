@@ -1,7 +1,7 @@
 import 'package:my_camping/models/camping.dart';
-import 'package:my_camping/screens/popups/orderPopup.dart';
 import 'package:my_camping/services/searchService.dart';
 import 'package:flutter/material.dart';
+import 'package:my_camping/utilities/enum.dart';
 
 class CampingProvider extends ChangeNotifier {
   String _keyword = "";

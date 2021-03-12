@@ -2,8 +2,8 @@
 import 'package:my_camping/models/privacySelectionList.dart';
 import 'package:flutter/material.dart';
 
-import '../../../appTheme.dart';
-import '../../../sizeConfig.dart';
+import '../../../utilities/appTheme.dart';
+import '../../../utilities/sizeConfig.dart';
 
 class Cookie extends StatefulWidget {
   final PrivacySelectionListData data;

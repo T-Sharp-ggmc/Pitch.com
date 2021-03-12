@@ -2,7 +2,7 @@ import 'package:my_camping/models/camping.dart';
 import 'package:my_camping/models/campingCoordinate.dart';
 import 'package:my_camping/models/pitch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:my_camping/screens/popups/orderPopup.dart';
+import 'package:my_camping/utilities/enum.dart';
 
 class SearchService {
   static CollectionReference _campingCollection = FirebaseFirestore.instance.collection('campings');

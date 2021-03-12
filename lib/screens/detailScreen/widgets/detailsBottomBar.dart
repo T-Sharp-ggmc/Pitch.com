@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../appTheme.dart';
-import '../../../sizeConfig.dart';
+import '../../../utilities/appTheme.dart';
+import '../../../utilities/sizeConfig.dart';
 
 class DetailsBottomBar extends StatefulWidget {
   @override

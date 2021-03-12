@@ -2,7 +2,7 @@ import 'package:my_camping/models/popularFilterList.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../appTheme.dart';
+import '../../../utilities/appTheme.dart';
 import '../../../models/popularFilterList.dart';
 
 class FilterPremiumView extends StatefulWidget {

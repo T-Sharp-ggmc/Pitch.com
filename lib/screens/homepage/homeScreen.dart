@@ -1,11 +1,11 @@
 import 'package:my_camping/provider/favoriteCampingProvider.dart';
 import 'package:my_camping/screens/homepage/widget/FilterPremium.dart';
 import 'package:my_camping/screens/homepage/widget/campingList.dart';
-import 'package:my_camping/sizeConfig.dart';
+import 'package:my_camping/utilities/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../appTheme.dart';
+import '../../utilities/appTheme.dart';
 import '../accountScreens/accountScreen.dart';
 import '../favoriteScreens/favoritesScreen.dart';
 import '../searchScreens/searchScreen.dart';

@@ -1,6 +1,7 @@
-import 'package:my_camping/appTheme.dart';
+import 'package:my_camping/utilities/appTheme.dart';
 import 'package:my_camping/provider/campingProvider.dart';
 import 'package:my_camping/screens/popups/orderPopup.dart';
+import 'package:my_camping/utilities/enum.dart';
 import 'package:my_camping/widgets/campingCard.dart';
 import 'package:my_camping/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
