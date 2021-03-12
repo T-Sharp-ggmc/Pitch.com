@@ -72,7 +72,7 @@ class Camping extends Equatable {
         info: json['info'],
         city: json['city'],
         category: json['category'],
-        rating: json['rating'],
+        rating: convertIntToDouble(json['rating']),
         reviews: json['reviews'],
         numOfBooking: json['numOfBooking'],
         isPremium: json['isPremium'],
@@ -89,4 +89,11 @@ class Camping extends Equatable {
     }
     return pitch.first;
   }
+
+  static double convertIntToDouble(num value){
+    if(value is int)
+      return value.toDouble();
+    return value;
+  }
+
 }

@@ -4,7 +4,7 @@ import 'pitchAvailableDate.dart';
 
 class Pitch extends Equatable {
   final String type;
-  final String price;
+  final double price;
   final int firstSize;
   final int secondSize;
   final int totalAvailable;
@@ -33,7 +33,7 @@ class Pitch extends Equatable {
 
   factory Pitch.fromJson(Map<String, dynamic> json) => Pitch(
         type: json['type'],
-        price: json['price'],
+        price: convertIntToDouble(json['price']),
         firstSize: json['firstSize'],
         secondSize: json['secondSize'],
         totalAvailable: json['totalAvailable'],
@@ -50,4 +50,11 @@ class Pitch extends Equatable {
         'totalQuantity': totalQuantity,
         'availableDate': availableDate.toJson(),
       };
+
+  
+  static double convertIntToDouble(num value){
+    if(value is int)
+      return value.toDouble();
+    return value;
+  }
 }
