@@ -1,8 +1,10 @@
+import 'package:my_camping/provider/favoriteCampingProvider.dart';
 import 'package:my_camping/screens/homepage/widget/FilterPremium.dart';
 import 'package:my_camping/screens/homepage/widget/campingList.dart';
 import 'package:my_camping/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../../appTheme.dart';
 import '../accountScreens/accountScreen.dart';
 import '../favoriteScreens/favoritesScreen.dart';
@@ -96,6 +98,7 @@ class _HomeScreen extends State<HomeScreen>
           _children[_currentIndex] = FavoritesScreen(
             animationController: controller,
           );
+          Provider.of<FavoriteCampingProvider>(context, listen: false).loadfavoriteCamping();
           break;
         // case 3:
         //   _children[_currentIndex] = AccountScreen(

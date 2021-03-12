@@ -21,7 +21,7 @@ class CampingProvider extends ChangeNotifier {
   void searchCamping(String query) async {
     _keyword = query;
     _searchedCampings =
-        campings.where((c) => c.name.toLowerCase().contains(keyword)).toList();
+        campings.where((c) => c.name.toLowerCase().contains(keyword) || c.city.toLowerCase().contains(keyword)).toList();
 
     notifyListeners();
   }

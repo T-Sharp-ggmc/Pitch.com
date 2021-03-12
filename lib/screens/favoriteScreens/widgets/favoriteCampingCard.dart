@@ -30,7 +30,7 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FavoriteCampingProvider>(context).loadfavoriteCamping();
+    final prov = Provider.of<FavoriteCampingProvider>(context);
     return Consumer<FavoriteCampingProvider>(builder: (context, provider, _) {
       if (provider.favoriteCampings != null) {
         return Container(
@@ -52,21 +52,23 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                     widget.animationController.forward();
                     return Dismissible(
                         key: UniqueKey(),
+                        direction: DismissDirection.startToEnd,
                         background: getDismissedBackground(),
                         onDismissed: (direction) async {
-                          String nameCampingDismissed =
-                              provider.favoriteCampings[index].name;
-                          await FavoriteService.removeInFavoriteList(
-                              provider.favoriteCampings[index].cid);
-                          // ignore: deprecated_member_use
-                          Scaffold.of(context).showSnackBar(SnackBar(
+                          String nameCampingDismissed = provider.favoriteCampings[index].name;
+                          setState(() {
+                            deletedCamping = provider.favoriteCampings[index];
+                          });
+                          await FavoriteService.removeInFavoriteList(provider.favoriteCampings[index].cid);
+                          prov.loadfavoriteCamping();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                                 "$nameCampingDismissed rimosso dai preferiti"),
                             action: SnackBarAction(
                                 label: "INDIETRO",
                                 onPressed: () async {
-                                  await FavoriteService.addInFavoriteList(
-                                      provider.favoriteCampings[index]);
+                                  await FavoriteService.addInFavoriteList(deletedCamping);
+                                  prov.loadfavoriteCamping();
                                 }),
                           ));
                         },
@@ -216,9 +218,11 @@ class FavoriteCampingCardListView extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Text(
-                                      campingData.info,
+                                      campingData.info.length > 100 
+                                      ? campingData.info.substring(0,80) 
+                                      : campingData.info,
                                       style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: 12,
                                           color: Colors.grey.withOpacity(0.8)),
                                     ),
                                     Expanded(

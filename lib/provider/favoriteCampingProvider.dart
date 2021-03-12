@@ -9,7 +9,6 @@ class FavoriteCampingProvider extends ChangeNotifier {
 
   void loadfavoriteCamping() async {
     _favoriteCampings = await FavoriteService.getFavoriteList();
-
     notifyListeners();
   }
 }
