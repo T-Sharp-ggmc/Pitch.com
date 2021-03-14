@@ -20,7 +20,7 @@ class FilterListData {
       imageUrl: '',
     ),
     FilterListData(
-      titleTxt: 'Lido',
+      titleTxt: 'Parcheggio gratuito',
       isSelected: true,
       imageUrl: '',
     ),

@@ -11,7 +11,8 @@ class FiltersScreen extends StatefulWidget {
   final List<FilterListData> serviceListDto;
   final List<FilterListData> categoryListDto;
   final RangeValues priceRange;
-  final Function(List<FilterListData>, List<FilterListData>, RangeValues)
+  final double distValue;
+  final Function(List<FilterListData>, List<FilterListData>, RangeValues, double)
       onApplyChanges;
 
   const FiltersScreen(
@@ -19,14 +20,16 @@ class FiltersScreen extends StatefulWidget {
       this.serviceListDto,
       this.categoryListDto,
       this.priceRange,
-      this.onApplyChanges})
+      this.distValue,
+      this.onApplyChanges}) 
       : super(key: key);
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  double distValue = 50.0;
+  double _dist = 100.00;
+  RangeValues _rang = RangeValues(0, 1000);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +95,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     highlightColor: Colors.transparent,
                     onTap: () {
                       widget.onApplyChanges(widget.categoryListDto,
-                          widget.serviceListDto, widget.priceRange);
+                          widget.serviceListDto, _rang, _dist);
                       Navigator.pop(context);
                     },
                     child: Center(
@@ -317,6 +320,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   Widget distanceViewUI() {
+    _dist = widget.distValue;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,9 +338,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
           ),
         ),
         SliderView(
-          distValue: distValue,
+          distValue: _dist,
           onChnagedistValue: (value) {
-            distValue = value;
+            _dist = value;
           },
         ),
         SizedBox(
@@ -347,7 +351,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   Widget priceBarFilter() {
-    RangeValues _values = widget.priceRange;
+    _rang = widget.priceRange;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,9 +368,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
           ),
         ),
         RangeSliderView(
-          values: _values,
+          values: _rang,
           onChnageRangeValues: (values) {
-            _values = values;
+            _rang = values;
           },
         ),
         SizedBox(

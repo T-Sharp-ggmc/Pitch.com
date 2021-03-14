@@ -1,4 +1,5 @@
 import 'package:my_camping/models/camping.dart';
+import 'package:my_camping/models/filter.dart';
 import 'package:my_camping/services/searchService.dart';
 import 'package:flutter/material.dart';
 import 'package:my_camping/utilities/enum.dart';
@@ -12,8 +13,8 @@ class CampingProvider extends ChangeNotifier {
   List<Camping> get campings => _campings;
   List<Camping> get searchedCampings => _searchedCampings;
 
-  void loadCamping(OrderType orderType) async {
-    _campings = await SearchService.getCamping(orderType);
+  void loadCamping(OrderType orderType, Filter filters) async {
+    _campings = await SearchService.getCamping(orderType, filters);
 
     notifyListeners();
   }

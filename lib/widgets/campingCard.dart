@@ -179,6 +179,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                                 CrossAxisAlignment.end,
                                             children: <Widget>[
                                               Text(
+                                                widget.campingData.campingPitch.isEmpty ? "€" :
                                                 "€${widget.campingData.campingPitch.first.price.toString()}",
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(

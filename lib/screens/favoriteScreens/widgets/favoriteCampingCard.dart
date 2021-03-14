@@ -295,7 +295,8 @@ class FavoriteCampingCardListView extends StatelessWidget {
                                                 CrossAxisAlignment.end,
                                             children: <Widget>[
                                               Text(
-                                                "€${campingData.campingPitch.first.price.toString()}",
+                                                campingData.campingPitch.isEmpty ? "€" 
+                                                :"€${campingData.campingPitch.first.price.toString()}",
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,

@@ -1,13 +1,14 @@
 import 'package:my_camping/models/camping.dart';
 import 'package:my_camping/models/campingCoordinate.dart';
-import 'package:my_camping/models/pitch.dart';
 import 'package:my_camping/services/authService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_camping/utilities/enum.dart';
+
+import 'campingPitchService.dart';
 
 class FavoriteService {
-  static CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
   static final currentUserID = AuthService().getUserID();
-  static CollectionReference favoriteCollection = userCollection.doc(currentUserID).collection('favoriteCamping');
+  static CollectionReference favoriteCollection = FirebaseFirestore.instance.collection('users').doc(currentUserID).collection('favoriteCamping');
 
   static Future<List<Camping>> getFavoriteList() async {
     QuerySnapshot snapshot = await favoriteCollection.get();
@@ -20,7 +21,7 @@ class FavoriteService {
           name: document.data()['name'],
           info: document.data()['info'],
           city: document.data()['city'],
-          category: document.data()['category'],
+          category: EnumUtilities.getCategoryEnum(document.data()['category']),
           rating: document.data()['rating'],
           reviews: document.data()['reviews'],
           numOfBooking: document.data()['numOfBooking'],
@@ -31,9 +32,7 @@ class FavoriteService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: (document.data()['campingPitch'] as List)
-              .map((p) => Pitch.fromJson(p))
-              .toList(),
+          campingPitch: await CampingPitchService(cid: document.id).getPitch(),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );
@@ -48,14 +47,15 @@ class FavoriteService {
       'name': favCamping.name,
       'info': favCamping.info,
       'city': favCamping.city,
-      'category': favCamping.category,
+      'category': favCamping.category.toString(),
       'rating': favCamping.rating,
       'reviews': favCamping.reviews,
       'numOfBooking': favCamping.numOfBooking,
       'isPremium': favCamping.isPremium,
       'photos': [...favCamping.photos],
       'services': [...favCamping.services],
-      'campingPitch': [...favCamping.campingPitch.map((p) => p.toJson())],
+      // TODO capire se funge con la modifica
+      //'campingPitch': [...favCamping.campingPitch.map((p) => p.toJson())], 
       'position': favCamping.position.toJson(),
     }).then((value) => print("Added success!"));
   }
