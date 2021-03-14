@@ -1,7 +1,9 @@
 import 'package:my_camping/models/camping.dart';
 import 'package:my_camping/models/campingCoordinate.dart';
-import 'package:my_camping/models/pitch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_camping/utilities/enum.dart';
+
+import 'campingPitchService.dart';
 
 class HomeService {
   static CollectionReference _campingCollection = FirebaseFirestore.instance.collection('campings');
@@ -19,7 +21,7 @@ class HomeService {
           name: document.data()['name'],
           info: document.data()['info'],
           city: document.data()['city'],
-          category: document.data()['category'],
+          category: EnumUtilities.getCategoryEnum(document.data()['category']),
           rating: document.data()['rating'],
           reviews: document.data()['reviews'],
           numOfBooking: document.data()['numOfBooking'],
@@ -30,9 +32,7 @@ class HomeService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: (document.data()['campingPitch'] as List)
-              .map((p) => Pitch.fromJson(p))
-              .toList(),
+          campingPitch: await CampingPitchService(cid: document.id).getPitch(),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );

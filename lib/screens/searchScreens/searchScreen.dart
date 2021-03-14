@@ -1,3 +1,4 @@
+import 'package:my_camping/models/filter.dart';
 import 'package:my_camping/utilities/appTheme.dart';
 import 'package:my_camping/provider/campingProvider.dart';
 import 'package:my_camping/screens/popups/orderPopup.dart';
@@ -25,18 +26,19 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen>
     with TickerProviderStateMixin {
+  Filter filters;
   List<FilterListData> serviceListData = FilterListData.serviceList;
   List<FilterListData> categoryListData = FilterListData.categoryList;
-  RangeValues priceRangeSelected = RangeValues(0, 1000);
-
-  int pitchSearch = 1;
-  int adSearch = 2;
+  int pitchSearch = 0;
+  int adSearch = 0;
   int chSearch = 0;
-  OrderType _selectedOrder = OrderType.noOrder;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(Duration(days: 5));
-  bool showMap = false;
-  final searchBarHeight = 158.0;
+  RangeValues priceRangeSelected = RangeValues(0, 1000);
+  double distance = 100.00;
+  
+  
+  OrderType _selectedOrder = OrderType.noOrder;
 
   //controller
   AnimationController animationController;
@@ -59,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen>
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<CampingProvider>(context).loadCamping(_selectedOrder);
+    Provider.of<CampingProvider>(context).loadCamping(_selectedOrder, filters);
     return Scaffold(
         appBar: NewCustomAppBar(nameOfPage: "Ricerca"),
         backgroundColor: AppTheme.getTheme().backgroundColor,
@@ -106,8 +108,6 @@ class _SearchScreenState extends State<SearchScreen>
                                         var count = campingListLenght > 10
                                             ? 10
                                             : campingListLenght;
-                                        // provider.campings =
-                                        //     orderList(_selectedOrder, provider.campings);
                                         var animation = Tween(
                                                 begin: 0.0, end: 1.0)
                                             .animate(CurvedAnimation(
@@ -141,8 +141,6 @@ class _SearchScreenState extends State<SearchScreen>
                                         var count = campingListLenght > 10
                                             ? 10
                                             : campingListLenght;
-                                        // provider.campings =
-                                        //     orderList(_selectedOrder, provider.campings);
                                         var animation = Tween(
                                                 begin: 0.0, end: 1.0)
                                             .animate(CurvedAnimation(
@@ -181,58 +179,57 @@ class _SearchScreenState extends State<SearchScreen>
         ));
   }
 
-// do not use!
-  // List<CampingListDto> filterListApply(List<CampingListDto> listToFilter) {
-  //   bool isToRemove = false;
-  //   bool isInSelectedCategory = false;
-  //   List<FilterListData> categoryList =
-  //       categoryListData.where((element) => element.isSelected).toList();
-  //   List<CampingCategory> categorySelectedList = <CampingCategory>[];
-  //   List<CampingListDto> filteredList = listToFilter;
+  String setTextA(){
+    if(this.adSearch == 0 || this.adSearch > 1){
+      return "Adulti";
+    }
+    return "Adulto";
+  }
+  String setTextP(){
+    if(this.pitchSearch == 0 || this.pitchSearch > 1){
+      return "Piazzole";
+    }
+    return "Piazzola";
+  }
 
-  //   for (var i = 0; i < categoryList.length; i++) {
-  //     categorySelectedList.add(categoryList[i].category);
-  //   }
-  //   List<int> index = <int>[];
+  void applyFilters(){
 
-  //   for (var x = 0; x < filteredList.length; x++) {
-  //     //filter price
-  //     if (filteredList[x].perDay < priceRangeSelected.start ||
-  //         filteredList[x].perDay > priceRangeSelected.end) isToRemove = true;
+    // get all category selected
+    List<CampingCategory> cat= <CampingCategory>[];
+    for (var i = 0; i < categoryListData.length; i++) {
+      if(categoryListData[i].isSelected)
+        cat.add(categoryListData[i].category);
+    }
 
-  //     //filter category
-  //     if (categorySelectedList.isNotEmpty) {
-  //       isInSelectedCategory = false;
-  //       for (var i = 0; i < categorySelectedList.length; i++) {
-  //         if (filteredList[x].category == categorySelectedList[i])
-  //           isInSelectedCategory = true;
-  //       }
+    // get all service selected
+    List<String> serv = <String>[];
+    for (var i = 0; i < serviceListData.length; i++) {
+      if(serviceListData[i].isSelected)
+        serv.add(serviceListData[i].titleTxt.toLowerCase());
+    }
 
-  //       if (!isInSelectedCategory) isToRemove = true;
-  //     }
+    //convert date range in list of string
+    List<String> listOfDate = getDaysInBeteween(this.startDate, this.endDate);
 
-  //     //filter service
+    this.filters = new Filter(
+      categories: cat,
+      dist: this.distance,
+      services: serv,
+      date: listOfDate,
+      numOfPitch: this.pitchSearch,
+      numOfAdults: this.adSearch,
+      numOfChild: this.chSearch,
+    );
 
-  //     //filter distance
+  }
 
-  //     if (isToRemove) index.add(filteredList[x].id);
-  //   }
-
-  //   //remove items
-  //   if (index.isNotEmpty) {
-  //     for (var i = 0; i < index.length; i++) {
-  //       for (var j = 0; j < filteredList.length; j++) {
-  //         if (filteredList[j].id == index[i]) {
-  //           filteredList.remove(filteredList[j]);
-  //           //break;
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   return filteredList;
-  // }
-
+  List<String> getDaysInBeteween(DateTime startDate, DateTime endDate) {
+      List<String> days = [];
+      for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+        days.add(startDate.add(Duration(days: i)).toString());
+      }
+      return days;
+  }
 
   refresh() {
     setState(() {});
@@ -284,6 +281,8 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   Widget getTimeDateUI() {
+    String textP = setTextP();
+    String textA = setTextA();
     return Padding(
       padding: const EdgeInsets.only(left: 16, bottom: 8),
       child: Row(
@@ -398,8 +397,7 @@ class _SearchScreenState extends State<SearchScreen>
                             height: 8,
                           ),
                           Text(
-                            "$pitchSearch Piazzole - $adSearch Adulti",
-                            // "$pitch Piazzola - $ad Adulti",
+                            "$pitchSearch $textP - $adSearch $textA",
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
@@ -444,12 +442,15 @@ class _SearchScreenState extends State<SearchScreen>
                                 serviceListDto: serviceListData,
                                 categoryListDto: categoryListData,
                                 priceRange: priceRangeSelected,
-                                onApplyChanges: (catList, serList, priceR) {
+                                distValue: distance,
+                                onApplyChanges: (catList, serList, priceR, dist) {
                                   setState(() {
                                     categoryListData = catList;
                                     serviceListData = serList;
                                     priceRangeSelected = priceR;
+                                    distance = dist;
                                   });
+                                  applyFilters();
                                 },
                               ),
                           fullscreenDialog: true),
@@ -516,9 +517,7 @@ class _SearchScreenState extends State<SearchScreen>
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
-                                showMap
-                                    ? Icons.sort
-                                    : FontAwesomeIcons.mapMarkedAlt,
+                                FontAwesomeIcons.mapMarkedAlt,
                                 color: AppTheme.getTheme().primaryColor),
                           ),
                         ],

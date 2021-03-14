@@ -7,17 +7,15 @@ class Pitch extends Equatable {
   final double price;
   final int firstSize;
   final int secondSize;
-  final int totalAvailable;
-  final int totalQuantity;
-  final PitchAvailableDate availableDate;
+  final bool isAvailable;
+  final List<PitchAvailableDate> availableDate;
 
   Pitch(
       {this.type,
       this.price,
       this.firstSize,
       this.secondSize,
-      this.totalAvailable,
-      this.totalQuantity,
+      this.isAvailable,
       this.availableDate});
 
   @override
@@ -26,8 +24,7 @@ class Pitch extends Equatable {
         price,
         firstSize,
         secondSize,
-        totalAvailable,
-        totalQuantity,
+        isAvailable,
         availableDate,
       ];
 
@@ -36,9 +33,8 @@ class Pitch extends Equatable {
         price: convertIntToDouble(json['price']),
         firstSize: json['firstSize'],
         secondSize: json['secondSize'],
-        totalAvailable: json['totalAvailable'],
-        totalQuantity: json['totalQuantity'],
-        availableDate : PitchAvailableDate.fromJson(json['availableDate']),
+        isAvailable: json['isAvailable'],
+        availableDate : json['availableDate'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -46,9 +42,8 @@ class Pitch extends Equatable {
         'price': price,
         'firstSize': firstSize,
         'secondSize': secondSize,
-        'totalAvailable': totalAvailable,
-        'totalQuantity': totalQuantity,
-        'availableDate': availableDate.toJson(),
+        'isAvailable': isAvailable,
+        'availableDate': availableDate,
       };
 
   

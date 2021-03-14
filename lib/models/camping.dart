@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:my_camping/utilities/enum.dart';
 
 import 'campingCoordinate.dart';
 import 'pitch.dart';
@@ -8,7 +9,7 @@ class Camping extends Equatable {
   final String name;
   final String info;
   final String city;
-  final String category;
+  final CampingCategory category;
   final double rating;
   final int reviews;
   final int numOfBooking;
