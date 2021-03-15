@@ -66,6 +66,7 @@ flutter:
     - assets/images/
     - assets/Icons/
     - assets/images/chip.png
+    - assets/text/TermsOfServices.txt
   #  - jsonFile/countryList.json
   #  - images/a_dot_ham.jpeg
 
