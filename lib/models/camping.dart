@@ -5,7 +5,7 @@ import 'campingCoordinate.dart';
 import 'pitch.dart';
 
 class Camping extends Equatable {
-  final int cid;
+  final String cid;
   final String name;
   final String info;
   final String city;

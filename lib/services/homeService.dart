@@ -33,7 +33,7 @@ class HomeService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter),
+          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter, null),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );

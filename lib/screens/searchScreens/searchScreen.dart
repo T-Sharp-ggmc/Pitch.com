@@ -227,6 +227,7 @@ class _SearchScreenState extends State<SearchScreen>
       numOfPitch: this.pitchSearch,
       numOfAdults: this.adSearch,
       numOfChild: this.chSearch,
+      priceRange: this.priceRangeSelected,
     );
   }
 

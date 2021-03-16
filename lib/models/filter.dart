@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:my_camping/utilities/enum.dart';
 
 class Filter extends Equatable {
@@ -10,6 +11,7 @@ class Filter extends Equatable {
   final int numOfPitch;
   final int numOfAdults;
   final int numOfChild;
+  final RangeValues priceRange;
 
   Filter({
     this.uid,
@@ -20,6 +22,7 @@ class Filter extends Equatable {
     this.numOfPitch,
     this.numOfAdults,
     this.numOfChild,
+    this.priceRange,
   });
 
   @override
@@ -32,6 +35,7 @@ class Filter extends Equatable {
         numOfPitch,
         numOfAdults,
         numOfChild,
+        priceRange,
       ];
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +47,7 @@ class Filter extends Equatable {
         'numOfPitch': numOfPitch,
         'numOfAdults': numOfAdults,
         'numOfChild': numOfChild,
+        'priceRange': priceRange,
       };
 
   factory Filter.fromJson(Map<String, dynamic> json) => Filter(
@@ -54,6 +59,7 @@ class Filter extends Equatable {
         numOfPitch: json['numOfPitch'],
         numOfAdults: json['numOfAdults'],
         numOfChild: json['numOfChild'],
+        priceRange: json['priceRange'],
       );
 
   static double convertIntToDouble(num value) {

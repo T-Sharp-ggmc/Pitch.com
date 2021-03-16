@@ -33,7 +33,7 @@ class FavoriteService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter),
+          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter, null),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );
@@ -55,13 +55,32 @@ class FavoriteService {
       'isPremium': favCamping.isPremium,
       'photos': [...favCamping.photos],
       'services': [...favCamping.services],
-      // TODO capire se funge con la modifica
-      //'campingPitch': [...favCamping.campingPitch.map((p) => p.toJson())], 
       'position': favCamping.position.toJson(),
     }).then((value) => print("Added success!"));
+
+    for (var pitch in favCamping.campingPitch) {
+      DocumentReference pitchDoc = favoriteCollection.doc(favCamping.cid).collection("pitchs").doc();
+      await pitchDoc.set({
+        'pid': pitchDoc.id,
+        'type': pitch.type,
+        'price': pitch.price,
+        'firstSize': pitch.firstSize,
+        'secondSize': pitch.secondSize,
+        'isAvailable': pitch.isAvailable,
+      });
+
+      for (var avDate in pitch.availableDate) {
+        DocumentReference availableDateDoc = pitchDoc.collection("availableDate").doc();
+        await availableDateDoc.set({
+          'avid': availableDateDoc.id,
+          'startDate': avDate.startDate,
+          'endDate': avDate.endDate,
+        });
+      }
+    }
   }
 
-  static Future<void> removeInFavoriteList(int favoriteCid) async {
+  static Future<void> removeInFavoriteList(String favoriteCid) async {
     await favoriteCollection
         .where("cid", isEqualTo: favoriteCid)
         .get()
