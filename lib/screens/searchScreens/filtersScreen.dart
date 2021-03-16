@@ -1,5 +1,5 @@
 import 'package:my_camping/models/popularFilterList.dart';
-import 'package:my_camping/widgets/customAppBar.dart';
+import 'package:my_camping/utilities/sizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../utilities/appTheme.dart';
@@ -12,7 +12,9 @@ class FiltersScreen extends StatefulWidget {
   final List<FilterListData> categoryListDto;
   final RangeValues priceRange;
   final double distValue;
-  final Function(List<FilterListData>, List<FilterListData>, RangeValues, double)
+  final bool isVisible;
+  final Function(
+          List<FilterListData>, List<FilterListData>, RangeValues, double, bool)
       onApplyChanges;
 
   const FiltersScreen(
@@ -21,22 +23,23 @@ class FiltersScreen extends StatefulWidget {
       this.categoryListDto,
       this.priceRange,
       this.distValue,
-      this.onApplyChanges}) 
+      this.onApplyChanges,
+      this.isVisible})
       : super(key: key);
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  double _dist = 100.00;
-  RangeValues _rang = RangeValues(0, 1000);
-
+  double _dist;
+  RangeValues _rang;
+  bool _isVisible;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppTheme.getTheme().backgroundColor,
       child: Scaffold(
-        appBar: NewCustomAppBar(nameOfPage: "Filtri"),
+        appBar: appBar(),
         backgroundColor: Colors.transparent,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -94,8 +97,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(24.0)),
                     highlightColor: Colors.transparent,
                     onTap: () {
+                      _isVisible = true;
                       widget.onApplyChanges(widget.categoryListDto,
-                          widget.serviceListDto, _rang, _dist);
+                          widget.serviceListDto, _rang, _dist, _isVisible);
                       Navigator.pop(context);
                     },
                     child: Center(
@@ -115,6 +119,71 @@ class _FiltersScreenState extends State<FiltersScreen> {
         ),
       ),
     );
+  }
+
+  AppBar appBar() {
+    _isVisible = widget.isVisible;
+    return AppBar(
+      backgroundColor: AppTheme.getTheme().backgroundColor,
+      title: Text(
+        "Filtri",
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      leading: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      actions: <Widget>[
+        Visibility(
+          visible: _isVisible,
+          child: Padding(
+              padding: EdgeInsets.only(right: 10.0),
+              child: Container(
+                width: getProportionateScreenWidth(100),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: IconButton(
+                    onPressed: () {
+                      clearFilter();
+                      widget.onApplyChanges(widget.categoryListDto,
+                          widget.serviceListDto, _rang, _dist, _isVisible);
+                      Navigator.pop(context);
+                    },
+                    icon: Text(
+                      "Azzera filtri",
+                      style: TextStyle(
+                        color: AppTheme.getTheme().primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+              )),
+        ),
+      ],
+    );
+  }
+
+  void clearFilter() {
+    for (var cat in widget.categoryListDto) {
+      cat.isSelected = false;
+    }
+    for (var ser in widget.serviceListDto) {
+      ser.isSelected = false;
+    }
+    _isVisible = true;
+    _rang = RangeValues(0, 1000);
+    _isVisible = false;
+    _dist = 100.00;
   }
 
   Widget categoryListUI() {
@@ -257,7 +326,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   Expanded(
                     child: Text(
                       date.titleTxt,
-                      // style: TextStyle(color: Colors.white),
                     ),
                   ),
                   CupertinoSwitch(

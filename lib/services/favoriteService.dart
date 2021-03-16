@@ -13,6 +13,7 @@ class FavoriteService {
   static Future<List<Camping>> getFavoriteList() async {
     QuerySnapshot snapshot = await favoriteCollection.get();
     List<Camping> favoriteCampings = [];
+    List<String> dateToFilter = [];
 
     for (var document in snapshot.docs) {
       favoriteCampings.add(
@@ -32,7 +33,7 @@ class FavoriteService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: await CampingPitchService(cid: document.id).getPitch(),
+          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );

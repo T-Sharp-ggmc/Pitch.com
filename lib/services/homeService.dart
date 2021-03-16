@@ -13,6 +13,7 @@ class HomeService {
     var documents =
         snapshot.docs.where((document) => document.data()['isPremium'] == true);
     List<Camping> campings = [];
+    List<String> dateToFilter = [];
 
     for (var document in documents) {
       campings.add(
@@ -32,7 +33,7 @@ class HomeService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: await CampingPitchService(cid: document.id).getPitch(),
+          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );
