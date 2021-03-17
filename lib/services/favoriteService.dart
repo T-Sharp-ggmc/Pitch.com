@@ -43,7 +43,7 @@ class FavoriteService {
   }
 
   static Future<void> addInFavoriteList(Camping favCamping) async {
-    await favoriteCollection.doc().set({
+    await favoriteCollection.doc(favCamping.cid).set({
       'cid': favCamping.cid,
       'name': favCamping.name,
       'info': favCamping.info,

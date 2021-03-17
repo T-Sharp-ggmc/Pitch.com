@@ -1,7 +1,6 @@
 import 'package:my_camping/models/filter.dart';
 import 'package:my_camping/utilities/appTheme.dart';
 import 'package:my_camping/provider/campingProvider.dart';
-import 'package:my_camping/screens/popups/orderPopup.dart';
 import 'package:my_camping/utilities/enum.dart';
 import 'package:my_camping/widgets/campingCard.dart';
 import 'package:my_camping/widgets/customAppBar.dart';
@@ -10,10 +9,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:my_camping/widgets/loading.dart';
 import 'package:provider/provider.dart';
-import '../../models/popularFilterList.dart';
+import '../../models/filtersList.dart';
 import 'filtersScreen.dart';
-import '../popups/calendarPopup.dart';
-import '../popups/pitchPopup.dart';
+import 'popups/calendarPopup.dart';
+import 'popups/pitchPopup.dart';
+import 'popups/orderPopup.dart';
 
 class SearchScreen extends StatefulWidget {
   static String routeName = "/search";

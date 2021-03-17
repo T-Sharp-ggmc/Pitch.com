@@ -66,20 +66,6 @@ class SettingsListData {
       iconData: null,
     ),
   ];
-  
-  //to remove
-  static List<SettingsListData> appSettingsList = [
-      SettingsListData(
-        titleTxt: 'Gestisci Privacy',
-        isSelected: false,
-        iconData: FontAwesomeIcons.lock,
-      ),
-      SettingsListData(
-        titleTxt: 'Informazioni su Pitch',
-        isSelected: false,
-        iconData: FontAwesomeIcons.info,
-      ),
-    ];
 }
 
 class Language {

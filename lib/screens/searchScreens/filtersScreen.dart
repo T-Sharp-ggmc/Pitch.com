@@ -1,4 +1,4 @@
-import 'package:my_camping/models/popularFilterList.dart';
+import 'package:my_camping/models/filtersList.dart';
 import 'package:my_camping/utilities/sizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
