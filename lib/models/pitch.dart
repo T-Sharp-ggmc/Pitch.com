@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'pitchAvailableDate.dart';
 
 class Pitch extends Equatable {
+  final String pid;
   final String type;
   final double price;
   final int firstSize;
@@ -11,7 +12,8 @@ class Pitch extends Equatable {
   final List<PitchAvailableDate> availableDate;
 
   Pitch(
-      {this.type,
+      {this.pid,
+      this.type,
       this.price,
       this.firstSize,
       this.secondSize,
@@ -20,6 +22,7 @@ class Pitch extends Equatable {
 
   @override
   List<Object> get props => [
+        pid,
         type,
         price,
         firstSize,
@@ -29,6 +32,7 @@ class Pitch extends Equatable {
       ];
 
   factory Pitch.fromJson(Map<String, dynamic> json) => Pitch(
+        pid: json['pid'],
         type: json['type'],
         price: convertIntToDouble(json['price']),
         firstSize: json['firstSize'],
@@ -38,6 +42,7 @@ class Pitch extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
+        'pid': pid,
         'type': type,
         'price': price,
         'firstSize': firstSize,

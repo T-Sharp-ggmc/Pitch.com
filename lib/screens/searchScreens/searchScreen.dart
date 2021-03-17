@@ -1,7 +1,6 @@
 import 'package:my_camping/models/filter.dart';
 import 'package:my_camping/utilities/appTheme.dart';
 import 'package:my_camping/provider/campingProvider.dart';
-import 'package:my_camping/screens/popups/orderPopup.dart';
 import 'package:my_camping/utilities/enum.dart';
 import 'package:my_camping/widgets/campingCard.dart';
 import 'package:my_camping/widgets/customAppBar.dart';
@@ -10,10 +9,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:my_camping/widgets/loading.dart';
 import 'package:provider/provider.dart';
-import '../../models/popularFilterList.dart';
+import '../../models/filtersList.dart';
 import 'filtersScreen.dart';
-import '../popups/calendarPopup.dart';
-import '../popups/pitchPopup.dart';
+import 'popups/calendarPopup.dart';
+import 'popups/pitchPopup.dart';
+import 'popups/orderPopup.dart';
 
 class SearchScreen extends StatefulWidget {
   static String routeName = "/search";
@@ -32,12 +32,13 @@ class _SearchScreenState extends State<SearchScreen>
   int pitchSearch = 0;
   int adSearch = 0;
   int chSearch = 0;
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now().add(Duration(days: 5));
+  DateTime startDate;
+  DateTime endDate;
   RangeValues priceRangeSelected = RangeValues(0, 1000);
   double distance = 100.00;
+  bool isFilterApplied = false;
   
-  
+
   OrderType _selectedOrder = OrderType.noOrder;
 
   //controller
@@ -179,37 +180,44 @@ class _SearchScreenState extends State<SearchScreen>
         ));
   }
 
-  String setTextA(){
-    if(this.adSearch == 0 || this.adSearch > 1){
+  String setTextA() {
+    if (this.adSearch == 0 || this.adSearch > 1) {
       return "Adulti";
     }
     return "Adulto";
   }
-  String setTextP(){
-    if(this.pitchSearch == 0 || this.pitchSearch > 1){
+
+  String setTextP() {
+    if (this.pitchSearch == 0 || this.pitchSearch > 1) {
       return "Piazzole";
     }
     return "Piazzola";
   }
 
-  void applyFilters(){
+  
 
+  void applyFilters() {
     // get all category selected
-    List<CampingCategory> cat= <CampingCategory>[];
-    for (var i = 0; i < categoryListData.length; i++) {
-      if(categoryListData[i].isSelected)
-        cat.add(categoryListData[i].category);
+    List<CampingCategory> cat = <CampingCategory>[];
+    if (categoryListData.isNotEmpty) {
+      for (var i = 0; i < categoryListData.length; i++) {
+        if (categoryListData[i].isSelected) cat.add(categoryListData[i].category);
+      }
     }
 
     // get all service selected
     List<String> serv = <String>[];
-    for (var i = 0; i < serviceListData.length; i++) {
-      if(serviceListData[i].isSelected)
-        serv.add(serviceListData[i].titleTxt.toLowerCase());
+    if (serviceListData.isNotEmpty) {
+      for (var i = 0; i < serviceListData.length; i++) {
+        if (serviceListData[i].isSelected)
+          serv.add(serviceListData[i].titleTxt.toLowerCase());
+      }
     }
 
     //convert date range in list of string
-    List<String> listOfDate = getDaysInBeteween(this.startDate, this.endDate);
+    List<String> listOfDate = [];
+    if(!(this.startDate == null || this.endDate == null))
+      listOfDate = getDaysInBeteween(this.startDate, this.endDate);
 
     this.filters = new Filter(
       categories: cat,
@@ -219,16 +227,24 @@ class _SearchScreenState extends State<SearchScreen>
       numOfPitch: this.pitchSearch,
       numOfAdults: this.adSearch,
       numOfChild: this.chSearch,
+      priceRange: this.priceRangeSelected,
     );
-
   }
 
   List<String> getDaysInBeteween(DateTime startDate, DateTime endDate) {
-      List<String> days = [];
-      for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-        days.add(startDate.add(Duration(days: i)).toString());
-      }
-      return days;
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String dateFormatted;
+    List<String> days = [];
+    DateTime start = startDate;
+    dateFormatted = formatter.format(start);
+    days.add(dateFormatted);
+
+    for (int i = 1; i <= endDate.difference(startDate).inDays; i++) {
+      start = start.add(Duration(days: 1));
+      dateFormatted = formatter.format(start);
+      days.add(dateFormatted);
+    }
+    return days;
   }
 
   refresh() {
@@ -302,9 +318,6 @@ class _SearchScreenState extends State<SearchScreen>
                     ),
                     onTap: () {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      // setState(() {
-                      //   isDatePopupOpen = true;
-                      // });
                       showDemoDialog(context: context);
                     },
                     child: Padding(
@@ -325,7 +338,8 @@ class _SearchScreenState extends State<SearchScreen>
                             height: 8,
                           ),
                           Text(
-                            "${DateFormat("dd, MMM").format(startDate)} - ${DateFormat("dd, MMM").format(endDate)}",
+                            startDate == null && endDate == null ? "Data inizio - Data fine"
+                            : "${DateFormat("dd, MMM").format(startDate)} - ${DateFormat("dd, MMM").format(endDate)}",
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
@@ -443,12 +457,16 @@ class _SearchScreenState extends State<SearchScreen>
                                 categoryListDto: categoryListData,
                                 priceRange: priceRangeSelected,
                                 distValue: distance,
-                                onApplyChanges: (catList, serList, priceR, dist) {
+                                isVisible: isFilterApplied,
+                                onApplyChanges: (catList, serList, priceR, dist, vis) {
                                   setState(() {
-                                    categoryListData = catList;
-                                    serviceListData = serList;
+                                    if(catList.isNotEmpty)
+                                      categoryListData = catList;
+                                    if(serList.isNotEmpty)
+                                      serviceListData = serList;
                                     priceRangeSelected = priceR;
                                     distance = dist;
+                                    isFilterApplied = vis;
                                   });
                                   applyFilters();
                                 },
@@ -516,8 +534,7 @@ class _SearchScreenState extends State<SearchScreen>
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                                FontAwesomeIcons.mapMarkedAlt,
+                            child: Icon(FontAwesomeIcons.mapMarkedAlt,
                                 color: AppTheme.getTheme().primaryColor),
                           ),
                         ],
@@ -603,10 +620,8 @@ class _SearchScreenState extends State<SearchScreen>
         initialStartDate: startDate,
         onApplyClick: (DateTime startData, DateTime endData) {
           setState(() {
-            if (startData != null && endData != null) {
               startDate = startData;
               endDate = endData;
-            }
           });
         },
         onCancelClick: () {},

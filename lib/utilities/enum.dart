@@ -31,7 +31,7 @@ class EnumUtilities {
         return 'mare';
         break;
       case CampingCategory.lago:
-        return  'lago';
+        return 'lago';
         break;
       case CampingCategory.montagna:
         return 'montagna';

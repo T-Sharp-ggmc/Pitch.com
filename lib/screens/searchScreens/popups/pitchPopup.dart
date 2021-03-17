@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_camping/utilities/enum.dart';
 
-import '../../utilities/appTheme.dart';
+import '../../../utilities/appTheme.dart';
 
 class PitchPopupView extends StatefulWidget {
   final Function(int, int, int) onChnage;

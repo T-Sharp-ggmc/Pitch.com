@@ -14,7 +14,10 @@ class CampingProvider extends ChangeNotifier {
   List<Camping> get searchedCampings => _searchedCampings;
 
   void loadCamping(OrderType orderType, Filter filters) async {
-    _campings = await SearchService.getCamping(orderType, filters);
+    if(filters != null)
+      _campings = await SearchService.getFilteredCamping(orderType, filters);
+    else
+      _campings = await SearchService.getCamping(orderType);
 
     notifyListeners();
   }

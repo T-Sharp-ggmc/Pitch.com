@@ -15,17 +15,47 @@ class FilterListData {
   static List<FilterListData> serviceList = [
     FilterListData(titleTxt: 'Tutto', isSelected: false, imageUrl: ''),
     FilterListData(
-      titleTxt: 'Bagno',
+      titleTxt: 'WC',
       isSelected: false,
       imageUrl: '',
     ),
     FilterListData(
       titleTxt: 'Parcheggio gratuito',
-      isSelected: true,
+      isSelected: false,
       imageUrl: '',
     ),
     FilterListData(
       titleTxt: 'Ristorante',
+      isSelected: false,
+      imageUrl: '',
+    ),
+    FilterListData(
+      titleTxt: 'Wi-Fi',
+      isSelected: false,
+      imageUrl: '',
+    ),
+    FilterListData(
+      titleTxt: 'Accesso disabili',
+      isSelected: false,
+      imageUrl: '',
+    ),
+    FilterListData(
+      titleTxt: 'Animali ammessi',
+      isSelected: false,
+      imageUrl: '',
+    ),
+    FilterListData(
+      titleTxt: 'Piscina esterna',
+      isSelected: false,
+      imageUrl: '',
+    ),
+    FilterListData(
+      titleTxt: 'Aria condizionata',
+      isSelected: false,
+      imageUrl: '',
+    ),
+    FilterListData(
+      titleTxt: 'Accesso alla spiaggia',
       isSelected: false,
       imageUrl: '',
     ),
@@ -47,13 +77,13 @@ class FilterListData {
     FilterListData(
       category: CampingCategory.montagna,
       titleTxt: 'Montagna',
-      isSelected: true,
+      isSelected: false,
       imageUrl: 'assets/images/filters/montagna.png',
     ),
     FilterListData(
       category: CampingCategory.fiume,
-      titleTxt: 'Fiumi',
-      isSelected: true,
+      titleTxt: 'Fiume',
+      isSelected: false,
       imageUrl: 'assets/images/filters/fiumi.png',
     ),
   ];
