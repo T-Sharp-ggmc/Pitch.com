@@ -6,7 +6,8 @@ import 'package:my_camping/utilities/enum.dart';
 import 'campingPitchService.dart';
 
 class HomeService {
-  static CollectionReference _campingCollection = FirebaseFirestore.instance.collection('campings');
+  static CollectionReference _campingCollection =
+      FirebaseFirestore.instance.collection('campings');
 
   static Future<List<Camping>> getPremiumCamping() async {
     QuerySnapshot snapshot = await _campingCollection.get();
