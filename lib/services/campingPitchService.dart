@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:my_camping/models/pitch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,5 +40,44 @@ class CampingPitchService {
         }
       }
     return pitchs;
+  }
+  static Future<int> getAvailablePitchCount(String pitchType, String cid) async {
+    CollectionReference _pitchCollection = FirebaseFirestore.instance.collection('campings').doc(cid).collection('pitchs');
+    QuerySnapshot snap = await _pitchCollection
+      .where("isAvailable", isEqualTo: true)
+      .where("type", isEqualTo: pitchType.toLowerCase())
+      .get();
+      
+    return snap.docs.length ?? 0;
+  }
+  static Future<double> getPitchPrice(String pitchType, String cid) async {
+    CollectionReference _pitchCollection = FirebaseFirestore.instance.collection('campings').doc(cid).collection('pitchs');
+    QuerySnapshot snap = await _pitchCollection
+      .where("isAvailable", isEqualTo: true)
+      .where("type", isEqualTo: pitchType.toLowerCase())
+      .get();
+      
+    return snap.docs.first.data()['price'] ?? 0;
+  }
+  static Future<List<double>> getPitchRangePrice(String cid) async {
+    CollectionReference _pitchCollection = FirebaseFirestore.instance.collection('campings').doc(cid).collection('pitchs');
+    QuerySnapshot snap = await _pitchCollection
+      .where("isAvailable", isEqualTo: true)
+      .get();
+
+    List<double> priceRange = [];
+    double lowerPrice;
+    double higherPrice;
+    
+    for (var doc in snap.docs) {
+      priceRange.add(doc.data()['price']);
+    }
+    lowerPrice = priceRange.reduce(min);
+    higherPrice = priceRange.reduce(max);
+    priceRange.clear();
+    priceRange.add(lowerPrice);
+    priceRange.add(higherPrice);
+
+    return priceRange;
   }
 }

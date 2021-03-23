@@ -4,6 +4,10 @@ import '../../../utilities/appTheme.dart';
 import '../../../utilities/sizeConfig.dart';
 
 class DetailsBottomBar extends StatefulWidget {
+  final List<double> priceRange;
+  final double price;
+
+  const DetailsBottomBar({Key key, this.priceRange, this.price}) : super(key: key);
   @override
   _DetailsBottomBarState createState() => _DetailsBottomBarState();
 }
@@ -29,13 +33,17 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
               padding: EdgeInsets.only(left: 24, bottom: 6),
               child: ListTile(
                 title: Text(
-                  "Totale",
+                  widget.priceRange.isEmpty && widget.price != 0
+                  ? "€${widget.price.toString()}"
+                  : widget.priceRange.isNotEmpty && widget.price == 0
+                  ? "€${widget.priceRange.first.toString()} - €${widget.priceRange.last.toString()}"
+                  : "",
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: Colors.black),
                 ),
-                subtitle: Text("60€ / notte"),
+                subtitle: Text("/ notte"),
               ),
             ),
           ),

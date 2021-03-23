@@ -217,12 +217,18 @@ class _CampingCardListViewState extends State<CampingCardListView> {
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(16.0),
                                     ),
-                                    onTap: () {
-                                      try {
-                                        Navigator.pushNamed(
-                                            context, CampingDetailScreen.routeName,
-                                            arguments: widget.campingData);
-                                      } catch (e) {}
+                                    onTap: () async {
+                                        final favoritoSiazzet = await Navigator.pushNamed(
+                                            context, 
+                                            CampingDetailScreen.routeName,
+                                            arguments: <String, Object>{
+                                              'campingData':widget.campingData, 
+                                              'favorite':isFavorite
+                                            }
+                                        ) as bool;
+                                        setState(() {
+                                          isFavorite = favoritoSiazzet;
+                                        });
                                     },
                                   ),
                                 ),
@@ -285,16 +291,7 @@ class _CampingCardListViewState extends State<CampingCardListView> {
         );
       }
     
-      Future<bool> isInFavoriteList(Camping camping) async {
-        var favoriteList = await FavoriteService.getFavoriteList();
-        for (var i = 0; i < favoriteList.length; i++) {
-          if (favoriteList[i].cid == camping.cid) 
-            return true;
-        }
-        return false;
-      }
-    
       void asyncMethod() async{
-        isFavorite = await isInFavoriteList(widget.campingData);
+        isFavorite = await FavoriteService.isInFavoriteList(widget.campingData.cid);
       }
 }

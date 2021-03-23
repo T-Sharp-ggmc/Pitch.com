@@ -184,6 +184,53 @@ class SearchService {
     return result;
   }
 
+static Future<List<Camping>> getLikelihoodCamping(String cid, String city, List<String> pitchCategories) async {
+    
+    QuerySnapshot snapshot = await _campingCollection
+    .where("city", isEqualTo: city)
+    .where("cid", isGreaterThan: cid)
+    .where("cid", isLessThan: cid)
+    .get();
+
+    List<String> dateToFilter = [];
+    List<Camping> tempCampings = [];
+    List<Camping> campings = [];
+
+    for (var document in snapshot.docs) {
+      tempCampings.add(
+        Camping(
+          cid: document.data()['cid'],
+          name: document.data()['name'],
+          info: document.data()['info'],
+          city: document.data()['city'],
+          category: EnumUtilities.getCategoryEnum(document.data()['category']),
+          rating: document.data()['rating'],
+          reviews: document.data()['reviews'],
+          numOfBooking: document.data()['numOfBooking'],
+          isPremium: document.data()['isPremium'],
+          photos: (document.data()['photos'] as List)
+              .map((p) => p.toString())
+              .toList(),
+          services: (document.data()['services'] as List)
+              .map((s) => s.toString())
+              .toList(),
+          campingPitch: await CampingPitchService(cid: document.id)
+              .getPitch(dateToFilter, null),
+          position: CampingCoordinate.fromJson(document.data()['position']),
+        ),
+      );
+    }
+
+    for (var camp in tempCampings) {
+      for (var cat in pitchCategories) {
+        if(camp.campingPitch.any((pitch) => pitch.type == cat))
+          campings.add(camp);
+      }
+    }
+    return campings;
+  }
+  
+
   static int compareForLowestPrice(Camping a, Camping b) {
     Pitch pA = Camping.getLowestPrice(a.campingPitch);
     Pitch pB = Camping.getLowestPrice(b.campingPitch);

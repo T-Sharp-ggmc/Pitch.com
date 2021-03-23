@@ -7,10 +7,12 @@ import 'package:my_camping/utilities/enum.dart';
 class CampingProvider extends ChangeNotifier {
   String _keyword = "";
   List<Camping> _campings;
+  List<Camping> _likelihoodCampings;
   List<Camping> _searchedCampings;
 
   String get keyword => _keyword;
   List<Camping> get campings => _campings;
+  List<Camping> get likelihoodCampings => _likelihoodCampings;
   List<Camping> get searchedCampings => _searchedCampings;
 
   void loadCamping(OrderType orderType, Filter filters) async {
@@ -18,6 +20,12 @@ class CampingProvider extends ChangeNotifier {
       _campings = await SearchService.getFilteredCamping(orderType, filters);
     else
       _campings = await SearchService.getCamping(orderType);
+
+    notifyListeners();
+  }
+  
+  void loadLikelihoodCamping(String cid, String city, List<String> pitchCategories) async {
+      _likelihoodCampings = await SearchService.getLikelihoodCamping(cid, city, pitchCategories);
 
     notifyListeners();
   }

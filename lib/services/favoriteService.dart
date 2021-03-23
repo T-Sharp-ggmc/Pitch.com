@@ -8,7 +8,10 @@ import 'campingPitchService.dart';
 
 class FavoriteService {
   static final currentUserID = AuthService().getUserID();
-  static CollectionReference favoriteCollection = FirebaseFirestore.instance.collection('users').doc(currentUserID).collection('favoriteCamping');
+  static CollectionReference favoriteCollection = FirebaseFirestore.instance
+      .collection('users')
+      .doc(currentUserID)
+      .collection('favoriteCamping');
 
   static Future<List<Camping>> getFavoriteList() async {
     QuerySnapshot snapshot = await favoriteCollection.get();
@@ -33,7 +36,8 @@ class FavoriteService {
           services: (document.data()['services'] as List)
               .map((s) => s.toString())
               .toList(),
-          campingPitch: await CampingPitchService(cid: document.id).getPitch(dateToFilter, null),
+          campingPitch: await CampingPitchService(cid: document.id)
+              .getPitch(dateToFilter, null),
           position: CampingCoordinate.fromJson(document.data()['position']),
         ),
       );
@@ -59,7 +63,8 @@ class FavoriteService {
     }).then((value) => print("Added success!"));
 
     for (var pitch in favCamping.campingPitch) {
-      DocumentReference pitchDoc = favoriteCollection.doc(favCamping.cid).collection("pitchs").doc();
+      DocumentReference pitchDoc =
+          favoriteCollection.doc(favCamping.cid).collection("pitchs").doc();
       await pitchDoc.set({
         'pid': pitchDoc.id,
         'type': pitch.type,
@@ -70,7 +75,8 @@ class FavoriteService {
       });
 
       for (var avDate in pitch.availableDate) {
-        DocumentReference availableDateDoc = pitchDoc.collection("availableDate").doc();
+        DocumentReference availableDateDoc =
+            pitchDoc.collection("availableDate").doc();
         await availableDateDoc.set({
           'avid': availableDateDoc.id,
           'startDate': avDate.startDate,
@@ -92,5 +98,12 @@ class FavoriteService {
                     .then((value) => {print("Remove success!")});
               })
             });
+  }
+
+  static Future<bool> isInFavoriteList(String campingId) async {
+    QuerySnapshot snapshot = await favoriteCollection
+    .where("cid", isEqualTo: campingId)
+    .get();
+    return snapshot.docs.length > 0;
   }
 }

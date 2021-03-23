@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:my_camping/models/camping.dart';
+import 'package:my_camping/services/favoriteService.dart';
 
 import '../../../utilities/appTheme.dart';
 import '../../../utilities/sizeConfig.dart';
 
-class CustomDetailAppBar extends PreferredSize {
-  final bool isFavoriteCamping;
+class CustomDetailAppBar extends StatefulWidget {
+  final Camping camping;
+  final bool isFavoriteC;
+  CustomDetailAppBar({this.camping, this.isFavoriteC});
 
-  CustomDetailAppBar(this.isFavoriteCamping);
   @override
-  // AppBar().preferredSize.height provide us the height that appy on our app bar
-  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
+  _CustomDetailAppBarState createState() => _CustomDetailAppBarState();
+}
+
+class _CustomDetailAppBarState extends State<CustomDetailAppBar> {
+  bool isFavoriteCamping;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavoriteCamping = widget.isFavoriteC;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,7 @@ class CustomDetailAppBar extends PreferredSize {
                   ),
                   color: Colors.white,
                   padding: EdgeInsets.zero,
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context, isFavoriteCamping ?? widget.isFavoriteC),
                   child: Icon(Icons.arrow_back)),
             ),
             Spacer(),
@@ -62,7 +74,22 @@ class CustomDetailAppBar extends PreferredSize {
                       ),
                       color: Colors.white,
                       padding: EdgeInsets.zero,
-                      onPressed: () {}, //set favorite
+                      onPressed: () async {
+                        if (isFavoriteCamping) {
+                          await FavoriteService.removeInFavoriteList(
+                              widget.camping.cid);
+                              setState(() {
+                                isFavoriteCamping = false;
+                              });
+
+                        } else {
+                          await FavoriteService.addInFavoriteList(
+                              widget.camping);
+                              setState(() {
+                                isFavoriteCamping = true;
+                              });
+                        }
+                      },
                       child: Icon(
                         isFavoriteCamping
                             ? Icons.favorite
