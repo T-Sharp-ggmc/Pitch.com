@@ -305,6 +305,8 @@ class _SearchScreenState extends State<SearchScreen>
         children: <Widget>[
           Expanded(
             child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Material(
                   color: Colors.transparent,
@@ -363,6 +365,8 @@ class _SearchScreenState extends State<SearchScreen>
           ),
           Expanded(
             child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Material(
                   color: Colors.transparent,
@@ -432,73 +436,70 @@ class _SearchScreenState extends State<SearchScreen>
 
   Widget getFilterBarUI() {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+      padding: const EdgeInsets.only(left: 16, right: 8, top: 4, bottom: 4),
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Row(children: <Widget>[
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  focusColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  splashColor: Colors.grey.withOpacity(0.2),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(4.0),
-                  ),
-                  onTap: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FiltersScreen(
-                                serviceListDto: serviceListData,
-                                categoryListDto: categoryListData,
-                                priceRange: priceRangeSelected,
-                                distValue: distance,
-                                isVisible: isFilterApplied,
-                                onApplyChanges: (catList, serList, priceR, dist, vis) {
-                                  setState(() {
-                                    if(catList.isNotEmpty)
-                                      categoryListData = catList;
-                                    if(serList.isNotEmpty)
-                                      serviceListData = serList;
-                                    priceRangeSelected = priceR;
-                                    distance = dist;
-                                    isFilterApplied = vis;
-                                  });
-                                  applyFilters();
-                                },
-                              ),
-                          fullscreenDialog: true),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "Filtri",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.sort,
-                              color: AppTheme.getTheme().primaryColor),
-                        ),
-                      ],
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                splashColor: Colors.grey.withOpacity(0.2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(4.0),
+                ),
+                onTap: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FiltersScreen(
+                              serviceListDto: serviceListData,
+                              categoryListDto: categoryListData,
+                              priceRange: priceRangeSelected,
+                              distValue: distance,
+                              isVisible: isFilterApplied,
+                              onApplyChanges: (catList, serList, priceR, dist, vis) {
+                                setState(() {
+                                  if(catList.isNotEmpty)
+                                    categoryListData = catList;
+                                  if(serList.isNotEmpty)
+                                    serviceListData = serList;
+                                  priceRangeSelected = priceR;
+                                  distance = dist;
+                                  isFilterApplied = vis;
+                                });
+                                applyFilters();
+                              },
+                            ),
+                        fullscreenDialog: true),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Filtri",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.sort,
+                          color: AppTheme.getTheme().primaryColor),
+                    ),
+                  ],
                 ),
               ),
-            ]),
+            ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 30, right: 30),
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Container(
               width: 1,
               height: 42,
@@ -506,47 +507,42 @@ class _SearchScreenState extends State<SearchScreen>
             ),
           ),
           Expanded(
-            child: Row(
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.grey.withOpacity(0.2),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                    onTap: () {
-                      //Abilita view mappa
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Mappa",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(FontAwesomeIcons.mapMarkedAlt,
-                                color: AppTheme.getTheme().primaryColor),
-                          ),
-                        ],
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                splashColor: Colors.grey.withOpacity(0.2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(4.0),
+                ),
+                onTap: () {
+                  //Abilita view mappa
+                },
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Mappa",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(FontAwesomeIcons.mapMarkedAlt,
+                          color: AppTheme.getTheme().primaryColor),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 30, right: 30),
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Container(
               width: 1,
               height: 42,
@@ -554,54 +550,49 @@ class _SearchScreenState extends State<SearchScreen>
             ),
           ),
           Expanded(
-            child: Row(
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.grey.withOpacity(0.2),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                splashColor: Colors.grey.withOpacity(0.2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(4.0),
+                ),
+                onTap: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => OrderPopupView(
+                      orderType: _selectedOrder,
+                      onChange: (selOrd) {
+                        setState(() {
+                          _selectedOrder = selOrd;
+                        });
+                      },
                     ),
-                    onTap: () {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => OrderPopupView(
-                          orderType: _selectedOrder,
-                          onChange: (selOrd) {
-                            setState(() {
-                              _selectedOrder = selOrd;
-                            });
-                          },
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Ordina",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(FontAwesomeIcons.sort,
-                                color: AppTheme.getTheme().primaryColor),
-                          ),
-                        ],
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Ordina",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(FontAwesomeIcons.sort,
+                          color: AppTheme.getTheme().primaryColor),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
