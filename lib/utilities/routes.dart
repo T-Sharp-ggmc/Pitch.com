@@ -1,14 +1,11 @@
 import 'package:my_camping/screens/accountScreens/accountScreen.dart';
 import 'package:my_camping/screens/accountScreens/addCard.dart';
 import 'package:my_camping/screens/accountScreens/bookingScreen.dart';
-
 import 'package:my_camping/screens/accountScreens/changepassword.dart';
 import 'package:my_camping/screens/accountScreens/editAccountScreen.dart';
-import 'package:my_camping/screens/accountScreens/existing-cards.dart';
 import 'package:my_camping/screens/accountScreens/helpDetailsScreen.dart';
 import 'package:my_camping/screens/accountScreens/helpScreen.dart';
 import 'package:my_camping/screens/accountScreens/inviteFriendScreen.dart';
-import 'package:my_camping/screens/accountScreens/paymentMethodScreen.dart';
 import 'package:my_camping/screens/accountScreens/pitchInfoScreen.dart';
 import 'package:my_camping/screens/accountScreens/privacySettingScreen.dart';
 import 'package:my_camping/screens/accountScreens/reviewScreen.dart';
@@ -28,7 +25,6 @@ final Map<String, WidgetBuilder> routes = {
   SignUpScreen.routeName: (context) => SignUpScreen(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   AccountScreen.routeName: (context) => AccountScreen(),
-  ExistingCardsPage.routeName: (context) => ExistingCardsPage(),
   AddCard.routeName: (context) => AddCard(),
   BookingScreen.routeName: (context) => BookingScreen(),
   ChangepasswordScreen.routeName: (context) => ChangepasswordScreen(),
@@ -36,7 +32,6 @@ final Map<String, WidgetBuilder> routes = {
   HelpDetailsScreen.routeName: (context) => HelpDetailsScreen(),
   HelpScreen.routeName: (context) => HelpScreen(),
   InviteFriendScreen.routeName: (context) => InviteFriendScreen(),
-  PaymentMethodScreen.routeName: (context) => PaymentMethodScreen(),
   PitchInfoScreen.routeName: (context) => PitchInfoScreen(),
   PrivacySettingScreen.routeName: (context) => PrivacySettingScreen(),
   ReviewScreen.routeName: (context) => ReviewScreen(),

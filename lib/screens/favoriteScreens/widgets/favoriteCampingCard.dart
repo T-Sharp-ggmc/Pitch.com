@@ -55,11 +55,13 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                         direction: DismissDirection.startToEnd,
                         background: getDismissedBackground(),
                         onDismissed: (direction) async {
-                          String nameCampingDismissed = provider.favoriteCampings[index].name;
+                          String nameCampingDismissed =
+                              provider.favoriteCampings[index].name;
                           setState(() {
                             deletedCamping = provider.favoriteCampings[index];
                           });
-                          await FavoriteService.removeInFavoriteList(provider.favoriteCampings[index].cid);
+                          await FavoriteService.removeInFavoriteList(
+                              provider.favoriteCampings[index].cid);
                           prov.loadfavoriteCamping();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
@@ -67,7 +69,8 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                             action: SnackBarAction(
                                 label: "INDIETRO",
                                 onPressed: () async {
-                                  await FavoriteService.addInFavoriteList(deletedCamping);
+                                  await FavoriteService.addInFavoriteList(
+                                      deletedCamping);
                                   prov.loadfavoriteCamping();
                                 }),
                           ));
@@ -218,9 +221,9 @@ class FavoriteCampingCardListView extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Text(
-                                      campingData.info.length > 100 
-                                      ? campingData.info.substring(0,80) 
-                                      : campingData.info,
+                                      campingData.info.length > 100
+                                          ? campingData.info.substring(0, 80)
+                                          : campingData.info,
                                       style: TextStyle(
                                           fontSize: 12,
                                           color: Colors.grey.withOpacity(0.8)),
@@ -295,8 +298,9 @@ class FavoriteCampingCardListView extends StatelessWidget {
                                                 CrossAxisAlignment.end,
                                             children: <Widget>[
                                               Text(
-                                                campingData.campingPitch.isEmpty ? "€" 
-                                                :"€${campingData.campingPitch.first.price.toString()}",
+                                                campingData.campingPitch.isEmpty
+                                                    ? "€"
+                                                    : "€${campingData.campingPitch.first.price.toString()}",
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,

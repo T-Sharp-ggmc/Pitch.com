@@ -1,6 +1,5 @@
 import 'package:my_camping/models/profileSelectionList.dart';
 import 'package:my_camping/screens/accountScreens/editAccountScreen.dart';
-import 'package:my_camping/screens/accountScreens/paymentMethodScreen.dart';
 import 'package:my_camping/services/authService.dart';
 import 'package:my_camping/utilities/sizeConfig.dart';
 import 'package:flutter/material.dart';
@@ -121,8 +120,6 @@ class _AccountScreenState extends State<AccountScreen>
                 Navigator.pushNamed(context, EditAccountScreen.routeName);
               if (index == 1)
                 Navigator.pushNamed(context, ChangepasswordScreen.routeName);
-              if (index == 2)
-                Navigator.pushNamed(context, PaymentMethodScreen.routeName);
               if (index == 3)
                 Navigator.pushNamed(context, ReviewScreen.routeName);
               if (index == 4)

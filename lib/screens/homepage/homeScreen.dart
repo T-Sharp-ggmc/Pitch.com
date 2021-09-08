@@ -58,26 +58,18 @@ class _HomeScreen extends State<HomeScreen>
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: _currentIndex == 0 ? getHomePage() : _children[_currentIndex],
-      // ignore: missing_required_param
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              // ignore: deprecated_member_use
               title: Text('home')),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
-              // ignore: deprecated_member_use
               title: Text('favorite')),
-          // BottomNavigationBarItem(
-          //     icon: Icon(Icons.new_releases),
-          //     // ignore: deprecated_member_use
-          //     title: Text('new feature')),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
-              // ignore: deprecated_member_use
               title: Text('account')),
         ],
         selectedItemColor: Colors.black87,
@@ -100,11 +92,6 @@ class _HomeScreen extends State<HomeScreen>
           );
           Provider.of<FavoriteCampingProvider>(context, listen: false).loadfavoriteCamping();
           break;
-        // case 3:
-        //   _children[_currentIndex] = AccountScreen(
-        //     animationController: controller,
-        //   );
-        //   break;
         default:
       }
     });
@@ -114,14 +101,11 @@ class _HomeScreen extends State<HomeScreen>
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          //padding: EdgeInsets.symmetric(vertical: 30.0),
           children: <Widget>[
             Stack(children: <Widget>[
               Container(
-                //height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.height,
                 child: ClipRRect(
-                  //borderRadius: BorderRadius.circular(2.0),
                   child: SizedBox(
                     height: 450,
                     child: Image(

@@ -37,7 +37,6 @@ class _SearchScreenState extends State<SearchScreen>
   RangeValues priceRangeSelected = RangeValues(0, 1000);
   double distance = 100.00;
   bool isFilterApplied = false;
-  
 
   OrderType _selectedOrder = OrderType.noOrder;
 
@@ -120,9 +119,6 @@ class _SearchScreenState extends State<SearchScreen>
 
                                         animationController.forward();
                                         return CampingCardListView(
-                                          animation: animation,
-                                          animationController:
-                                              animationController,
                                           campingData: provider.campings[index],
                                           callback: refresh,
                                         );
@@ -142,20 +138,7 @@ class _SearchScreenState extends State<SearchScreen>
                                         var count = campingListLenght > 10
                                             ? 10
                                             : campingListLenght;
-                                        var animation = Tween(
-                                                begin: 0.0, end: 1.0)
-                                            .animate(CurvedAnimation(
-                                                parent: animationController,
-                                                curve: Interval(
-                                                    (1 / count) * index, 1.0,
-                                                    curve:
-                                                        Curves.fastOutSlowIn)));
-
-                                        animationController.forward();
                                         return CampingCardListView(
-                                          animation: animation,
-                                          animationController:
-                                              animationController,
                                           campingData:
                                               provider.searchedCampings[index],
                                           callback: refresh,
@@ -194,14 +177,13 @@ class _SearchScreenState extends State<SearchScreen>
     return "Piazzola";
   }
 
-  
-
   void applyFilters() {
     // get all category selected
     List<CampingCategory> cat = <CampingCategory>[];
     if (categoryListData.isNotEmpty) {
       for (var i = 0; i < categoryListData.length; i++) {
-        if (categoryListData[i].isSelected) cat.add(categoryListData[i].category);
+        if (categoryListData[i].isSelected)
+          cat.add(categoryListData[i].category);
       }
     }
 
@@ -216,7 +198,7 @@ class _SearchScreenState extends State<SearchScreen>
 
     //convert date range in list of string
     List<String> listOfDate = [];
-    if(!(this.startDate == null || this.endDate == null))
+    if (!(this.startDate == null || this.endDate == null))
       listOfDate = getDaysInBeteween(this.startDate, this.endDate);
 
     this.filters = new Filter(
@@ -338,8 +320,9 @@ class _SearchScreenState extends State<SearchScreen>
                             height: 8,
                           ),
                           Text(
-                            startDate == null && endDate == null ? "Data inizio - Data fine"
-                            : "${DateFormat("dd, MMM").format(startDate)} - ${DateFormat("dd, MMM").format(endDate)}",
+                            startDate == null && endDate == null
+                                ? "Data inizio - Data fine"
+                                : "${DateFormat("dd, MMM").format(startDate)} - ${DateFormat("dd, MMM").format(endDate)}",
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
@@ -458,11 +441,12 @@ class _SearchScreenState extends State<SearchScreen>
                                 priceRange: priceRangeSelected,
                                 distValue: distance,
                                 isVisible: isFilterApplied,
-                                onApplyChanges: (catList, serList, priceR, dist, vis) {
+                                onApplyChanges:
+                                    (catList, serList, priceR, dist, vis) {
                                   setState(() {
-                                    if(catList.isNotEmpty)
+                                    if (catList.isNotEmpty)
                                       categoryListData = catList;
-                                    if(serList.isNotEmpty)
+                                    if (serList.isNotEmpty)
                                       serviceListData = serList;
                                     priceRangeSelected = priceR;
                                     distance = dist;
@@ -620,8 +604,8 @@ class _SearchScreenState extends State<SearchScreen>
         initialStartDate: startDate,
         onApplyClick: (DateTime startData, DateTime endData) {
           setState(() {
-              startDate = startData;
-              endDate = endData;
+            startDate = startData;
+            endDate = endData;
           });
         },
         onCancelClick: () {},
