@@ -1,5 +1,7 @@
 library star_rating;
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 typedef void RatingChangeCallback(double rating);
@@ -34,7 +36,7 @@ class StarRating extends StatelessWidget {
         color: borderColor ?? Theme.of(context).primaryColor,
         size: size ?? 25.0,
       );
-    } else if (index > rating - (allowHalfRating ? 0.5 : 1.0) &&
+    } else if (index.toDouble() > rating - (allowHalfRating ? 0.5 : 1.0) &&
         index < rating) {
       icon = new Icon(
         Icons.star_half,

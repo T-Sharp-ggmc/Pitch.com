@@ -60,15 +60,11 @@ class _CampingListState extends State<CampingList>
                             var count = provider.premiumCampings.length > 10
                                 ? 10
                                 : provider.premiumCampings.length;
-                            // provider.campings =
-                            //     orderList(_selectedOrder, provider.campings);
                             var animation = Tween(begin: 0.0, end: 1.0).animate(
                                 CurvedAnimation(
                                     parent: animationController,
                                     curve: Interval((1 / count) * index, 1.0,
                                         curve: Curves.fastOutSlowIn)));
-
-                            animationController.forward();
                             return CampingCardListView(
                               campingData: provider.premiumCampings[index],
                               callback: refresh,

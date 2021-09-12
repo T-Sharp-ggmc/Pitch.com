@@ -22,20 +22,16 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen>
     with TickerProviderStateMixin {
   List<SettingsListData> userSettingsList = SettingsListData.userSettingsList;
-  AnimationController controller;
+
   AuthService _authService = AuthService();
 
   @override
   void initState() {
-    controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 4));
-    controller.forward(); //implementare animazione nel build
     super.initState();
   }
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 

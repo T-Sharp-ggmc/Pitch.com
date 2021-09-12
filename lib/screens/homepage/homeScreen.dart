@@ -18,12 +18,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  //Variables
-  Animation gap;
-  Animation base;
-  Animation reverse;
-  AnimationController controller;
-
   int _currentIndex = 0;
   final List<Widget> _children = [
     Center(child: Text('Home in lavorazione')), //home body
@@ -34,21 +28,11 @@ class _HomeScreen extends State<HomeScreen>
 
   void initState() {
     super.initState();
-    controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
-    base = CurvedAnimation(parent: controller, curve: Curves.easeOut);
-    reverse = Tween<double>(begin: 0.0, end: -1.0).animate(base);
-    gap = Tween<double>(begin: 3.0, end: 0.0).animate(base)
-      ..addListener(() {
-        setState(() {});
-      });
-    controller.forward();
   }
 
   /// Dispose
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 
@@ -62,15 +46,11 @@ class _HomeScreen extends State<HomeScreen>
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('home')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('home')),
+              icon: Icon(Icons.favorite), title: Text('favorite')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              title: Text('favorite')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              title: Text('account')),
+              icon: Icon(Icons.account_circle), title: Text('account')),
         ],
         selectedItemColor: Colors.black87,
         unselectedItemColor: Colors.black87,
@@ -87,10 +67,9 @@ class _HomeScreen extends State<HomeScreen>
       _currentIndex = value;
       switch (_currentIndex) {
         case 1:
-          _children[_currentIndex] = FavoritesScreen(
-            animationController: controller,
-          );
-          Provider.of<FavoriteCampingProvider>(context, listen: false).loadfavoriteCamping();
+          _children[_currentIndex] = FavoritesScreen();
+          Provider.of<FavoriteCampingProvider>(context, listen: false)
+              .loadfavoriteCamping();
           break;
         default:
       }
