@@ -24,7 +24,6 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
   Camping deletedCamping = new Camping();
   @override
   void initState() {
-    widget.animationController.forward();
     super.initState();
   }
 
