@@ -70,8 +70,6 @@ class _CampingListState extends State<CampingList>
 
                             animationController.forward();
                             return CampingCardListView(
-                              animation: animation,
-                              animationController: animationController,
                               campingData: provider.premiumCampings[index],
                               callback: refresh,
                             );

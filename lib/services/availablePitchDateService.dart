@@ -8,7 +8,7 @@ class AvailablePitchDateService {
   AvailablePitchDateService({this.cid, this.pid});
 
   Future<List<PitchAvailableDate>> getAvailablePitchDate(List<String> dateToFilter) async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('campings').doc(cid).collection("pitchs").doc(pid).collection("availableDate").get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection('campings').doc(cid).collection("pitchs").doc(pid).collection("availableDate").get();
     
     List<PitchAvailableDate> availablePitchDateList = [];
 

@@ -12,7 +12,7 @@ class SearchService {
       FirebaseFirestore.instance.collection('campings');
 
   static Future<List<Camping>> getCamping(OrderType orderType) async {
-    QuerySnapshot snapshot = await _campingCollection.get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _campingCollection.get();
     List<String> dateToFilter = [];
 
     List<Camping> campings = [];
@@ -84,7 +84,7 @@ class SearchService {
     // TODO capire se lasciarlo o meno
     if (filters.dist > 0) {}
 
-    List<QueryDocumentSnapshot> documents = [];
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = [];
     List<Camping> campings = [];
 
     if (snapshot.isEmpty) snapshot.add(await _campingCollection.get());

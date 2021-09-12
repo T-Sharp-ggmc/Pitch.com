@@ -21,7 +21,7 @@ class UserService {
   }
 
   // user data from snapshots
-  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+  UserData _userDataFromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return UserData(
         uid: uid,
         name: snapshot.data()['name'],

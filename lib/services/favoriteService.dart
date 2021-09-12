@@ -11,7 +11,7 @@ class FavoriteService {
   static CollectionReference favoriteCollection = FirebaseFirestore.instance.collection('users').doc(currentUserID).collection('favoriteCamping');
 
   static Future<List<Camping>> getFavoriteList() async {
-    QuerySnapshot snapshot = await favoriteCollection.get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await favoriteCollection.get();
     List<Camping> favoriteCampings = [];
     List<String> dateToFilter = [];
 

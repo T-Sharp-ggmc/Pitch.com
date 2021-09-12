@@ -10,7 +10,7 @@ class CampingPitchService {
   CampingPitchService({this.cid});
 
   Future<List<Pitch>> getPitch(List<String> dateToFilter, RangeValues rangeValues) async {
-    QuerySnapshot snapshot;
+    QuerySnapshot<Map<String, dynamic>> snapshot;
     if(rangeValues == null)
       snapshot = await FirebaseFirestore.instance.collection('campings').doc(cid).collection('pitchs').get();
     else

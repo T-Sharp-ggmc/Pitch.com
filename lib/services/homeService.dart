@@ -10,7 +10,7 @@ class HomeService {
       FirebaseFirestore.instance.collection('campings');
 
   static Future<List<Camping>> getPremiumCamping() async {
-    QuerySnapshot snapshot = await _campingCollection.get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _campingCollection.get();
     var documents =
         snapshot.docs.where((document) => document.data()['isPremium'] == true);
     List<Camping> campings = [];
