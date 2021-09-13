@@ -46,11 +46,11 @@ class _HomeScreen extends State<HomeScreen>
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('home')),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), title: Text('favorite')),
+              icon: Icon(Icons.favorite), label: 'favorite'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), title: Text('account')),
+              icon: Icon(Icons.account_circle), label: 'account'),
         ],
         selectedItemColor: Colors.black87,
         unselectedItemColor: Colors.black87,

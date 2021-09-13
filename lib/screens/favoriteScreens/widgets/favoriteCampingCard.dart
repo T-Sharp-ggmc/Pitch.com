@@ -11,10 +11,7 @@ import 'package:provider/provider.dart';
 import '../../../utilities/appTheme.dart';
 
 class FavoriteCampingCard extends StatefulWidget {
-  final AnimationController animationController;
-
-  const FavoriteCampingCard({Key key, this.animationController})
-      : super(key: key);
+  const FavoriteCampingCard({Key key}) : super(key: key);
 
   @override
   _FavoriteCampingCardState createState() => _FavoriteCampingCardState();
@@ -40,15 +37,6 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                   padding: EdgeInsets.only(top: 8, bottom: 8),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    var count = provider.favoriteCampings.length > 10
-                        ? 10
-                        : provider.favoriteCampings.length;
-                    var animation = Tween(begin: 0.0, end: 1.0).animate(
-                        CurvedAnimation(
-                            parent: widget.animationController,
-                            curve: Interval((1 / count) * index, 1.0,
-                                curve: Curves.fastOutSlowIn)));
-                    widget.animationController.forward();
                     return Dismissible(
                         key: UniqueKey(),
                         direction: DismissDirection.startToEnd,
@@ -77,8 +65,6 @@ class _FavoriteCampingCardState extends State<FavoriteCampingCard> {
                         child: FavoriteCampingCardListView(
                           callback: () {}, //navigate to details page
                           campingData: provider.favoriteCampings[index],
-                          animation: animation,
-                          animationController: widget.animationController,
                         ));
                   },
                 ),
@@ -162,191 +148,179 @@ class FavoriteCampingCardListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: animationController,
-      builder: (BuildContext context, Widget child) {
-        return FadeTransition(
-          opacity: animation,
-          child: new Transform(
-            transform: new Matrix4.translationValues(
-                0.0, 50 * (1.0 - animation.value), 0.0),
-            child: Padding(
-              padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 16),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppTheme.getTheme().backgroundColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: AppTheme.getTheme().dividerColor,
-                      offset: Offset(4, 4),
-                      blurRadius: 16,
-                    ),
-                  ],
+    return FadeTransition(
+      opacity: animation,
+      child: new Transform(
+        transform: new Matrix4.translationValues(
+            0.0, 50 * (1.0 - animation.value), 0.0),
+        child: Padding(
+          padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppTheme.getTheme().backgroundColor,
+              borderRadius: BorderRadius.all(Radius.circular(16.0)),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: AppTheme.getTheme().dividerColor,
+                  offset: Offset(4, 4),
+                  blurRadius: 16,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  child: AspectRatio(
-                    aspectRatio: 2.7,
-                    child: Stack(
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(16.0)),
+              child: AspectRatio(
+                aspectRatio: 2.7,
+                child: Stack(
+                  children: <Widget>[
+                    Row(
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            AspectRatio(
-                              aspectRatio: 0.90,
-                              child: CachedNetworkImage(
-                                imageUrl: campingData.photos.first,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width >= 360
-                                        ? 12
-                                        : 8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                        AspectRatio(
+                          aspectRatio: 0.90,
+                          child: CachedNetworkImage(
+                            imageUrl: campingData.photos.first,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(
+                                MediaQuery.of(context).size.width >= 360
+                                    ? 12
+                                    : 8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  campingData.name,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  campingData.info.length > 100
+                                      ? campingData.info.substring(0, 80)
+                                      : campingData.info,
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey.withOpacity(0.8)),
+                                ),
+                                Expanded(
+                                  child: SizedBox(),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
-                                    Text(
-                                      campingData.name,
-                                      maxLines: 2,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Text(
-                                      campingData.info.length > 100
-                                          ? campingData.info.substring(0, 80)
-                                          : campingData.info,
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey.withOpacity(0.8)),
-                                    ),
                                     Expanded(
-                                      child: SizedBox(),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Container(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.center,
                                               children: <Widget>[
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      FontAwesomeIcons
-                                                          .mapMarkerAlt,
-                                                      size: 12,
-                                                      color: AppTheme.getTheme()
-                                                          .primaryColor,
-                                                    ),
-                                                    Text(
-                                                      " 2 km dalla città",
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.8)),
-                                                    ),
-                                                  ],
+                                                Icon(
+                                                  FontAwesomeIcons.mapMarkerAlt,
+                                                  size: 12,
+                                                  color: AppTheme.getTheme()
+                                                      .primaryColor,
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 4),
-                                                  child: StarRating(
-                                                    allowHalfRating: true,
-                                                    starCount: 5,
-                                                    rating: campingData.rating,
-                                                    size: 20,
-                                                    color: AppTheme.getTheme()
-                                                        .primaryColor,
-                                                    borderColor:
-                                                        AppTheme.getTheme()
-                                                            .primaryColor,
-                                                  ),
+                                                Text(
+                                                  " 2 km dalla città",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.grey
+                                                          .withOpacity(0.8)),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: <Widget>[
-                                              Text(
-                                                campingData.campingPitch.isEmpty
-                                                    ? "€"
-                                                    : "€${campingData.campingPitch.first.price.toString()}",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 22,
-                                                ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 4),
+                                              child: StarRating(
+                                                allowHalfRating: true,
+                                                starCount: 5,
+                                                rating: campingData.rating,
+                                                size: 20,
+                                                color: AppTheme.getTheme()
+                                                    .primaryColor,
+                                                borderColor: AppTheme.getTheme()
+                                                    .primaryColor,
                                               ),
-                                              Text(
-                                                "/Al giorno",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.grey
-                                                        .withOpacity(0.8)),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(
+                                            campingData.campingPitch.isEmpty
+                                                ? "€"
+                                                : "€${campingData.campingPitch.first.price.toString()}",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 22,
+                                            ),
+                                          ),
+                                          Text(
+                                            "/Al giorno",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.grey
+                                                    .withOpacity(0.8)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            highlightColor: Colors.transparent,
-                            splashColor: AppTheme.getTheme()
-                                .primaryColor
-                                .withOpacity(0.1),
-                            onTap: () {
-                              try {
-                                callback();
-                              } catch (e) {}
-                            },
                           ),
-                        )
+                        ),
                       ],
                     ),
-                  ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        highlightColor: Colors.transparent,
+                        splashColor:
+                            AppTheme.getTheme().primaryColor.withOpacity(0.1),
+                        onTap: () {
+                          try {
+                            callback();
+                          } catch (e) {}
+                        },
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
