@@ -1,6 +1,7 @@
 import 'package:my_camping/provider/favoriteCampingProvider.dart';
 import 'package:my_camping/screens/homepage/widget/FilterPremium.dart';
 import 'package:my_camping/screens/homepage/widget/campingList.dart';
+import 'package:my_camping/services/searchService.dart';
 import 'package:my_camping/utilities/sizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,6 +22,7 @@ class _HomeScreen extends State<HomeScreen>
   int _currentIndex = 0;
   final List<Widget> _children = [
     Center(child: Text('Home in lavorazione')), //home body
+    SearchScreen(),
     FavoritesScreen(),
     // nuova funzionalità
     AccountScreen(),
@@ -47,6 +49,7 @@ class _HomeScreen extends State<HomeScreen>
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'favorite'),
           BottomNavigationBarItem(
@@ -67,6 +70,9 @@ class _HomeScreen extends State<HomeScreen>
       _currentIndex = value;
       switch (_currentIndex) {
         case 1:
+          _children[_currentIndex] = SearchScreen();
+          break;
+        case 2:
           _children[_currentIndex] = FavoritesScreen();
           Provider.of<FavoriteCampingProvider>(context, listen: false)
               .loadfavoriteCamping();

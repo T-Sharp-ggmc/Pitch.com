@@ -148,11 +148,9 @@ class FavoriteCampingCardListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: animation,
-      child: new Transform(
+    return new Transform(
         transform: new Matrix4.translationValues(
-            0.0, 50 * (1.0 - animation.value), 0.0),
+            0.0, 50, 0.0),
         child: Padding(
           padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 16),
           child: Container(
@@ -320,7 +318,6 @@ class FavoriteCampingCardListView extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

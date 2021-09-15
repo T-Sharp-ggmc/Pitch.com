@@ -17,9 +17,8 @@ import 'popups/orderPopup.dart';
 
 class SearchScreen extends StatefulWidget {
   static String routeName = "/search";
-  final AnimationController animationController;
 
-  const SearchScreen({Key key, this.animationController}) : super(key: key);
+  const SearchScreen({Key key}) : super(key: key);
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
@@ -40,22 +39,15 @@ class _SearchScreenState extends State<SearchScreen>
 
   OrderType _selectedOrder = OrderType.noOrder;
 
-  //controller
-  AnimationController animationController;
-  //AnimationController _animationController;
   ScrollController scrollController = new ScrollController();
 
   @override
   void initState() {
-    animationController = AnimationController(
-        duration: Duration(milliseconds: 1000), vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    animationController.dispose();
-    //_animationController.dispose();
     super.dispose();
   }
 
@@ -108,16 +100,6 @@ class _SearchScreenState extends State<SearchScreen>
                                         var count = campingListLenght > 10
                                             ? 10
                                             : campingListLenght;
-                                        var animation = Tween(
-                                                begin: 0.0, end: 1.0)
-                                            .animate(CurvedAnimation(
-                                                parent: animationController,
-                                                curve: Interval(
-                                                    (1 / count) * index, 1.0,
-                                                    curve:
-                                                        Curves.fastOutSlowIn)));
-
-                                        animationController.forward();
                                         return CampingCardListView(
                                           campingData: provider.campings[index],
                                           callback: refresh,
