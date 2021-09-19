@@ -31,16 +31,16 @@ Create copy of terminal using Rosetta and launch following commands:
 
 ## Step to solve error for module GoogleDataTransport
 ### clear cached artifacts/dependencies
-rm -rf ~/Library/Developer/Xcode/DerivedData/
-rm -rf ~/Library/Caches/CocoaPods/
-rm -rf clone/ios/Pods/
-pod cache clean --all
+- rm -rf ~/Library/Developer/Xcode/DerivedData/
+- rm -rf ~/Library/Caches/CocoaPods/
+- rm -rf clone/ios/Pods/
+- pod cache clean --all
 
 ### clear flutter
-flutter clean
-flutter pub get
-cd ios
+- flutter clean
+- flutter pub get
+- cd ios
 
 ### run pod install
-rm Podfile.lock
-pod install --repo-update
+- rm Podfile.lock
+- pod install --repo-update
