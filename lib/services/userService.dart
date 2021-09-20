@@ -22,7 +22,7 @@ class UserService {
 
   // user data from snapshots
   UserData _userDataFromSnapshot(
-      DocumentSnapshot<Map<dynamic, dynamic>> snapshot) {
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return UserData(
         uid: uid,
         name: snapshot.data()['name'],
@@ -34,6 +34,6 @@ class UserService {
   }
 
   Stream<UserData> get userData {
-    return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+    return userCollection.doc(uid).snapshots().map((event) => _userDataFromSnapshot(event));
   }
 }

@@ -18,7 +18,7 @@ class EditAccountScreen extends StatefulWidget {
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
   final _formKey = GlobalKey<FormState>();
-  final List<String> sex = ['Maschio', 'Femmina', 'Altro'];
+  final List<String> sex = ['','Maschio', 'Femmina', 'Altro'];
   TextEditingController textController = TextEditingController();
   String newAccountInfo = "";
   String _currentName;
@@ -348,7 +348,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         height: 50,
                                         child: Center(
                                           child: DropdownButtonFormField(
-                                            value: _currentSex ?? userData.sex,
+                                            value: _currentSex ?? userData.sex ,
                                             decoration: textInputDecoration,
                                             items: sex.map((sex) {
                                               return DropdownMenuItem(
